@@ -10,23 +10,7 @@
 		24501D121883DF9600FED266 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24501D111883DF9600FED266 /* Foundation.framework */; };
 		24501D171883DF9600FED266 /* DCTObjectStore.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 24501D161883DF9600FED266 /* DCTObjectStore.h */; };
 		24501D191883DF9600FED266 /* DCTObjectStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 24501D181883DF9600FED266 /* DCTObjectStore.m */; };
-		24501D201883DF9600FED266 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24501D1F1883DF9600FED266 /* XCTest.framework */; };
-		24501D211883DF9600FED266 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24501D111883DF9600FED266 /* Foundation.framework */; };
-		24501D231883DF9600FED266 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24501D221883DF9600FED266 /* UIKit.framework */; };
-		24501D261883DF9600FED266 /* libDCTObjectStore.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 24501D0E1883DF9600FED266 /* libDCTObjectStore.a */; };
-		24501D2C1883DF9600FED266 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 24501D2A1883DF9600FED266 /* InfoPlist.strings */; };
-		24501D2E1883DF9600FED266 /* DCTObjectStoreTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 24501D2D1883DF9600FED266 /* DCTObjectStoreTests.m */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		24501D241883DF9600FED266 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 24501D061883DF9600FED266 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 24501D0D1883DF9600FED266;
-			remoteInfo = DCTObjectStore;
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		24501D0C1883DF9600FED266 /* CopyFiles */ = {
@@ -44,15 +28,10 @@
 /* Begin PBXFileReference section */
 		24501D0E1883DF9600FED266 /* libDCTObjectStore.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libDCTObjectStore.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		24501D111883DF9600FED266 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		24501D151883DF9600FED266 /* DCTObjectStore-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "DCTObjectStore-Prefix.pch"; sourceTree = "<group>"; };
 		24501D161883DF9600FED266 /* DCTObjectStore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DCTObjectStore.h; sourceTree = "<group>"; };
 		24501D181883DF9600FED266 /* DCTObjectStore.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DCTObjectStore.m; sourceTree = "<group>"; };
-		24501D1E1883DF9600FED266 /* DCTObjectStoreTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DCTObjectStoreTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		24501D1F1883DF9600FED266 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		24501D221883DF9600FED266 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
-		24501D291883DF9600FED266 /* DCTObjectStoreTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "DCTObjectStoreTests-Info.plist"; sourceTree = "<group>"; };
-		24501D2B1883DF9600FED266 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		24501D2D1883DF9600FED266 /* DCTObjectStoreTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DCTObjectStoreTests.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,17 +43,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		24501D1B1883DF9600FED266 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				24501D261883DF9600FED266 /* libDCTObjectStore.a in Frameworks */,
-				24501D201883DF9600FED266 /* XCTest.framework in Frameworks */,
-				24501D231883DF9600FED266 /* UIKit.framework in Frameworks */,
-				24501D211883DF9600FED266 /* Foundation.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -82,7 +50,6 @@
 			isa = PBXGroup;
 			children = (
 				24501D131883DF9600FED266 /* DCTObjectStore */,
-				24501D271883DF9600FED266 /* DCTObjectStoreTests */,
 				24501D101883DF9600FED266 /* Frameworks */,
 				24501D0F1883DF9600FED266 /* Products */,
 			);
@@ -92,7 +59,6 @@
 			isa = PBXGroup;
 			children = (
 				24501D0E1883DF9600FED266 /* libDCTObjectStore.a */,
-				24501D1E1883DF9600FED266 /* DCTObjectStoreTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -112,35 +78,8 @@
 			children = (
 				24501D161883DF9600FED266 /* DCTObjectStore.h */,
 				24501D181883DF9600FED266 /* DCTObjectStore.m */,
-				24501D141883DF9600FED266 /* Supporting Files */,
 			);
 			path = DCTObjectStore;
-			sourceTree = "<group>";
-		};
-		24501D141883DF9600FED266 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				24501D151883DF9600FED266 /* DCTObjectStore-Prefix.pch */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		24501D271883DF9600FED266 /* DCTObjectStoreTests */ = {
-			isa = PBXGroup;
-			children = (
-				24501D2D1883DF9600FED266 /* DCTObjectStoreTests.m */,
-				24501D281883DF9600FED266 /* Supporting Files */,
-			);
-			path = DCTObjectStoreTests;
-			sourceTree = "<group>";
-		};
-		24501D281883DF9600FED266 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				24501D291883DF9600FED266 /* DCTObjectStoreTests-Info.plist */,
-				24501D2A1883DF9600FED266 /* InfoPlist.strings */,
-			);
-			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -162,24 +101,6 @@
 			productName = DCTObjectStore;
 			productReference = 24501D0E1883DF9600FED266 /* libDCTObjectStore.a */;
 			productType = "com.apple.product-type.library.static";
-		};
-		24501D1D1883DF9600FED266 /* DCTObjectStoreTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 24501D341883DF9600FED266 /* Build configuration list for PBXNativeTarget "DCTObjectStoreTests" */;
-			buildPhases = (
-				24501D1A1883DF9600FED266 /* Sources */,
-				24501D1B1883DF9600FED266 /* Frameworks */,
-				24501D1C1883DF9600FED266 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				24501D251883DF9600FED266 /* PBXTargetDependency */,
-			);
-			name = DCTObjectStoreTests;
-			productName = DCTObjectStoreTests;
-			productReference = 24501D1E1883DF9600FED266 /* DCTObjectStoreTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
 
@@ -203,21 +124,9 @@
 			projectRoot = "";
 			targets = (
 				24501D0D1883DF9600FED266 /* DCTObjectStore */,
-				24501D1D1883DF9600FED266 /* DCTObjectStoreTests */,
 			);
 		};
 /* End PBXProject section */
-
-/* Begin PBXResourcesBuildPhase section */
-		24501D1C1883DF9600FED266 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				24501D2C1883DF9600FED266 /* InfoPlist.strings in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		24501D0A1883DF9600FED266 /* Sources */ = {
@@ -228,34 +137,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		24501D1A1883DF9600FED266 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				24501D2E1883DF9600FED266 /* DCTObjectStoreTests.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		24501D251883DF9600FED266 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 24501D0D1883DF9600FED266 /* DCTObjectStore */;
-			targetProxy = 24501D241883DF9600FED266 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
-
-/* Begin PBXVariantGroup section */
-		24501D2A1883DF9600FED266 /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				24501D2B1883DF9600FED266 /* en */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		24501D2F1883DF9600FED266 /* Debug */ = {
@@ -333,7 +215,6 @@
 			buildSettings = {
 				DSTROOT = /tmp/DCTObjectStore.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "DCTObjectStore/DCTObjectStore-Prefix.pch";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -345,48 +226,9 @@
 			buildSettings = {
 				DSTROOT = /tmp/DCTObjectStore.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "DCTObjectStore/DCTObjectStore-Prefix.pch";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-			};
-			name = Release;
-		};
-		24501D351883DF9600FED266 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "DCTObjectStore/DCTObjectStore-Prefix.pch";
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = "DCTObjectStoreTests/DCTObjectStoreTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				WRAPPER_EXTENSION = xctest;
-			};
-			name = Debug;
-		};
-		24501D361883DF9600FED266 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "DCTObjectStore/DCTObjectStore-Prefix.pch";
-				INFOPLIST_FILE = "DCTObjectStoreTests/DCTObjectStoreTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				WRAPPER_EXTENSION = xctest;
 			};
 			name = Release;
 		};
@@ -407,14 +249,6 @@
 			buildConfigurations = (
 				24501D321883DF9600FED266 /* Debug */,
 				24501D331883DF9600FED266 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-		};
-		24501D341883DF9600FED266 /* Build configuration list for PBXNativeTarget "DCTObjectStoreTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				24501D351883DF9600FED266 /* Debug */,
-				24501D361883DF9600FED266 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 		};
