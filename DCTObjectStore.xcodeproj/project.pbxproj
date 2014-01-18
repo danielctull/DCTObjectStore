@@ -32,6 +32,7 @@
 		24501D181883DF9600FED266 /* DCTObjectStore.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DCTObjectStore.m; sourceTree = "<group>"; };
 		24501D1F1883DF9600FED266 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		24501D221883DF9600FED266 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
+		249097A1188A6935006BC35F /* Universal.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Universal.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -49,6 +50,7 @@
 		24501D051883DF9600FED266 = {
 			isa = PBXGroup;
 			children = (
+				249097A1188A6935006BC35F /* Universal.xcconfig */,
 				24501D131883DF9600FED266 /* DCTObjectStore */,
 				24501D101883DF9600FED266 /* Frameworks */,
 				24501D0F1883DF9600FED266 /* Products */,
@@ -220,6 +222,7 @@
 		};
 		24501D321883DF9600FED266 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 249097A1188A6935006BC35F /* Universal.xcconfig */;
 			buildSettings = {
 				DSTROOT = /tmp/DCTObjectStore.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -231,6 +234,7 @@
 		};
 		24501D331883DF9600FED266 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 249097A1188A6935006BC35F /* Universal.xcconfig */;
 			buildSettings = {
 				DSTROOT = /tmp/DCTObjectStore.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -259,6 +263,7 @@
 				24501D331883DF9600FED266 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
