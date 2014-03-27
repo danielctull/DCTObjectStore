@@ -27,6 +27,8 @@ extern const struct DCTObjectStoreAttributes {
 @property (nonatomic, readonly) NSArray *objects;
 @property (nonatomic, readonly) NSArray *sortDescriptors;
 
+@property (nonatomic) NSPredicate *objectPredicate;
+
 - (void)addObject:(id<DCTObjectStoreCoding>)object;
 - (void)removeObject:(id<DCTObjectStoreCoding>)object;
 - (void)updateObject:(id<DCTObjectStoreCoding>)object;
