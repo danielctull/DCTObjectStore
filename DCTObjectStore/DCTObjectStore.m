@@ -7,12 +7,20 @@
 //
 
 #import "DCTObjectStore.h"
+@import ObjectiveC.runtime;
 
 const struct DCTObjectStoreAttributes DCTObjectStoreAttributes = {
 	.name = @"name",
 	.objects = @"objects",
 	.sortDescriptors = @"sortDescriptors"
 };
+
+static void* DCTObjectStoreSaveUUID = &DCTObjectStoreSaveUUID;
+
+@interface DCTObjectStore ()
+@property (nonatomic, readonly) NSURL *objectStoreURL;
+
+@end
 
 @implementation DCTObjectStore
 
@@ -32,22 +40,99 @@ const struct DCTObjectStoreAttributes DCTObjectStoreAttributes = {
 + (instancetype)objectStoreWithName:(NSString *)name sortDescriptors:(NSArray *)sortDescriptors {
 
 	NSMutableDictionary *objectStores = [self objectStores];
-	DCTObjectStore *objectStore = [objectStores objectForKey:name];
+	DCTObjectStore *objectStore = objectStores[name];
 	if (objectStore) return objectStore;
 
-	NSURL *URL = [self objectStoreDirectory];
-	URL = [URL URLByAppendingPathComponent:name];
-	NSData *data = [NSData dataWithContentsOfURL:URL];
-	if (data)
-		objectStore = [NSKeyedUnarchiver unarchiveObjectWithData:data];
-	else
-		objectStore = [[self alloc] initWithName:name sortDescriptors:sortDescriptors];
+	objectStore = [[self alloc] initWithName:name sortDescriptors:sortDescriptors];
+	objectStores[name] = objectStore;
 
-	[objectStores setObject:objectStore forKey:name];
 	return objectStore;
 }
 
-- (void)addObject:(id<DCTObjectStoreCoding>)object {
+- (instancetype)initWithName:(NSString *)name sortDescriptors:(NSArray *)sortDescriptors {
+	self = [self init];
+	if (!self) return nil;
+	_name = [name copy];
+	_sortDescriptors = sortDescriptors;
+	[self updateObjectList];
+	return self;
+}
+
+- (void)updateObjectList {
+
+	if (![NSThread isMainThread]) {
+		dispatch_sync(dispatch_get_main_queue(), ^{
+			[self updateObjectList];
+		});
+		return;
+	}
+
+	NSFileManager *fileManager = [NSFileManager new];
+	NSDirectoryEnumerator *enumerator = [fileManager enumeratorAtURL:self.objectStoreURL
+										  includingPropertiesForKeys:nil
+															 options:NSDirectoryEnumerationSkipsSubdirectoryDescendants
+														errorHandler:nil];
+
+	for (NSURL *URL in enumerator) {
+
+		@try {
+			NSData *data = [NSData dataWithContentsOfURL:URL];
+			NSString *saveUUID = [URL lastPathComponent];
+			id<DCTObjectStoreCoding> object = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+			objc_setAssociatedObject(object, DCTObjectStoreSaveUUID, saveUUID, OBJC_ASSOCIATION_COPY);
+			[self updateObject:object];
+		}
+
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wunused-exception-parameter"
+		@catch (NSException *exception) {
+			return;
+		}
+#pragma clang diagnostic pop
+	}
+}
+
+- (NSURL *)objectStoreURL {
+	NSURL *URL = [[self objectStoreDirectory] URLByAppendingPathComponent:self.name];
+	[[NSFileManager defaultManager] createDirectoryAtURL:URL withIntermediateDirectories:YES attributes:nil error:NULL];
+	return URL;
+}
+
+- (id<DCTObjectStoreCoding>)objectWithSaveUUID:(NSString *)saveUUID {
+
+	for (id object in self.objects) {
+		NSString *objectSaveUUID = [self saveUUIDForObject:object];
+		if ([saveUUID isEqualToString:objectSaveUUID])
+			return object;
+	}
+
+	return nil;
+}
+
+- (void)updateObject:(id<DCTObjectStoreCoding>)object {
+
+	NSString *saveUUID = objc_getAssociatedObject(object, DCTObjectStoreSaveUUID);
+	if (!saveUUID) {
+		saveUUID = [[NSUUID UUID] UUIDString];
+	}
+
+	id<DCTObjectStoreCoding> currentObject = [self objectWithSaveUUID:saveUUID];
+
+	// If no predicate is set, we show all the accounts we can
+	BOOL shouldListAccount = self.objectPredicate ? [self.objectPredicate evaluateWithObject:object] : YES;
+	if (!shouldListAccount) {
+
+		if (currentObject)
+			[self removeObject:currentObject];
+
+		return;
+	}
+
+	[self removeObject:currentObject];
+	[self insertObject:object];
+}
+
+- (void)insertObject:(id<DCTObjectStoreCoding>)object {
 
 	NSMutableArray *sortObjects = [self.objects mutableCopy];
 	[sortObjects addObject:object];
@@ -63,62 +148,36 @@ const struct DCTObjectStoreAttributes DCTObjectStoreAttributes = {
 	[array removeObject:object];
 }
 
-- (void)updateObject:(id<DCTObjectStoreCoding>)object {
-
-	NSUInteger index = [self.objects indexOfObject:object];
-	NSIndexSet *indexSet = [NSIndexSet indexSetWithIndex:index];
-
-	[self willChange:NSKeyValueChangeReplacement
-	 valuesAtIndexes:indexSet
-			  forKey:DCTObjectStoreAttributes.objects];
-
-	[self didChange:NSKeyValueChangeReplacement
-	valuesAtIndexes:indexSet
-			 forKey:DCTObjectStoreAttributes.objects];
+- (void)saveObject:(id<DCTObjectStoreCoding>)object {
+	NSString *saveUUID = [self saveUUIDForObject:object];
+	NSURL *URL = [[self objectStoreURL] URLByAppendingPathComponent:saveUUID];
+	NSData *data = [NSKeyedArchiver archivedDataWithRootObject:object];
+	[data writeToURL:URL atomically:YES];
+	[self updateObject:object];
 }
 
-- (BOOL)save:(NSError *__autoreleasing*)error {
-	NSData *data = [NSKeyedArchiver archivedDataWithRootObject:self];
-	NSURL *URL = [[self class] objectStoreDirectory];
-	[[NSFileManager defaultManager] createDirectoryAtURL:URL withIntermediateDirectories:YES attributes:nil error:nil];
-	URL = [URL URLByAppendingPathComponent:self.name];
-	return [data writeToURL:URL options:NSDataWritingAtomic error:error];
+- (void)deleteObject:(id<DCTObjectStoreCoding>)object {
+	NSString *saveUUID = [self saveUUIDForObject:object];
+	NSURL *URL = [[self objectStoreURL] URLByAppendingPathComponent:saveUUID];
+	[[NSFileManager defaultManager] removeItemAtURL:URL error:NULL];
+	[self removeObject:object];
 }
 
-#pragma mark - NSSecureCoding
+- (NSString *)saveUUIDForObject:(id<DCTObjectStoreCoding>)object {
 
-- (id)initWithCoder:(NSCoder *)coder {
-	self = [self init];
-	if (!self) return nil;
-	_name = [coder decodeObjectOfClass:[NSString class] forKey:DCTObjectStoreAttributes.name];
-	_objects = [coder decodeObjectOfClass:[NSArray class] forKey:DCTObjectStoreAttributes.objects];
-	_sortDescriptors = [coder decodeObjectOfClass:[NSArray class] forKey:DCTObjectStoreAttributes.sortDescriptors];
-	return self;
-}
-
-- (void)encodeWithCoder:(NSCoder *)coder {
-	[coder encodeObject:self.name forKey:DCTObjectStoreAttributes.name];
-	[coder encodeObject:self.objects forKey:DCTObjectStoreAttributes.objects];
-	[coder encodeObject:self.sortDescriptors forKey:DCTObjectStoreAttributes.sortDescriptors];
-}
-
-+ (BOOL)supportsSecureCoding {
-	return YES;
+	NSString *saveUUID = objc_getAssociatedObject(object, DCTObjectStoreSaveUUID);
+	if (!saveUUID) {
+		saveUUID = [[NSUUID UUID] UUIDString];
+		objc_setAssociatedObject(object, DCTObjectStoreSaveUUID, saveUUID, OBJC_ASSOCIATION_COPY);
+	}
+	return saveUUID;
 }
 
 #pragma mark - Internal
 
-+ (NSURL *)objectStoreDirectory {
+- (NSURL *)objectStoreDirectory {
     NSURL *URL = [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
-	return [URL URLByAppendingPathComponent:NSStringFromClass(self)];
-}
-
-- (instancetype)initWithName:(NSString *)name sortDescriptors:(NSArray *)sortDescriptors {
-	self = [self init];
-	if (!self) return nil;
-	_name = [name copy];
-	_sortDescriptors = sortDescriptors;
-	return self;
+	return [URL URLByAppendingPathComponent:NSStringFromClass([self class])];
 }
 
 @end
