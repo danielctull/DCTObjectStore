@@ -29,6 +29,7 @@ extern const struct DCTObjectStoreAttributes {
 
 @property (nonatomic) NSPredicate *objectPredicate;
 
+- (void)reload;
 - (void)saveObject:(id<DCTObjectStoreCoding>)object;
 - (void)deleteObject:(id<DCTObjectStoreCoding>)object;
 

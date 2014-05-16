@@ -54,15 +54,15 @@ static void* DCTObjectStoreSaveUUID = &DCTObjectStoreSaveUUID;
 	if (!self) return nil;
 	_name = [name copy];
 	_sortDescriptors = sortDescriptors;
-	[self updateObjectList];
+	[self reload];
 	return self;
 }
 
-- (void)updateObjectList {
+- (void)reload {
 
 	if (![NSThread isMainThread]) {
 		dispatch_sync(dispatch_get_main_queue(), ^{
-			[self updateObjectList];
+			[self reload];
 		});
 		return;
 	}
