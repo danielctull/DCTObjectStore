@@ -14,6 +14,8 @@ extern const struct DCTObjectStoreAttributes {
 	__unsafe_unretained NSString *sortDescriptors;
 } DCTObjectStoreAttributes;
 
+extern NSString *const DCTObjectStoreDidChangeNotification;
+
 @protocol DCTObjectStoreCoding <NSSecureCoding>
 - (NSString *)identifier;
 @end

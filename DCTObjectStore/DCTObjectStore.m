@@ -15,6 +15,8 @@ const struct DCTObjectStoreAttributes DCTObjectStoreAttributes = {
 	.sortDescriptors = @"sortDescriptors"
 };
 
+NSString *const DCTObjectStoreDidChangeNotification = @"DCTObjectStoreDidChangeNotification";
+
 static void* DCTObjectStoreSaveUUID = &DCTObjectStoreSaveUUID;
 
 @interface DCTObjectStore ()
@@ -141,11 +143,15 @@ static void* DCTObjectStoreSaveUUID = &DCTObjectStoreSaveUUID;
 
 	NSMutableArray *array = [self mutableArrayValueForKey:DCTObjectStoreAttributes.objects];
 	[array insertObject:object atIndex:index];
+
+	[[NSNotificationCenter defaultCenter] postNotificationName:DCTObjectStoreDidChangeNotification object:self];
 }
 
 - (void)removeObject:(id<DCTObjectStoreCoding>)object {
 	NSMutableArray *array = [self mutableArrayValueForKey:DCTObjectStoreAttributes.objects];
 	[array removeObject:object];
+
+	[[NSNotificationCenter defaultCenter] postNotificationName:DCTObjectStoreDidChangeNotification object:self];
 }
 
 - (void)saveObject:(id<DCTObjectStoreCoding>)object {
