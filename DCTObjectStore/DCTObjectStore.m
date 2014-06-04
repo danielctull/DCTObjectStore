@@ -36,26 +36,33 @@ static void* DCTObjectStoreSaveUUID = &DCTObjectStoreSaveUUID;
 }
 
 + (instancetype)objectStoreWithName:(NSString *)name {
-	return [self objectStoreWithName:name sortDescriptors:nil];
+	return [self objectStoreWithName:name sortDescriptors:nil groupIdentifier:nil];
 }
 
 + (instancetype)objectStoreWithName:(NSString *)name sortDescriptors:(NSArray *)sortDescriptors {
+	return [self objectStoreWithName:name sortDescriptors:nil groupIdentifier:nil];
+}
+
++ (instancetype)objectStoreWithName:(NSString *)name sortDescriptors:(NSArray *)sortDescriptors groupIdentifier:(NSString *)groupIdentifier {
 
 	NSMutableDictionary *objectStores = [self objectStores];
 	DCTObjectStore *objectStore = objectStores[name];
 	if (objectStore) return objectStore;
 
-	objectStore = [[self alloc] initWithName:name sortDescriptors:sortDescriptors];
+	objectStore = [[self alloc] initWithName:name sortDescriptors:sortDescriptors groupIdentifier:groupIdentifier];
 	objectStores[name] = objectStore;
 
 	return objectStore;
 }
 
-- (instancetype)initWithName:(NSString *)name sortDescriptors:(NSArray *)sortDescriptors {
+
+
+- (instancetype)initWithName:(NSString *)name sortDescriptors:(NSArray *)sortDescriptors groupIdentifier:(NSString *)groupIdentifier {
 	self = [self init];
 	if (!self) return nil;
 	_name = [name copy];
 	_sortDescriptors = sortDescriptors;
+	_groupIdentifier = [groupIdentifier copy];
 	[self reload];
 	return self;
 }
@@ -182,7 +189,15 @@ static void* DCTObjectStoreSaveUUID = &DCTObjectStoreSaveUUID;
 #pragma mark - Internal
 
 - (NSURL *)objectStoreDirectory {
-    NSURL *URL = [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
+
+	NSFileManager *fileManager = [NSFileManager defaultManager];
+	NSURL *URL;
+	if (self.groupIdentifier.length > 0) {
+		URL = [fileManager containerURLForSecurityApplicationGroupIdentifier:self.groupIdentifier];
+	} else {
+		URL = [[fileManager URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
+	}
+
 	return [URL URLByAppendingPathComponent:NSStringFromClass([self class])];
 }
 

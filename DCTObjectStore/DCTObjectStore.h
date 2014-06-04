@@ -24,10 +24,12 @@ extern NSString *const DCTObjectStoreDidChangeNotification;
 
 + (instancetype)objectStoreWithName:(NSString *)name;
 + (instancetype)objectStoreWithName:(NSString *)name sortDescriptors:(NSArray *)sortDescriptors;
++ (instancetype)objectStoreWithName:(NSString *)name sortDescriptors:(NSArray *)sortDescriptors groupIdentifier:(NSString *)groupIdentifier;
 
 @property (nonatomic, readonly) NSString *name;
 @property (nonatomic, readonly) NSArray *objects;
 @property (nonatomic, readonly) NSArray *sortDescriptors;
+@property (nonatomic, readonly) NSString *groupIdentifier;
 
 @property (nonatomic) NSPredicate *objectPredicate;
 
