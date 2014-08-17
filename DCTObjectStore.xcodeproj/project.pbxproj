@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2416D56519A0021D002DBFB9 /* DCTObjectStoreRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 2416D56419A0021D002DBFB9 /* DCTObjectStoreRequest.m */; };
+		2416D56819A002EE002DBFB9 /* DCTObjectStoreController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2416D56719A002EE002DBFB9 /* DCTObjectStoreController.m */; };
 		24501D121883DF9600FED266 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24501D111883DF9600FED266 /* Foundation.framework */; };
 		24501D171883DF9600FED266 /* DCTObjectStore.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 24501D161883DF9600FED266 /* DCTObjectStore.h */; };
 		24501D191883DF9600FED266 /* DCTObjectStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 24501D181883DF9600FED266 /* DCTObjectStore.m */; };
@@ -26,6 +28,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		2416D56319A0021D002DBFB9 /* DCTObjectStoreRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCTObjectStoreRequest.h; sourceTree = "<group>"; };
+		2416D56419A0021D002DBFB9 /* DCTObjectStoreRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCTObjectStoreRequest.m; sourceTree = "<group>"; };
+		2416D56619A002EE002DBFB9 /* DCTObjectStoreController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCTObjectStoreController.h; sourceTree = "<group>"; };
+		2416D56719A002EE002DBFB9 /* DCTObjectStoreController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCTObjectStoreController.m; sourceTree = "<group>"; };
 		24501D0E1883DF9600FED266 /* libDCTObjectStore.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libDCTObjectStore.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		24501D111883DF9600FED266 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		24501D161883DF9600FED266 /* DCTObjectStore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DCTObjectStore.h; sourceTree = "<group>"; };
@@ -80,6 +86,10 @@
 			children = (
 				24501D161883DF9600FED266 /* DCTObjectStore.h */,
 				24501D181883DF9600FED266 /* DCTObjectStore.m */,
+				2416D56319A0021D002DBFB9 /* DCTObjectStoreRequest.h */,
+				2416D56419A0021D002DBFB9 /* DCTObjectStoreRequest.m */,
+				2416D56619A002EE002DBFB9 /* DCTObjectStoreController.h */,
+				2416D56719A002EE002DBFB9 /* DCTObjectStoreController.m */,
 			);
 			path = DCTObjectStore;
 			sourceTree = "<group>";
@@ -135,6 +145,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2416D56819A002EE002DBFB9 /* DCTObjectStoreController.m in Sources */,
+				2416D56519A0021D002DBFB9 /* DCTObjectStoreRequest.m in Sources */,
 				24501D191883DF9600FED266 /* DCTObjectStore.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

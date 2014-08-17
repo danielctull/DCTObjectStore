@@ -7,6 +7,8 @@
 //
 
 @import Foundation;
+#import "DCTObjectStoreRequest.h"
+#import "DCTObjectStoreController.h"
 
 extern const struct DCTObjectStoreAttributes {
 	__unsafe_unretained NSString *name;
@@ -36,5 +38,7 @@ extern NSString *const DCTObjectStoreDidChangeNotification;
 - (void)reload;
 - (void)saveObject:(id<DCTObjectStoreCoding>)object;
 - (void)deleteObject:(id<DCTObjectStoreCoding>)object;
+
+- (DCTObjectStoreController *)controllerForRequest:(DCTObjectStoreRequest *)request;
 
 @end
