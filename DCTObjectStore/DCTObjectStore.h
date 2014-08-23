@@ -10,6 +10,10 @@
 #import "DCTObjectStoreRequest.h"
 #import "DCTObjectStoreController.h"
 
+//! Project version number and string for DCTObjectStore.
+FOUNDATION_EXPORT double DCTObjectStoreVersionNumber;
+FOUNDATION_EXPORT const unsigned char DCTObjectStoreVersionString[];
+
 extern const struct DCTObjectStoreAttributes {
 	__unsafe_unretained NSString *name;
 	__unsafe_unretained NSString *objects;

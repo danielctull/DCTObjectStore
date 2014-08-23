@@ -187,7 +187,7 @@ static void* DCTObjectStoreSaveUUID = &DCTObjectStoreSaveUUID;
 }
 
 - (DCTObjectStoreController *)controllerForRequest:(DCTObjectStoreRequest *)request {
-	
+	return nil;
 }
 
 #pragma mark - Internal
