@@ -186,10 +186,6 @@ static void* DCTObjectStoreSaveUUID = &DCTObjectStoreSaveUUID;
 	return saveUUID;
 }
 
-- (DCTObjectStoreController *)controllerForRequest:(DCTObjectStoreRequest *)request {
-	return nil;
-}
-
 #pragma mark - Internal
 
 - (NSURL *)objectStoreDirectory {

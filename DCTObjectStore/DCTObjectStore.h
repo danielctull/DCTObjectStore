@@ -7,8 +7,6 @@
 //
 
 @import Foundation;
-#import "DCTObjectStoreRequest.h"
-#import "DCTObjectStoreController.h"
 
 //! Project version number and string for DCTObjectStore.
 FOUNDATION_EXPORT double DCTObjectStoreVersionNumber;
@@ -42,7 +40,5 @@ extern NSString *const DCTObjectStoreDidChangeNotification;
 - (void)reload;
 - (void)saveObject:(id<DCTObjectStoreCoding>)object;
 - (void)deleteObject:(id<DCTObjectStoreCoding>)object;
-
-- (DCTObjectStoreController *)controllerForRequest:(DCTObjectStoreRequest *)request;
 
 @end
