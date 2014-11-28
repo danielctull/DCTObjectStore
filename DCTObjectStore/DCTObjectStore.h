@@ -12,6 +12,12 @@
 FOUNDATION_EXPORT double DCTObjectStoreVersionNumber;
 FOUNDATION_EXPORT const unsigned char DCTObjectStoreVersionString[];
 
+#import "DCTObjectStoreCoding.h"
+#import "DCTObjectStoreController.h"
+#import "DCTObjectStoreControllerDelegate.h"
+
+
+
 extern const struct DCTObjectStoreAttributes {
 	__unsafe_unretained NSString *name;
 	__unsafe_unretained NSString *objects;
@@ -20,24 +26,23 @@ extern const struct DCTObjectStoreAttributes {
 
 extern NSString *const DCTObjectStoreDidChangeNotification;
 
-@protocol DCTObjectStoreCoding <NSSecureCoding>
-- (NSString *)identifier;
-@end
+
+
+
+
 
 @interface DCTObjectStore : NSObject
 
 + (instancetype)objectStoreWithName:(NSString *)name;
-+ (instancetype)objectStoreWithName:(NSString *)name sortDescriptors:(NSArray *)sortDescriptors;
-+ (instancetype)objectStoreWithName:(NSString *)name sortDescriptors:(NSArray *)sortDescriptors groupIdentifier:(NSString *)groupIdentifier;
++ (instancetype)objectStoreWithName:(NSString *)name groupIdentifier:(NSString *)groupIdentifier;
++ (instancetype)objectStoreWithName:(NSString *)name groupIdentifier:(NSString *)groupIdentifier synchonizable:(BOOL)synchonizable;
 
 @property (nonatomic, readonly) NSString *name;
-@property (nonatomic, readonly) NSArray *objects;
-@property (nonatomic, readonly) NSArray *sortDescriptors;
 @property (nonatomic, readonly) NSString *groupIdentifier;
+@property (nonatomic, readonly) BOOL synchonizable;
 
-@property (nonatomic) NSPredicate *objectPredicate;
+@property (nonatomic, readonly) NSArray *objects;
 
-- (void)reload;
 - (void)saveObject:(id<DCTObjectStoreCoding>)object;
 - (void)deleteObject:(id<DCTObjectStoreCoding>)object;
 

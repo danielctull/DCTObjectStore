@@ -61,7 +61,6 @@ static void* DCTObjectStoreSaveUUID = &DCTObjectStoreSaveUUID;
 	self = [self init];
 	if (!self) return nil;
 	_name = [name copy];
-	_sortDescriptors = sortDescriptors;
 	_groupIdentifier = [groupIdentifier copy];
 	[self reload];
 	return self;
@@ -128,14 +127,12 @@ static void* DCTObjectStoreSaveUUID = &DCTObjectStoreSaveUUID;
 	id<DCTObjectStoreCoding> currentObject = [self objectWithSaveUUID:saveUUID];
 
 	// If no predicate is set, we show all the accounts we can
-	BOOL shouldListAccount = self.objectPredicate ? [self.objectPredicate evaluateWithObject:object] : YES;
-	if (!shouldListAccount) {
 
-		if (currentObject)
-			[self removeObject:currentObject];
-
+	if (currentObject) {
+		[self removeObject:currentObject];
 		return;
 	}
+
 
 	[self removeObject:currentObject];
 	[self insertObject:object];
@@ -145,7 +142,6 @@ static void* DCTObjectStoreSaveUUID = &DCTObjectStoreSaveUUID;
 
 	NSMutableArray *sortObjects = [self.objects mutableCopy];
 	[sortObjects addObject:object];
-	[sortObjects sortUsingDescriptors:self.sortDescriptors];
 	NSUInteger index = [sortObjects indexOfObject:object];
 
 	NSMutableArray *array = [self mutableArrayValueForKey:DCTObjectStoreAttributes.objects];

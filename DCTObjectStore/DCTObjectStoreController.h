@@ -7,9 +7,19 @@
 //
 
 @import Foundation;
+@class DCTObjectStore;
+@protocol DCTObjectStoreControllerDelegate;
+
 
 @interface DCTObjectStoreController : NSObject
 
+- (instancetype)initWithObjectStore:(DCTObjectStore *)objectStore predciate:(NSPredicate *)predicate sortDescriptors:(NSArray *)sortDescriptors;
+
+@property (nonatomic, readonly) DCTObjectStore *objectStore;
+@property (nonatomic, readonly) NSPredicate *predicate;
+@property (nonatomic, readonly) NSArray *sortDescriptors;
+
 @property (nonatomic, readonly) NSArray *objects;
+@property (nonatomic, weak) id<DCTObjectStoreControllerDelegate> delegate;
 
 @end
