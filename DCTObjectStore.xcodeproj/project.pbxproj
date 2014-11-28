@@ -9,9 +9,30 @@
 /* Begin PBXBuildFile section */
 		242BEF7F19A8FBB00063F2F2 /* DCTObjectStore.h in Headers */ = {isa = PBXBuildFile; fileRef = 24501D161883DF9600FED266 /* DCTObjectStore.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		242BEF8019A8FBD00063F2F2 /* DCTObjectStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 24501D181883DF9600FED266 /* DCTObjectStore.m */; };
+		244775131A1260260091CBDD /* DCTObjectStoreCloudEncoder.h in Headers */ = {isa = PBXBuildFile; fileRef = 244775111A1260260091CBDD /* DCTObjectStoreCloudEncoder.h */; };
+		244775141A1260260091CBDD /* DCTObjectStoreCloudEncoder.m in Sources */ = {isa = PBXBuildFile; fileRef = 244775121A1260260091CBDD /* DCTObjectStoreCloudEncoder.m */; };
+		244775151A1260260091CBDD /* DCTObjectStoreCloudEncoder.m in Sources */ = {isa = PBXBuildFile; fileRef = 244775121A1260260091CBDD /* DCTObjectStoreCloudEncoder.m */; };
 		24501D171883DF9600FED266 /* DCTObjectStore.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 24501D161883DF9600FED266 /* DCTObjectStore.h */; };
 		24501D191883DF9600FED266 /* DCTObjectStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 24501D181883DF9600FED266 /* DCTObjectStore.m */; };
+		24D52A261A28E98C00FDA615 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 24D52A251A28E98C00FDA615 /* main.m */; };
+		24D52A291A28E98C00FDA615 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 24D52A281A28E98C00FDA615 /* AppDelegate.m */; };
+		24D52A2C1A28E98C00FDA615 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24D52A2B1A28E98C00FDA615 /* ViewController.m */; };
+		24D52A2F1A28E98C00FDA615 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 24D52A2D1A28E98C00FDA615 /* Main.storyboard */; };
+		24D52A311A28E98C00FDA615 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 24D52A301A28E98C00FDA615 /* Images.xcassets */; };
+		24D52A341A28E98C00FDA615 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 24D52A321A28E98C00FDA615 /* LaunchScreen.xib */; };
+		24D52A471A28EB1C00FDA615 /* DCTObjectStore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 242BEEFC19A8F53B0063F2F2 /* DCTObjectStore.framework */; };
+		24D52A481A28EB1C00FDA615 /* DCTObjectStore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 242BEEFC19A8F53B0063F2F2 /* DCTObjectStore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		24D52A491A28EB1C00FDA615 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 24501D061883DF9600FED266 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 242BEEFB19A8F53B0063F2F2;
+			remoteInfo = "DCTObjectStore iOS";
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		24501D0C1883DF9600FED266 /* CopyFiles */ = {
@@ -24,11 +45,24 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		24D52A4B1A28EB1D00FDA615 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				24D52A481A28EB1C00FDA615 /* DCTObjectStore.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		242BEEFC19A8F53B0063F2F2 /* DCTObjectStore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = DCTObjectStore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		242BEF1219A8F55F0063F2F2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		244775111A1260260091CBDD /* DCTObjectStoreCloudEncoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCTObjectStoreCloudEncoder.h; sourceTree = "<group>"; };
+		244775121A1260260091CBDD /* DCTObjectStoreCloudEncoder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCTObjectStoreCloudEncoder.m; sourceTree = "<group>"; };
 		244DE8D019A9235100A91DC7 /* Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
 		244DE8D119A9235100A91DC7 /* iOS Application.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "iOS Application.xcconfig"; sourceTree = "<group>"; };
 		244DE8D219A9235100A91DC7 /* iOS Bundle.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "iOS Bundle.xcconfig"; sourceTree = "<group>"; };
@@ -41,6 +75,16 @@
 		24501D0E1883DF9600FED266 /* libDCTObjectStore.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libDCTObjectStore.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		24501D161883DF9600FED266 /* DCTObjectStore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DCTObjectStore.h; sourceTree = "<group>"; };
 		24501D181883DF9600FED266 /* DCTObjectStore.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DCTObjectStore.m; sourceTree = "<group>"; };
+		24D52A211A28E98C00FDA615 /* DCTObjectStore.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DCTObjectStore.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		24D52A241A28E98C00FDA615 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		24D52A251A28E98C00FDA615 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		24D52A271A28E98C00FDA615 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		24D52A281A28E98C00FDA615 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		24D52A2A1A28E98C00FDA615 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		24D52A2B1A28E98C00FDA615 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		24D52A2E1A28E98C00FDA615 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		24D52A301A28E98C00FDA615 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		24D52A331A28E98C00FDA615 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,6 +99,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		24D52A1E1A28E98C00FDA615 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				24D52A471A28EB1C00FDA615 /* DCTObjectStore.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -81,6 +133,7 @@
 			isa = PBXGroup;
 			children = (
 				24501D131883DF9600FED266 /* DCTObjectStore */,
+				24D52A221A28E98C00FDA615 /* DCTObjectStore Demo */,
 				244DE8CF19A9235100A91DC7 /* Configurations */,
 				24501D0F1883DF9600FED266 /* Products */,
 			);
@@ -91,6 +144,7 @@
 			children = (
 				24501D0E1883DF9600FED266 /* libDCTObjectStore.a */,
 				242BEEFC19A8F53B0063F2F2 /* DCTObjectStore.framework */,
+				24D52A211A28E98C00FDA615 /* DCTObjectStore.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -101,8 +155,26 @@
 				242BEF1219A8F55F0063F2F2 /* Info.plist */,
 				24501D161883DF9600FED266 /* DCTObjectStore.h */,
 				24501D181883DF9600FED266 /* DCTObjectStore.m */,
+				244775111A1260260091CBDD /* DCTObjectStoreCloudEncoder.h */,
+				244775121A1260260091CBDD /* DCTObjectStoreCloudEncoder.m */,
 			);
 			path = DCTObjectStore;
+			sourceTree = "<group>";
+		};
+		24D52A221A28E98C00FDA615 /* DCTObjectStore Demo */ = {
+			isa = PBXGroup;
+			children = (
+				24D52A271A28E98C00FDA615 /* AppDelegate.h */,
+				24D52A281A28E98C00FDA615 /* AppDelegate.m */,
+				24D52A2A1A28E98C00FDA615 /* ViewController.h */,
+				24D52A2B1A28E98C00FDA615 /* ViewController.m */,
+				24D52A2D1A28E98C00FDA615 /* Main.storyboard */,
+				24D52A301A28E98C00FDA615 /* Images.xcassets */,
+				24D52A321A28E98C00FDA615 /* LaunchScreen.xib */,
+				24D52A241A28E98C00FDA615 /* Info.plist */,
+				24D52A251A28E98C00FDA615 /* main.m */,
+			);
+			path = "DCTObjectStore Demo";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -112,6 +184,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				244775131A1260260091CBDD /* DCTObjectStoreCloudEncoder.h in Headers */,
 				242BEF7F19A8FBB00063F2F2 /* DCTObjectStore.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -154,6 +227,25 @@
 			productReference = 24501D0E1883DF9600FED266 /* libDCTObjectStore.a */;
 			productType = "com.apple.product-type.library.static";
 		};
+		24D52A201A28E98C00FDA615 /* DCTObjectStore Demo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 24D52A451A28E98C00FDA615 /* Build configuration list for PBXNativeTarget "DCTObjectStore Demo" */;
+			buildPhases = (
+				24D52A1D1A28E98C00FDA615 /* Sources */,
+				24D52A1E1A28E98C00FDA615 /* Frameworks */,
+				24D52A1F1A28E98C00FDA615 /* Resources */,
+				24D52A4B1A28EB1D00FDA615 /* Embed Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				24D52A4A1A28EB1C00FDA615 /* PBXTargetDependency */,
+			);
+			name = "DCTObjectStore Demo";
+			productName = "DCTObjectStore Demo";
+			productReference = 24D52A211A28E98C00FDA615 /* DCTObjectStore.app */;
+			productType = "com.apple.product-type.application";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -166,6 +258,9 @@
 					242BEEFB19A8F53B0063F2F2 = {
 						CreatedOnToolsVersion = 6.0;
 					};
+					24D52A201A28E98C00FDA615 = {
+						CreatedOnToolsVersion = 6.1;
+					};
 				};
 			};
 			buildConfigurationList = 24501D091883DF9600FED266 /* Build configuration list for PBXProject "DCTObjectStore" */;
@@ -174,6 +269,7 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				Base,
 			);
 			mainGroup = 24501D051883DF9600FED266;
 			productRefGroup = 24501D0F1883DF9600FED266 /* Products */;
@@ -182,6 +278,7 @@
 			targets = (
 				24501D0D1883DF9600FED266 /* DCTObjectStore */,
 				242BEEFB19A8F53B0063F2F2 /* DCTObjectStore iOS */,
+				24D52A201A28E98C00FDA615 /* DCTObjectStore Demo */,
 			);
 		};
 /* End PBXProject section */
@@ -194,6 +291,16 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		24D52A1F1A28E98C00FDA615 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				24D52A2F1A28E98C00FDA615 /* Main.storyboard in Resources */,
+				24D52A341A28E98C00FDA615 /* LaunchScreen.xib in Resources */,
+				24D52A311A28E98C00FDA615 /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -202,6 +309,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				242BEF8019A8FBD00063F2F2 /* DCTObjectStore.m in Sources */,
+				244775151A1260260091CBDD /* DCTObjectStoreCloudEncoder.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -210,10 +318,48 @@
 			buildActionMask = 2147483647;
 			files = (
 				24501D191883DF9600FED266 /* DCTObjectStore.m in Sources */,
+				244775141A1260260091CBDD /* DCTObjectStoreCloudEncoder.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		24D52A1D1A28E98C00FDA615 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				24D52A2C1A28E98C00FDA615 /* ViewController.m in Sources */,
+				24D52A291A28E98C00FDA615 /* AppDelegate.m in Sources */,
+				24D52A261A28E98C00FDA615 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		24D52A4A1A28EB1C00FDA615 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 242BEEFB19A8F53B0063F2F2 /* DCTObjectStore iOS */;
+			targetProxy = 24D52A491A28EB1C00FDA615 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		24D52A2D1A28E98C00FDA615 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				24D52A2E1A28E98C00FDA615 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		24D52A321A28E98C00FDA615 /* LaunchScreen.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				24D52A331A28E98C00FDA615 /* Base */,
+			);
+			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		242BEF0C19A8F53B0063F2F2 /* Debug */ = {
@@ -267,6 +413,26 @@
 			};
 			name = Release;
 		};
+		24D52A411A28E98C00FDA615 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 244DE8D119A9235100A91DC7 /* iOS Application.xcconfig */;
+			buildSettings = {
+				INFOPLIST_FILE = "DCTObjectStore Demo/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = DCTObjectStore;
+			};
+			name = Debug;
+		};
+		24D52A421A28E98C00FDA615 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 244DE8D119A9235100A91DC7 /* iOS Application.xcconfig */;
+			buildSettings = {
+				INFOPLIST_FILE = "DCTObjectStore Demo/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = DCTObjectStore;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -293,6 +459,15 @@
 			buildConfigurations = (
 				24501D321883DF9600FED266 /* Debug */,
 				24501D331883DF9600FED266 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		24D52A451A28E98C00FDA615 /* Build configuration list for PBXNativeTarget "DCTObjectStore Demo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				24D52A411A28E98C00FDA615 /* Debug */,
+				24D52A421A28E98C00FDA615 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
