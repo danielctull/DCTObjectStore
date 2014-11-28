@@ -101,7 +101,7 @@ static void* DCTObjectStoreObjectIdentifier = &DCTObjectStoreObjectIdentifier;
 		@try {
 			NSData *data = [NSData dataWithContentsOfURL:URL];
 			NSString *identifier = [URL lastPathComponent];
-			id<DCTObjectStoreCoding> object = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+			id<NSSecureCoding> object = [NSKeyedUnarchiver unarchiveObjectWithData:data];
 			[self setIdentifier:identifier forObject:object];
 			[self updateObject:object];
 		}
