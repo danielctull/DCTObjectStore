@@ -8,6 +8,7 @@
 
 #import "DCTObjectStoreController.h"
 #import "DCTObjectStore.h"
+#import "DCTObjectStoreAttributes.h"
 
 void *DCTObjectStoreControllerContext = &DCTObjectStoreControllerContext;
 
@@ -33,7 +34,8 @@ void *DCTObjectStoreControllerContext = &DCTObjectStoreControllerContext;
 	_sortDescriptors = [sortDescriptors copy];
 	_objects = [self objectsFromObjectStore:objectStore predciate:predicate sortDescriptors:sortDescriptors];
 
-	[objectStore addObserver:self forKeyPath:DCTObjectStoreAttributes.objects options:(NSKeyValueObservingOptionOld | NSKeyValueObservingOptionNew) context:DCTObjectStoreControllerContext];
+	NSKeyValueObservingOptions options = (NSKeyValueObservingOptions)(NSKeyValueObservingOptionOld | NSKeyValueObservingOptionNew);
+	[objectStore addObserver:self forKeyPath:DCTObjectStoreAttributes.objects options:options context:DCTObjectStoreControllerContext];
 
 	return self;
 }
@@ -129,7 +131,7 @@ void *DCTObjectStoreControllerContext = &DCTObjectStoreControllerContext;
 #pragma mark - Helper methods
 
 - (NSArray *)objectsFromObjectStore:(DCTObjectStore *)objectStore predciate:(NSPredicate *)predicate sortDescriptors:(NSArray *)sortDescriptors {
-	NSArray *objects = objectStore.objects;
+	NSArray *objects = [objectStore.objects allObjects];
 
 	if (predicate) {
 		objects = [objects filteredArrayUsingPredicate:predicate];

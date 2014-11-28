@@ -10,13 +10,14 @@
 @import DCTObjectStore;
 
 extern const struct EventAttributes {
+	__unsafe_unretained NSString *name;
 	__unsafe_unretained NSString *date;
-	__unsafe_unretained NSString *identifier;
 } EventAttributes;
 
 
-@interface Event : NSObject <DCTObjectStoreCoding>
+@interface Event : NSObject <NSSecureCoding>
 
+@property (nonatomic) NSString *name;
 @property (nonatomic) NSDate *date;
 
 @end

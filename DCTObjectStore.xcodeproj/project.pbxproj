@@ -14,6 +14,9 @@
 		244775151A1260260091CBDD /* DCTObjectStoreCloudEncoder.m in Sources */ = {isa = PBXBuildFile; fileRef = 244775121A1260260091CBDD /* DCTObjectStoreCloudEncoder.m */; };
 		24501D171883DF9600FED266 /* DCTObjectStore.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 24501D161883DF9600FED266 /* DCTObjectStore.h */; };
 		24501D191883DF9600FED266 /* DCTObjectStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 24501D181883DF9600FED266 /* DCTObjectStore.m */; };
+		2464AB3B1A29207100F72B41 /* DCTObjectStoreAttributes.m in Sources */ = {isa = PBXBuildFile; fileRef = 2464AB3A1A29207100F72B41 /* DCTObjectStoreAttributes.m */; };
+		2464AB3C1A2922B200F72B41 /* DCTObjectStoreAttributes.h in Headers */ = {isa = PBXBuildFile; fileRef = 2464AB391A29207100F72B41 /* DCTObjectStoreAttributes.h */; };
+		2464AB3D1A2922B800F72B41 /* DCTObjectStoreAttributes.m in Sources */ = {isa = PBXBuildFile; fileRef = 2464AB3A1A29207100F72B41 /* DCTObjectStoreAttributes.m */; };
 		24D52A261A28E98C00FDA615 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 24D52A251A28E98C00FDA615 /* main.m */; };
 		24D52A291A28E98C00FDA615 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 24D52A281A28E98C00FDA615 /* AppDelegate.m */; };
 		24D52A2C1A28E98C00FDA615 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24D52A2B1A28E98C00FDA615 /* ViewController.m */; };
@@ -84,6 +87,8 @@
 		24501D0E1883DF9600FED266 /* libDCTObjectStore.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libDCTObjectStore.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		24501D161883DF9600FED266 /* DCTObjectStore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DCTObjectStore.h; sourceTree = "<group>"; };
 		24501D181883DF9600FED266 /* DCTObjectStore.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DCTObjectStore.m; sourceTree = "<group>"; };
+		2464AB391A29207100F72B41 /* DCTObjectStoreAttributes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCTObjectStoreAttributes.h; sourceTree = "<group>"; };
+		2464AB3A1A29207100F72B41 /* DCTObjectStoreAttributes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCTObjectStoreAttributes.m; sourceTree = "<group>"; };
 		24D52A211A28E98C00FDA615 /* DCTObjectStore.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DCTObjectStore.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		24D52A241A28E98C00FDA615 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		24D52A251A28E98C00FDA615 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -184,8 +189,8 @@
 		24D52A221A28E98C00FDA615 /* DCTObjectStore Demo */ = {
 			isa = PBXGroup;
 			children = (
-				24D52A271A28E98C00FDA615 /* AppDelegate.h */,
 				24D52A281A28E98C00FDA615 /* AppDelegate.m */,
+				24D52A271A28E98C00FDA615 /* AppDelegate.h */,
 				24D52A2A1A28E98C00FDA615 /* ViewController.h */,
 				24D52A2B1A28E98C00FDA615 /* ViewController.m */,
 				24D52A591A28F36900FDA615 /* Event.h */,
@@ -202,6 +207,8 @@
 		24D52A581A28F27500FDA615 /* Private */ = {
 			isa = PBXGroup;
 			children = (
+				2464AB391A29207100F72B41 /* DCTObjectStoreAttributes.h */,
+				2464AB3A1A29207100F72B41 /* DCTObjectStoreAttributes.m */,
 				24D52A4C1A28EE3E00FDA615 /* DCTObjectStoreCloudKit.h */,
 				24D52A4D1A28EE3E00FDA615 /* DCTObjectStoreCloudKit.m */,
 				244775111A1260260091CBDD /* DCTObjectStoreCloudEncoder.h */,
@@ -223,6 +230,7 @@
 				24D52A571A28F21D00FDA615 /* DCTObjectStoreCoding.h in Headers */,
 				242BEF7F19A8FBB00063F2F2 /* DCTObjectStore.h in Headers */,
 				24D52A4E1A28EE3E00FDA615 /* DCTObjectStoreCloudKit.h in Headers */,
+				2464AB3C1A2922B200F72B41 /* DCTObjectStoreAttributes.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -348,6 +356,7 @@
 				24D52A551A28EEB800FDA615 /* DCTObjectStoreController.m in Sources */,
 				24D52A501A28EE3E00FDA615 /* DCTObjectStoreCloudKit.m in Sources */,
 				242BEF8019A8FBD00063F2F2 /* DCTObjectStore.m in Sources */,
+				2464AB3D1A2922B800F72B41 /* DCTObjectStoreAttributes.m in Sources */,
 				244775151A1260260091CBDD /* DCTObjectStoreCloudEncoder.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -360,6 +369,7 @@
 				24D52A4F1A28EE3E00FDA615 /* DCTObjectStoreCloudKit.m in Sources */,
 				24501D191883DF9600FED266 /* DCTObjectStore.m in Sources */,
 				244775141A1260260091CBDD /* DCTObjectStoreCloudEncoder.m in Sources */,
+				2464AB3B1A29207100F72B41 /* DCTObjectStoreAttributes.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

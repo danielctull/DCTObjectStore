@@ -18,32 +18,20 @@ FOUNDATION_EXPORT const unsigned char DCTObjectStoreVersionString[];
 
 
 
-extern const struct DCTObjectStoreAttributes {
-	__unsafe_unretained NSString *name;
-	__unsafe_unretained NSString *objects;
-	__unsafe_unretained NSString *sortDescriptors;
-} DCTObjectStoreAttributes;
-
-extern NSString *const DCTObjectStoreDidChangeNotification;
-
-
-
-
-
-
 @interface DCTObjectStore : NSObject
 
 + (instancetype)objectStoreWithName:(NSString *)name;
-+ (instancetype)objectStoreWithName:(NSString *)name groupIdentifier:(NSString *)groupIdentifier;
 + (instancetype)objectStoreWithName:(NSString *)name groupIdentifier:(NSString *)groupIdentifier synchonizable:(BOOL)synchonizable;
 
 @property (nonatomic, readonly) NSString *name;
 @property (nonatomic, readonly) NSString *groupIdentifier;
 @property (nonatomic, readonly) BOOL synchonizable;
 
-@property (nonatomic, readonly) NSArray *objects;
+@property (nonatomic, readonly) NSSet *objects;
 
-- (void)saveObject:(id<DCTObjectStoreCoding>)object;
-- (void)deleteObject:(id<DCTObjectStoreCoding>)object;
+- (void)saveObject:(id<NSSecureCoding>)object;
+- (void)deleteObject:(id<NSSecureCoding>)object;
+
++ (void)deleteStore:(DCTObjectStore *)store;
 
 @end

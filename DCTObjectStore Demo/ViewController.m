@@ -22,22 +22,22 @@
 
 	self.objectStore = [DCTObjectStore objectStoreWithName:@"Test"];
 
-	NSArray *sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:EventAttributes.date ascending:NO]];
+	NSArray *sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:EventAttributes.name ascending:YES]];
 	self.objectStoreController = [[DCTObjectStoreController alloc] initWithObjectStore:self.objectStore predciate:nil sortDescriptors:sortDescriptors];
 	self.objectStoreController.delegate = self;
 
-	Event *event = [Event new];
-	event.date = [NSDate new];
-	[self.objectStore saveObject:event];
+	Event *eventB = [Event new];
+	eventB.name = @"b";
+	eventB.date = [NSDate new];
+	[self.objectStore saveObject:eventB];
 
 
-	event.date = [NSDate new];
-	[self.objectStore saveObject:event];
+	Event *eventA = [Event new];
+	eventA.date = [NSDate new];
+	eventA.name = @"a";
+	[self.objectStore saveObject:eventA];
 	
-	dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-		[self.objectStore deleteObject:event];
-	});
-
+	NSLog(@"%@:%@ %@", self, NSStringFromSelector(_cmd), self.objectStoreController.objects);
 }
 
 #pragma mark - DCTObjectStoreControllerDelegate

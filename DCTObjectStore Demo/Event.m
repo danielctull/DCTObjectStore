@@ -9,21 +9,18 @@
 #import "Event.h"
 
 const struct EventAttributes EventAttributes = {
-	.date = @"date",
-	.identifier = @"identifier"
+	.name = @"name",
+	.date = @"date"
 };
-
-@interface Event ()
-@property (nonatomic, readonly) NSString *identifier;
-@end
 
 @implementation Event
 
-- (instancetype)init {
-	self = [super init];
-	if (!self) return nil;
-	_identifier = [[NSUUID UUID] UUIDString];
-	return self;
+- (NSString *)description {
+	return [NSString stringWithFormat:@"<%@: %p; %@ = %@; %@ = %@>",
+			NSStringFromClass([self class]),
+			self,
+			EventAttributes.name, self.name,
+			EventAttributes.date, self.date];
 }
 
 #pragma mark - NSSecureCoding
@@ -35,14 +32,14 @@ const struct EventAttributes EventAttributes = {
 - (instancetype)initWithCoder:(NSCoder *)decoder {
 	self = [super init];
 	if (!self) return nil;
-	_identifier = [decoder decodeObjectOfClass:[NSString class] forKey:@"identifier"];
-	_date = [decoder decodeObjectOfClass:[NSString class] forKey:@"date"];
+	_name = [decoder decodeObjectOfClass:[NSString class] forKey:EventAttributes.name];
+	_date = [decoder decodeObjectOfClass:[NSString class] forKey:EventAttributes.date];
 	return self;
 }
 
 - (void)encodeWithCoder:(NSCoder *)encoder {
-	[encoder encodeObject:self.identifier forKey:@"identifier"];
-	[encoder encodeObject:self.date forKey:@"date"];
+	[encoder encodeObject:self.name forKey:EventAttributes.name];
+	[encoder encodeObject:self.date forKey:EventAttributes.date];
 }
 
 @end
