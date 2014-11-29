@@ -30,7 +30,7 @@ static NSString *const DCTObjectStoreControllerPredicateTestsNotString = @"B";
 
 - (void)tearDown {
 	self.controller = nil;
-	[DCTObjectStore deleteStore:self.store];
+	[self.store destroy];
 	[super tearDown];
 }
 

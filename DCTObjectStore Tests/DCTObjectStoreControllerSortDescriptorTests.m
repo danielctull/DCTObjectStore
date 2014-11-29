@@ -26,7 +26,7 @@
 
 - (void)tearDown {
 	self.controller = nil;
-	[DCTObjectStore deleteStore:self.store];
+	[self.store destroy];
 	[super tearDown];
 }
 
@@ -54,6 +54,23 @@
 	XCTAssertEqual(self.controller.objects.count, (NSUInteger)2, @"Store should have two objects.");
 	XCTAssertEqualObjects(self.controller.objects[0], event2, @"First object should be event2.");
 	XCTAssertEqualObjects(self.controller.objects[1], event1, @"First object should be event1.");
+}
+
+- (void)testMove {
+	Event *event1 = [Event new];
+	event1.name = @"1";
+	[self.store saveObject:event1];
+	
+	Event *event2 = [Event new];
+	event2.name = @"2";
+	[self.store saveObject:event2];
+	
+	event1.name = @"3";
+	[self.store saveObject:event1];
+	
+	XCTAssertEqual(self.controller.objects.count, (NSUInteger)2, @"The store should contain one object.");
+	XCTAssertEqualObjects(self.controller.objects[0], event2, @"The first object should be event2.");
+	XCTAssertEqualObjects(self.controller.objects[1], event1, @"The second object should be event1.");
 }
 
 @end

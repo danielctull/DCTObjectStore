@@ -22,7 +22,7 @@
 }
 
 - (void)tearDown {
-	[DCTObjectStore deleteStore:self.store];
+	[self.store destroy];
     [super tearDown];
 }
 
@@ -31,7 +31,7 @@
 	DCTObjectStore *store1 = [DCTObjectStore objectStoreWithName:name];
 	DCTObjectStore *store2 = [DCTObjectStore objectStoreWithName:name];
 	XCTAssertEqualObjects(store1, store2, @"Should retrieve exactly the same store object.");
-	[DCTObjectStore deleteStore:store1];
+	[store1 destroy];
 }
 
 - (void)testDifferent {
@@ -40,8 +40,8 @@
 	DCTObjectStore *store1 = [DCTObjectStore objectStoreWithName:name1];
 	DCTObjectStore *store2 = [DCTObjectStore objectStoreWithName:name2];
 	XCTAssertNotEqualObjects(store1, store2, @"Should retrieve different store objects.");
-	[DCTObjectStore deleteStore:store1];
-	[DCTObjectStore deleteStore:store2];
+	[store1 destroy];
+	[store2 destroy];
 }
 
 - (void)testInsertion {

@@ -25,12 +25,13 @@ FOUNDATION_EXPORT const unsigned char DCTObjectStoreVersionString[];
 @property (nonatomic, readonly) NSString *name;
 @property (nonatomic, readonly) NSString *groupIdentifier;
 @property (nonatomic, readonly) BOOL synchonizable;
+@property (nonatomic, readonly) NSString *storeIdentifier;
 
 @property (nonatomic, readonly) NSSet *objects;
 
 - (void)saveObject:(id<NSSecureCoding>)object;
 - (void)deleteObject:(id<NSSecureCoding>)object;
 
-+ (void)deleteStore:(DCTObjectStore *)store;
+- (void)destroy;
 
 @end

@@ -8,18 +8,15 @@
 
 #import "DCTObjectStore.h"
 #import "DCTObjectStoreAttributes.h"
-@import ObjectiveC.runtime;
-
-static void* DCTObjectStoreObjectIdentifier = &DCTObjectStoreObjectIdentifier;
+#import "DCTObjectStoreIdentifier.h"
+#import "DCTDiskObjectStore.h"
 
 @interface DCTObjectStore ()
-@property (nonatomic, readonly) NSString *storeIdentifier;
-@property (nonatomic, readonly) NSURL *storeURL;
+@property (nonatomic) DCTDiskObjectStore *diskStore;
+@property (nonatomic, readwrite) NSSet *objects;
 @end
 
 @implementation DCTObjectStore
-@synthesize storeIdentifier = _storeIdentifier;
-@synthesize storeURL = _storeURL;
 
 + (NSMutableDictionary *)objectStores {
 	static NSMutableDictionary *objectStores;
@@ -34,81 +31,61 @@ static void* DCTObjectStoreObjectIdentifier = &DCTObjectStoreObjectIdentifier;
 	return [self objectStoreWithName:name groupIdentifier:nil synchonizable:NO];
 }
 
-+ (instancetype)objectStoreWithName:(NSString *)name groupIdentifier:(NSString *)groupIdentifier synchonizable:(BOOL)synchonizable {
++ (instancetype)objectStoreWithName:(NSString *)name
+					groupIdentifier:(NSString *)groupIdentifier
+					  synchonizable:(BOOL)synchonizable {
 
 	NSMutableDictionary *objectStores = [self objectStores];
-	NSString *identifier = [self storeIdentifierWithName:name groupIdentifier:groupIdentifier synchonizable:synchonizable];
+	NSString *storeIdentifier = [DCTObjectStoreIdentifier storeIdentifierWithName:name
+																  groupIdentifier:groupIdentifier
+																	synchonizable:synchonizable];
 	
-	DCTObjectStore *objectStore = objectStores[identifier];
+	DCTObjectStore *objectStore = objectStores[storeIdentifier];
 	
 	if (!objectStore) {
-		objectStore = [[self alloc] initWithName:name groupIdentifier:groupIdentifier synchonizable:synchonizable];
-		objectStores[identifier] = objectStore;
+		
+		objectStore = [[self alloc] initWithName:name
+								 storeIdentifier:storeIdentifier
+								 groupIdentifier:groupIdentifier
+								   synchonizable:synchonizable];
+		
+		objectStores[storeIdentifier] = objectStore;
 	}
 
 	return objectStore;
 }
 
 - (void)saveObject:(id<NSSecureCoding>)object {
-	NSString *saveUUID = [self identifierForObject:object];
-	NSURL *URL = [self.storeURL URLByAppendingPathComponent:saveUUID];
-	NSData *data = [NSKeyedArchiver archivedDataWithRootObject:object];
-	[data writeToURL:URL atomically:YES];
+	[self.diskStore saveObject:object];
 	[self updateObject:object];
 }
 
 - (void)deleteObject:(id<NSSecureCoding>)object {
-	NSString *saveUUID = [self identifierForObject:object];
-	NSURL *URL = [self.storeURL URLByAppendingPathComponent:saveUUID];
-	[[NSFileManager defaultManager] removeItemAtURL:URL error:NULL];
+	[self.diskStore deleteObject:object];
 	[self removeObject:object];
 }
 
-+ (void)deleteStore:(DCTObjectStore *)store {
-	[self.objectStores removeObjectForKey:store.storeIdentifier];
-	[[NSFileManager defaultManager] removeItemAtURL:store.storeURL error:NULL];
+- (void)destroy {
+	[self.diskStore destroy];
+	[[[self class] objectStores] removeObjectForKey:self.storeIdentifier];
 }
 
 #pragma mark - Internal
 
-- (instancetype)initWithName:(NSString *)name groupIdentifier:(NSString *)groupIdentifier synchonizable:(BOOL)synchonizable {
+- (instancetype)initWithName:(NSString *)name
+			 storeIdentifier:(NSString *)storeIdentifier
+			 groupIdentifier:(NSString *)groupIdentifier
+			   synchonizable:(BOOL)synchonizable {
+	
 	self = [self init];
 	if (!self) return nil;
 	_name = [name copy];
+	_storeIdentifier = [storeIdentifier copy];
 	_groupIdentifier = [groupIdentifier copy];
 	_synchonizable = synchonizable;
-	[self reload];
+	_diskStore = [[DCTDiskObjectStore alloc] initWithStoreIdentifier:storeIdentifier groupIdentifier:groupIdentifier];
+	_objects = _diskStore.objects;
 	return self;
-}
-
-- (void)reload {
-
-	if (![NSThread isMainThread]) {
-		dispatch_sync(dispatch_get_main_queue(), ^{
-			[self reload];
-		});
-		return;
-	}
-
-	NSFileManager *fileManager = [NSFileManager new];
-	NSDirectoryEnumerator *enumerator = [fileManager enumeratorAtURL:self.storeURL
-										  includingPropertiesForKeys:nil
-															 options:NSDirectoryEnumerationSkipsSubdirectoryDescendants
-														errorHandler:nil];
-
-	for (NSURL *URL in enumerator) {
-
-		@try {
-			NSData *data = [NSData dataWithContentsOfURL:URL];
-			NSString *identifier = [URL lastPathComponent];
-			id<NSSecureCoding> object = [NSKeyedUnarchiver unarchiveObjectWithData:data];
-			[self setIdentifier:identifier forObject:object];
-			[self updateObject:object];
-		}
-		@catch (__unused NSException *exception) {
-			return;
-		}
-	}
 }
 
 - (void)updateObject:(id<NSSecureCoding>)object {
@@ -128,72 +105,6 @@ static void* DCTObjectStoreObjectIdentifier = &DCTObjectStoreObjectIdentifier;
 - (void)removeObject:(id<NSSecureCoding>)object {
 	NSMutableSet *set = [self mutableSetValueForKey:DCTObjectStoreAttributes.objects];
 	[set removeObject:object];
-}
-
-#pragma mark - Properties
-
-- (NSString *)storeIdentifier {
-	
-	if (!_storeIdentifier) {
-		_storeIdentifier = [[self class] storeIdentifierWithName:self.name groupIdentifier:self.groupIdentifier synchonizable:self.synchonizable];
-	}
-	
-	return _storeIdentifier;
-}
-
-- (NSURL *)storeURL {
-	
-	if (!_storeURL) {
-		_storeURL = [[self objectStoreDirectory] URLByAppendingPathComponent:self.storeIdentifier];
-		[[NSFileManager defaultManager] createDirectoryAtURL:_storeURL withIntermediateDirectories:YES attributes:nil error:NULL];
-	}
-	
-	return _storeURL;
-}
-
-#pragma mark - Object Identifiers
-
-- (void)setIdentifier:(NSString *)identifier forObject:(id)object {
-	objc_setAssociatedObject(object, DCTObjectStoreObjectIdentifier, identifier, OBJC_ASSOCIATION_COPY);
-}
-
-- (NSString *)identifierForObject:(id)object {
-
-	NSString *identifier = objc_getAssociatedObject(object, DCTObjectStoreObjectIdentifier);
-	if (!identifier) {
-		identifier = [[NSUUID UUID] UUIDString];
-		[self setIdentifier:identifier forObject:object];
-	}
-	return identifier;
-}
-
-#pragma mark - Internal
-
-+ (NSString *)storeIdentifierWithName:(NSString *)name groupIdentifier:(NSString *)groupIdentifier synchonizable:(BOOL)synchonizable {
-	
-	NSString *string = @"";
-	if (name) string = [string stringByAppendingString:name];
-	string = [string stringByAppendingString:@"-"];
-	if (groupIdentifier) string = [string stringByAppendingString:groupIdentifier];
-	string = [string stringByAppendingString:@"-"];
-	string = [string stringByAppendingString:[@(synchonizable) stringValue]];
-	
-	NSData *data = [string dataUsingEncoding:NSUTF8StringEncoding];
-	NSString *identifier = [data base64EncodedStringWithOptions:NSDataBase64Encoding76CharacterLineLength];
-	return identifier;
-}
-
-- (NSURL *)objectStoreDirectory {
-
-	NSFileManager *fileManager = [NSFileManager defaultManager];
-	NSURL *URL;
-	if (self.groupIdentifier.length > 0) {
-		URL = [fileManager containerURLForSecurityApplicationGroupIdentifier:self.groupIdentifier];
-	} else {
-		URL = [[fileManager URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
-	}
-
-	return [URL URLByAppendingPathComponent:NSStringFromClass([self class])];
 }
 
 @end
