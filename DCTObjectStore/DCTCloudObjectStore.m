@@ -11,6 +11,7 @@
 #import "DCTCloudObjectStoreDelegate.h"
 
 @interface DCTCloudObjectStore ()
+@property (nonatomic) CKContainer *container;
 @property (nonatomic) CKRecordZone *recordZone;
 @end
 
@@ -18,10 +19,15 @@
 
 - (instancetype)initWithStoreIdentifier:(NSString *)storeIdentifier
 						cloudIdentifier:(NSString *)cloudIdentifier {
+
+	NSParameterAssert(storeIdentifier);
+	NSParameterAssert(cloudIdentifier);
+
 	self = [super init];
 	if (!self) return nil;
 	_storeIdentifier = [storeIdentifier copy];
 	_cloudIdentifier = [cloudIdentifier copy];
+	_container = [CKContainer containerWithIdentifier:cloudIdentifier];
 	_recordZone = [[CKRecordZone alloc] initWithZoneName:storeIdentifier];
 
 	CKFetchRecordChangesOperation *operation = [[CKFetchRecordChangesOperation alloc] initWithRecordZoneID:_recordZone.zoneID
