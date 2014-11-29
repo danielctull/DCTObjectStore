@@ -240,8 +240,8 @@
 		24D52A221A28E98C00FDA615 /* DCTObjectStore Demo */ = {
 			isa = PBXGroup;
 			children = (
-				24D52A281A28E98C00FDA615 /* AppDelegate.m */,
 				24D52A271A28E98C00FDA615 /* AppDelegate.h */,
+				24D52A281A28E98C00FDA615 /* AppDelegate.m */,
 				24D52A2A1A28E98C00FDA615 /* ViewController.h */,
 				24D52A2B1A28E98C00FDA615 /* ViewController.m */,
 				24D52A591A28F36900FDA615 /* Event.h */,
