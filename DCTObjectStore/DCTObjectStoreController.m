@@ -132,6 +132,11 @@ void *DCTObjectStoreControllerContext = &DCTObjectStoreControllerContext;
 
 - (NSArray *)objectsFromObjectStore:(DCTObjectStore *)objectStore predciate:(NSPredicate *)predicate sortDescriptors:(NSArray *)sortDescriptors {
 	NSArray *objects = [objectStore.objects allObjects];
+	
+	if (!objects) {
+		objects = @[];
+		return objects;
+	}
 
 	if (predicate) {
 		objects = [objects filteredArrayUsingPredicate:predicate];
