@@ -7,6 +7,8 @@
 //
 
 @import Foundation;
+@protocol DCTCloudObjectStoreDelegate;
+
 
 @interface DCTCloudObjectStore : NSObject
 
@@ -15,6 +17,8 @@
 
 @property (nonatomic, readonly) NSString *storeIdentifier;
 @property (nonatomic, readonly) NSString *cloudIdentifier;
+
+@property (nonatomic, weak) id<DCTCloudObjectStoreDelegate> delegate;
 
 - (void)saveObject:(id<NSSecureCoding>)object;
 - (void)deleteObject:(id<NSSecureCoding>)object;
