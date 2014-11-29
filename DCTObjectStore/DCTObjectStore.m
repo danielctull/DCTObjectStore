@@ -10,9 +10,11 @@
 #import "DCTObjectStoreAttributes.h"
 #import "DCTObjectStoreIdentifier.h"
 #import "DCTDiskObjectStore.h"
+#import "DCTCloudObjectStore.h"
 
 @interface DCTObjectStore ()
-@property (nonatomic) DCTDiskObjectStore *diskStore;
+@property (nonatomic, readonly) DCTDiskObjectStore *diskStore;
+@property (nonatomic, readonly) DCTCloudObjectStore *cloudStore;
 @property (nonatomic, readwrite) NSSet *objects;
 @end
 
@@ -57,16 +59,19 @@
 
 - (void)saveObject:(id<NSSecureCoding>)object {
 	[self.diskStore saveObject:object];
+	[self.cloudStore saveObject:object];
 	[self updateObject:object];
 }
 
 - (void)deleteObject:(id<NSSecureCoding>)object {
 	[self.diskStore deleteObject:object];
+	[self.cloudStore deleteObject:object];
 	[self removeObject:object];
 }
 
 - (void)destroy {
 	[self.diskStore destroy];
+	[self.cloudStore destroy];
 	[[[self class] objectStores] removeObjectForKey:self.storeIdentifier];
 }
 
@@ -85,6 +90,11 @@
 	_synchonizable = synchonizable;
 	_diskStore = [[DCTDiskObjectStore alloc] initWithStoreIdentifier:storeIdentifier groupIdentifier:groupIdentifier];
 	_objects = _diskStore.objects;
+	
+	if (synchonizable) {
+		_cloudStore = [[DCTCloudObjectStore alloc] initWithStoreIdentifier:storeIdentifier];
+	}
+	
 	return self;
 }
 

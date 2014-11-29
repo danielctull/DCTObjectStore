@@ -6,8 +6,16 @@
 //  Copyright (c) 2014 Daniel Tull. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+@import Foundation;
 
 @interface DCTCloudObjectStore : NSObject
+
+- (instancetype)initWithStoreIdentifier:(NSString *)storeIdentifier;
+@property (nonatomic, readonly) NSString *storeIdentifier;
+
+- (void)saveObject:(id<NSSecureCoding>)object;
+- (void)deleteObject:(id<NSSecureCoding>)object;
+
+- (void)destroy;
 
 @end

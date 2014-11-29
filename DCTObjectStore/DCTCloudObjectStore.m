@@ -10,4 +10,16 @@
 
 @implementation DCTCloudObjectStore
 
+- (instancetype)initWithStoreIdentifier:(NSString *)storeIdentifier {
+	self = [super init];
+	if (!self) return nil;
+	_storeIdentifier = [storeIdentifier copy];
+	return self;
+}
+
+- (void)saveObject:(id<NSSecureCoding>)object {}
+- (void)deleteObject:(id<NSSecureCoding>)object {}
+
+- (void)destroy {}
+
 @end
