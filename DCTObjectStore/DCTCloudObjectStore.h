@@ -10,8 +10,11 @@
 
 @interface DCTCloudObjectStore : NSObject
 
-- (instancetype)initWithStoreIdentifier:(NSString *)storeIdentifier;
+- (instancetype)initWithStoreIdentifier:(NSString *)storeIdentifier
+						cloudIdentifier:(NSString *)cloudIdentifier;
+
 @property (nonatomic, readonly) NSString *storeIdentifier;
+@property (nonatomic, readonly) NSString *cloudIdentifier;
 
 - (void)saveObject:(id<NSSecureCoding>)object;
 - (void)deleteObject:(id<NSSecureCoding>)object;

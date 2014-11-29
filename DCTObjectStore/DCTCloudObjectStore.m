@@ -10,10 +10,12 @@
 
 @implementation DCTCloudObjectStore
 
-- (instancetype)initWithStoreIdentifier:(NSString *)storeIdentifier {
+- (instancetype)initWithStoreIdentifier:(NSString *)storeIdentifier
+						cloudIdentifier:(NSString *)cloudIdentifier {
 	self = [super init];
 	if (!self) return nil;
 	_storeIdentifier = [storeIdentifier copy];
+	_cloudIdentifier = [cloudIdentifier copy];
 	return self;
 }
 

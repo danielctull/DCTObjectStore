@@ -20,11 +20,14 @@ FOUNDATION_EXPORT const unsigned char DCTObjectStoreVersionString[];
 @interface DCTObjectStore : NSObject
 
 + (instancetype)objectStoreWithName:(NSString *)name;
-+ (instancetype)objectStoreWithName:(NSString *)name groupIdentifier:(NSString *)groupIdentifier synchonizable:(BOOL)synchonizable;
+
++ (instancetype)objectStoreWithName:(NSString *)name
+					groupIdentifier:(NSString *)groupIdentifier
+					cloudIdentifier:(NSString *)cloudIdentifier;
 
 @property (nonatomic, readonly) NSString *name;
 @property (nonatomic, readonly) NSString *groupIdentifier;
-@property (nonatomic, readonly) BOOL synchonizable;
+@property (nonatomic, readonly) NSString *cloudIdentifier;
 @property (nonatomic, readonly) NSString *storeIdentifier;
 
 @property (nonatomic, readonly) NSSet *objects;

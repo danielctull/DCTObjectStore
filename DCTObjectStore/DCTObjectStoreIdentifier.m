@@ -14,14 +14,16 @@ static void* DCTObjectStoreObjectIdentifier = &DCTObjectStoreObjectIdentifier;
 
 @implementation DCTObjectStoreIdentifier
 
-+ (NSString *)storeIdentifierWithName:(NSString *)name groupIdentifier:(NSString *)groupIdentifier synchonizable:(BOOL)synchonizable {
++ (NSString *)storeIdentifierWithName:(NSString *)name
+					  groupIdentifier:(NSString *)groupIdentifier
+					  cloudIdentifier:(NSString *)cloudIdentifier {
 	
 	NSString *string = @"";
 	if (name) string = [string stringByAppendingString:name];
 	string = [string stringByAppendingString:@"-"];
 	if (groupIdentifier) string = [string stringByAppendingString:groupIdentifier];
 	string = [string stringByAppendingString:@"-"];
-	string = [string stringByAppendingString:[@(synchonizable) stringValue]];
+	if (cloudIdentifier) string = [string stringByAppendingString:cloudIdentifier];
 	
 	NSData *data = [string dataUsingEncoding:NSUTF8StringEncoding];
 	NSString *identifier = [data base64EncodedStringWithOptions:NSDataBase64Encoding76CharacterLineLength];

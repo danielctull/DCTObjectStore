@@ -13,7 +13,7 @@
 
 + (NSString *)storeIdentifierWithName:(NSString *)name
 					  groupIdentifier:(NSString *)groupIdentifier
-						synchonizable:(BOOL)synchonizable;
+					  cloudIdentifier:(NSString *)cloudIdentifier;
 
 + (NSString *)identifierForObject:(id)object;
 

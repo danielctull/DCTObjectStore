@@ -30,26 +30,25 @@
 }
 
 + (instancetype)objectStoreWithName:(NSString *)name {
-	return [self objectStoreWithName:name groupIdentifier:nil synchonizable:NO];
+	return [self objectStoreWithName:name groupIdentifier:nil cloudIdentifier:nil];
 }
 
 + (instancetype)objectStoreWithName:(NSString *)name
 					groupIdentifier:(NSString *)groupIdentifier
-					  synchonizable:(BOOL)synchonizable {
+					cloudIdentifier:(NSString *)cloudIdentifier {
 
 	NSMutableDictionary *objectStores = [self objectStores];
 	NSString *storeIdentifier = [DCTObjectStoreIdentifier storeIdentifierWithName:name
 																  groupIdentifier:groupIdentifier
-																	synchonizable:synchonizable];
+																  cloudIdentifier:cloudIdentifier];
 	
 	DCTObjectStore *objectStore = objectStores[storeIdentifier];
 	
 	if (!objectStore) {
-		
 		objectStore = [[self alloc] initWithName:name
 								 storeIdentifier:storeIdentifier
 								 groupIdentifier:groupIdentifier
-								   synchonizable:synchonizable];
+								 cloudIdentifier:cloudIdentifier];
 		
 		objectStores[storeIdentifier] = objectStore;
 	}
@@ -80,21 +79,22 @@
 - (instancetype)initWithName:(NSString *)name
 			 storeIdentifier:(NSString *)storeIdentifier
 			 groupIdentifier:(NSString *)groupIdentifier
-			   synchonizable:(BOOL)synchonizable {
+			 cloudIdentifier:(NSString *)cloudIdentifier {
 	
 	self = [self init];
 	if (!self) return nil;
 	_name = [name copy];
 	_storeIdentifier = [storeIdentifier copy];
 	_groupIdentifier = [groupIdentifier copy];
-	_synchonizable = synchonizable;
+	_cloudIdentifier = [cloudIdentifier copy];
 	_diskStore = [[DCTDiskObjectStore alloc] initWithStoreIdentifier:storeIdentifier groupIdentifier:groupIdentifier];
 	_objects = _diskStore.objects;
-	
-	if (synchonizable) {
-		_cloudStore = [[DCTCloudObjectStore alloc] initWithStoreIdentifier:storeIdentifier];
+
+	if (cloudIdentifier) {
+		_cloudStore = [[DCTCloudObjectStore alloc] initWithStoreIdentifier:storeIdentifier
+														   cloudIdentifier:cloudIdentifier];
 	}
-	
+
 	return self;
 }
 
@@ -103,7 +103,7 @@
 	if ([self.objects containsObject:object]) {
 		return;
 	}
-	
+
 	[self insertObject:object];
 }
 
