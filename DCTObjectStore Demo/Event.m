@@ -23,6 +23,23 @@ const struct EventAttributes EventAttributes = {
 			EventAttributes.date, self.date];
 }
 
+- (BOOL)isEqualToEvent:(Event *)event {
+	
+	if (self.class != event.class) {
+		return NO;
+	}
+	
+	if (self.name && ![self.name isEqualToString:event.name]) {
+		return NO;
+	}
+	
+	if (self.date && ![self.date isEqualToDate:event.date]) {
+		return NO;
+	}
+	
+	return YES;
+}
+
 #pragma mark - NSSecureCoding
 
 + (BOOL)supportsSecureCoding {

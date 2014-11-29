@@ -20,4 +20,6 @@ extern const struct EventAttributes {
 @property (nonatomic) NSString *name;
 @property (nonatomic) NSDate *date;
 
+- (BOOL)isEqualToEvent:(Event *)event;
+
 @end
