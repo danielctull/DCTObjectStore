@@ -54,6 +54,7 @@
 		24D52A6B1A2B5DB900FDA615 /* DCTCloudObjectStoreDecoder.h in Headers */ = {isa = PBXBuildFile; fileRef = 24D52A691A2B5DB900FDA615 /* DCTCloudObjectStoreDecoder.h */; };
 		24D52A6C1A2B5DB900FDA615 /* DCTCloudObjectStoreDecoder.m in Sources */ = {isa = PBXBuildFile; fileRef = 24D52A6A1A2B5DB900FDA615 /* DCTCloudObjectStoreDecoder.m */; };
 		24D52A6D1A2B5DB900FDA615 /* DCTCloudObjectStoreDecoder.m in Sources */ = {isa = PBXBuildFile; fileRef = 24D52A6A1A2B5DB900FDA615 /* DCTCloudObjectStoreDecoder.m */; };
+		24D52A731A2BBBA700FDA615 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24D52A721A2BBBA700FDA615 /* CloudKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -151,6 +152,8 @@
 		24D52A641A2B59BF00FDA615 /* DCTObjectStoreCoding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = DCTObjectStoreCoding.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		24D52A691A2B5DB900FDA615 /* DCTCloudObjectStoreDecoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCTCloudObjectStoreDecoder.h; sourceTree = "<group>"; };
 		24D52A6A1A2B5DB900FDA615 /* DCTCloudObjectStoreDecoder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCTCloudObjectStoreDecoder.m; sourceTree = "<group>"; };
+		24D52A6F1A2BB3C300FDA615 /* DCTObjectStore Demo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "DCTObjectStore Demo.entitlements"; sourceTree = "<group>"; };
+		24D52A721A2BBBA700FDA615 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -181,6 +184,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				24D52A471A28EB1C00FDA615 /* DCTObjectStore.framework in Frameworks */,
+				24D52A731A2BBBA700FDA615 /* CloudKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -209,6 +213,7 @@
 				24501D131883DF9600FED266 /* DCTObjectStore */,
 				24D52A221A28E98C00FDA615 /* DCTObjectStore Demo */,
 				2464AB471A2931D800F72B41 /* DCTObjectStore Tests */,
+				24D52A741A2BBBBA00FDA615 /* Frameworks */,
 				244DE8CF19A9235100A91DC7 /* Configurations */,
 				24501D0F1883DF9600FED266 /* Products */,
 			);
@@ -266,6 +271,7 @@
 				24D52A301A28E98C00FDA615 /* Images.xcassets */,
 				24D52A321A28E98C00FDA615 /* LaunchScreen.xib */,
 				24D52A241A28E98C00FDA615 /* Info.plist */,
+				24D52A6F1A2BB3C300FDA615 /* DCTObjectStore Demo.entitlements */,
 				24D52A251A28E98C00FDA615 /* main.m */,
 			);
 			path = "DCTObjectStore Demo";
@@ -300,6 +306,14 @@
 				24D52A6A1A2B5DB900FDA615 /* DCTCloudObjectStoreDecoder.m */,
 			);
 			name = Cloud;
+			sourceTree = "<group>";
+		};
+		24D52A741A2BBBBA00FDA615 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				24D52A721A2BBBA700FDA615 /* CloudKit.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -416,6 +430,14 @@
 					};
 					24D52A201A28E98C00FDA615 = {
 						CreatedOnToolsVersion = 6.1;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+							com.apple.iCloud = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -630,6 +652,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 244DE8D119A9235100A91DC7 /* iOS Application.xcconfig */;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = "DCTObjectStore Demo/DCTObjectStore Demo.entitlements";
 				INFOPLIST_FILE = "DCTObjectStore Demo/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = DCTObjectStore;
@@ -640,6 +663,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 244DE8D119A9235100A91DC7 /* iOS Application.xcconfig */;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = "DCTObjectStore Demo/DCTObjectStore Demo.entitlements";
 				INFOPLIST_FILE = "DCTObjectStore Demo/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = DCTObjectStore;

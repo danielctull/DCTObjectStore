@@ -12,7 +12,7 @@
 
 @interface ViewController () <DCTObjectStoreQueryDelegate>
 @property (nonatomic) DCTObjectStore *objectStore;
-@property (nonatomic) DCTObjectStoreQuery *objectStoreController;
+@property (nonatomic) DCTObjectStoreQuery *objectStoreQuery;
 @end
 
 @implementation ViewController
@@ -20,42 +20,54 @@
 - (void)viewDidLoad {
 	[super viewDidLoad];
 
-	self.objectStore = [DCTObjectStore objectStoreWithName:@"Test"];
+	self.objectStore = [DCTObjectStore objectStoreWithName:@"Test" groupIdentifier:nil cloudIdentifier:@"iCloud.uk.co.danieltull.DCTObjectStore"];
 
-	NSArray *sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:EventAttributes.name ascending:YES]];
-	self.objectStoreController = [[DCTObjectStoreQuery alloc] initWithObjectStore:self.objectStore predciate:nil sortDescriptors:sortDescriptors];
-	self.objectStoreController.delegate = self;
+	NSArray *sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:EventAttributes.date ascending:YES]];
+	self.objectStoreQuery = [[DCTObjectStoreQuery alloc] initWithObjectStore:self.objectStore predciate:nil sortDescriptors:sortDescriptors];
+	self.objectStoreQuery.delegate = self;
+}
 
-	Event *eventB = [Event new];
-	eventB.name = @"b";
-	eventB.date = [NSDate new];
-	[self.objectStore saveObject:eventB];
+- (IBAction)addEvent:(id)sender {
+	Event *event = [Event new];
+	event.date = [NSDate new];
+	event.name = @"The Event";
+	[self.objectStore saveObject:event];
+}
 
+#pragma mark - UITableViewDataSource 
 
-	Event *eventA = [Event new];
-	eventA.date = [NSDate new];
-	eventA.name = @"a";
-	[self.objectStore saveObject:eventA];
-	
-	NSLog(@"%@:%@ %@", self, NSStringFromSelector(_cmd), self.objectStoreController.objects);
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+	return self.objectStoreQuery.objects.count;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+	UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
+	Event *event = self.objectStoreQuery.objects[indexPath.row];
+	cell.textLabel.text = event.date.description;
+	return cell;
 }
 
 #pragma mark - DCTObjectStoreQueryDelegate
 
 - (void)objectStoreController:(DCTObjectStoreQuery *)controller didInsertObject:(id)object atIndex:(NSUInteger)index {
-	NSLog(@"%@:%@ %@ %@", self, NSStringFromSelector(_cmd), object, @(index));
+	NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:0];
+	[self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
 }
 
 - (void)objectStoreController:(DCTObjectStoreQuery *)controller didMoveObject:(id)object fromIndex:(NSUInteger)fromIndex toIndex:(NSUInteger)toIndex {
-	NSLog(@"%@:%@ %@ %@ %@", self, NSStringFromSelector(_cmd), object, @(fromIndex), @(toIndex));
+	NSIndexPath *fromIndexPath = [NSIndexPath indexPathForRow:fromIndex inSection:0];
+	NSIndexPath *toIndexPath = [NSIndexPath indexPathForRow:toIndex inSection:0];
+	[self.tableView moveRowAtIndexPath:fromIndexPath toIndexPath:toIndexPath];
 }
 
 - (void)objectStoreController:(DCTObjectStoreQuery *)controller didRemoveObject:(id)object fromIndex:(NSUInteger)index {
-	NSLog(@"%@:%@ %@ %@", self, NSStringFromSelector(_cmd), object, @(index));
+	NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:0];
+	[self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
 }
 
 - (void)objectStoreController:(DCTObjectStoreQuery *)controller didUpdateObject:(id)object atIndex:(NSUInteger)index {
-	NSLog(@"%@:%@ %@ %@", self, NSStringFromSelector(_cmd), object, @(index));
+	NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:0];
+	[self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
 }
 
 @end

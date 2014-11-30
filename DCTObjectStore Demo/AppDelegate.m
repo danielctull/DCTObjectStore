@@ -12,4 +12,16 @@
 @end
 
 @implementation AppDelegate
+
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+	[application registerForRemoteNotifications];
+	return YES;
+}
+
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
+	NSLog(@"%@:%@ %@", self, NSStringFromSelector(_cmd), userInfo);
+//	[self.store didReceiveNotification:userInfo];
+	completionHandler(UIBackgroundFetchResultNoData);
+}
+
 @end
