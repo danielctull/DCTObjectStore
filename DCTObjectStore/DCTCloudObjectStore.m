@@ -196,13 +196,11 @@ static NSString *const DCTCloudObjectStoreType = @"DCTCloudObjectStoreType";
 	if (!self.recordZone) return;
 
 	CKRecordID *recordID = [[CKRecordID alloc] initWithRecordName:recordName zoneID:self.recordZone.zoneID];
-	CKFetchRecordsOperation *fetchOperation = [[CKFetchRecordsOperation alloc] initWithRecordIDs:@[recordID]];
-	fetchOperation.fetchRecordsCompletionBlock = ^(NSDictionary *records, NSError *error) {
+	[self fetchRecordsWithIDs:@[recordID] completion:^(NSDictionary *records, NSError *error) {
 		CKRecord *record = records[recordName];
 		self.records[recordName] = record;
 		completion(record);
-	};
-	[self.container addOperation:fetchOperation];
+	}];
 }
 
 #pragma mark - Subscription
@@ -230,6 +228,15 @@ static NSString *const DCTCloudObjectStoreType = @"DCTCloudObjectStoreType";
 	[self downloadChangesWithCompletion:^{
 		[self uploadChanges];
 	}];
+}
+
+#pragma mark - CloudKit Operations
+
+- (void)fetchRecordsWithIDs:(NSArray *)recordIDs completion:(void(^)(NSDictionary *records, NSError *error))completion {
+	CKFetchRecordsOperation *fetchOperation = [[CKFetchRecordsOperation alloc] initWithRecordIDs:recordIDs];
+	fetchOperation.queuePriority = NSOperationQueuePriorityHigh;
+	fetchOperation.fetchRecordsCompletionBlock = completion;
+	[self.container addOperation:fetchOperation];
 }
 
 - (void)fetchRecordZone {
