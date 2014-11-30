@@ -1,5 +1,5 @@
 //
-//  DCTObjectStoreControllerPredicateTests.m
+//  DCTObjectStoreQueryPredicateTests.m
 //  DCTObjectStore
 //
 //  Created by Daniel Tull on 29.11.2014.
@@ -10,22 +10,22 @@
 @import DCTObjectStore;
 #import "Event.h"
 
-static NSString *const DCTObjectStoreControllerPredicateTestsString = @"A";
-static NSString *const DCTObjectStoreControllerPredicateTestsNotString = @"B";
+static NSString *const DCTObjectStoreQueryPredicateTestsString = @"A";
+static NSString *const DCTObjectStoreQueryPredicateTestsNotString = @"B";
 
-@interface DCTObjectStoreControllerPredicateTests : XCTestCase
+@interface DCTObjectStoreQueryPredicateTests : XCTestCase
 @property (nonatomic) DCTObjectStore *store;
-@property (nonatomic) DCTObjectStoreController *controller;
+@property (nonatomic) DCTObjectStoreQuery *controller;
 @end
 
-@implementation DCTObjectStoreControllerPredicateTests
+@implementation DCTObjectStoreQueryPredicateTests
 
 - (void)setUp {
 	[super setUp];
 	self.store = [DCTObjectStore objectStoreWithName:[[NSUUID UUID] UUIDString]];
 	NSArray *sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:EventAttributes.name ascending:YES]];
-	NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %@", EventAttributes.name, DCTObjectStoreControllerPredicateTestsString];
-	self.controller = [[DCTObjectStoreController alloc] initWithObjectStore:self.store predciate:predicate sortDescriptors:sortDescriptors];
+	NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %@", EventAttributes.name, DCTObjectStoreQueryPredicateTestsString];
+	self.controller = [[DCTObjectStoreQuery alloc] initWithObjectStore:self.store predciate:predicate sortDescriptors:sortDescriptors];
 }
 
 - (void)tearDown {
@@ -36,7 +36,7 @@ static NSString *const DCTObjectStoreControllerPredicateTestsNotString = @"B";
 
 - (void)testInsertion {
 	Event *event = [Event new];
-	event.name = DCTObjectStoreControllerPredicateTestsString;
+	event.name = DCTObjectStoreQueryPredicateTestsString;
 	[self.store saveObject:event];
 	XCTAssertEqual(self.controller.objects.count, (NSUInteger)1, @"Object count should be 1.");
 	XCTAssertEqualObjects([self.controller.objects firstObject], event, @"Object should be the event.");
@@ -44,7 +44,7 @@ static NSString *const DCTObjectStoreControllerPredicateTestsNotString = @"B";
 
 - (void)testNotInsertion {
 	Event *event = [Event new];
-	event.name = DCTObjectStoreControllerPredicateTestsNotString;
+	event.name = DCTObjectStoreQueryPredicateTestsNotString;
 	[self.store saveObject:event];
 	XCTAssertEqual(self.controller.objects.count, (NSUInteger)0, @"Object count should be 0.");
 }

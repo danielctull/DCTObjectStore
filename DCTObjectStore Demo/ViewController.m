@@ -10,9 +10,9 @@
 #import "ViewController.h"
 #import "Event.h"
 
-@interface ViewController () <DCTObjectStoreControllerDelegate>
+@interface ViewController () <DCTObjectStoreQueryDelegate>
 @property (nonatomic) DCTObjectStore *objectStore;
-@property (nonatomic) DCTObjectStoreController *objectStoreController;
+@property (nonatomic) DCTObjectStoreQuery *objectStoreController;
 @end
 
 @implementation ViewController
@@ -23,7 +23,7 @@
 	self.objectStore = [DCTObjectStore objectStoreWithName:@"Test"];
 
 	NSArray *sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:EventAttributes.name ascending:YES]];
-	self.objectStoreController = [[DCTObjectStoreController alloc] initWithObjectStore:self.objectStore predciate:nil sortDescriptors:sortDescriptors];
+	self.objectStoreController = [[DCTObjectStoreQuery alloc] initWithObjectStore:self.objectStore predciate:nil sortDescriptors:sortDescriptors];
 	self.objectStoreController.delegate = self;
 
 	Event *eventB = [Event new];
@@ -40,21 +40,21 @@
 	NSLog(@"%@:%@ %@", self, NSStringFromSelector(_cmd), self.objectStoreController.objects);
 }
 
-#pragma mark - DCTObjectStoreControllerDelegate
+#pragma mark - DCTObjectStoreQueryDelegate
 
-- (void)objectStoreController:(DCTObjectStoreController *)controller didInsertObject:(id)object atIndex:(NSUInteger)index {
+- (void)objectStoreController:(DCTObjectStoreQuery *)controller didInsertObject:(id)object atIndex:(NSUInteger)index {
 	NSLog(@"%@:%@ %@ %@", self, NSStringFromSelector(_cmd), object, @(index));
 }
 
-- (void)objectStoreController:(DCTObjectStoreController *)controller didMoveObject:(id)object fromIndex:(NSUInteger)fromIndex toIndex:(NSUInteger)toIndex {
+- (void)objectStoreController:(DCTObjectStoreQuery *)controller didMoveObject:(id)object fromIndex:(NSUInteger)fromIndex toIndex:(NSUInteger)toIndex {
 	NSLog(@"%@:%@ %@ %@ %@", self, NSStringFromSelector(_cmd), object, @(fromIndex), @(toIndex));
 }
 
-- (void)objectStoreController:(DCTObjectStoreController *)controller didRemoveObject:(id)object fromIndex:(NSUInteger)index {
+- (void)objectStoreController:(DCTObjectStoreQuery *)controller didRemoveObject:(id)object fromIndex:(NSUInteger)index {
 	NSLog(@"%@:%@ %@ %@", self, NSStringFromSelector(_cmd), object, @(index));
 }
 
-- (void)objectStoreController:(DCTObjectStoreController *)controller didUpdateObject:(id)object atIndex:(NSUInteger)index {
+- (void)objectStoreController:(DCTObjectStoreQuery *)controller didUpdateObject:(id)object atIndex:(NSUInteger)index {
 	NSLog(@"%@:%@ %@ %@", self, NSStringFromSelector(_cmd), object, @(index));
 }
 

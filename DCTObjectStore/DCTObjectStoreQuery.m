@@ -1,25 +1,25 @@
 //
-//  DCTObjectStoreController.m
+//  DCTObjectStoreQuery.m
 //  DCTObjectStore
 //
 //  Created by Daniel Tull on 16/08/2014.
 //  Copyright (c) 2014 Daniel Tull. All rights reserved.
 //
 
-#import "DCTObjectStoreController.h"
+#import "DCTObjectStoreQuery.h"
 #import "DCTObjectStore.h"
 #import "DCTObjectStoreAttributes.h"
 
-void *DCTObjectStoreControllerContext = &DCTObjectStoreControllerContext;
+void *DCTObjectStoreQueryContext = &DCTObjectStoreQueryContext;
 
-@interface DCTObjectStoreController ()
+@interface DCTObjectStoreQuery ()
 @property (nonatomic, readwrite) NSArray *objects;
 @end
 
-@implementation DCTObjectStoreController
+@implementation DCTObjectStoreQuery
 
 - (void)dealloc {
-	[self.objectStore removeObserver:self forKeyPath:DCTObjectStoreAttributes.objects context:DCTObjectStoreControllerContext];
+	[self.objectStore removeObserver:self forKeyPath:DCTObjectStoreAttributes.objects context:DCTObjectStoreQueryContext];
 }
 
 - (instancetype)initWithObjectStore:(DCTObjectStore *)objectStore predciate:(NSPredicate *)predicate sortDescriptors:(NSArray *)sortDescriptors {
@@ -35,14 +35,14 @@ void *DCTObjectStoreControllerContext = &DCTObjectStoreControllerContext;
 	_objects = [self objectsFromObjectStore:objectStore predciate:predicate sortDescriptors:sortDescriptors];
 
 	NSKeyValueObservingOptions options = (NSKeyValueObservingOptions)(NSKeyValueObservingOptionOld | NSKeyValueObservingOptionNew);
-	[objectStore addObserver:self forKeyPath:DCTObjectStoreAttributes.objects options:options context:DCTObjectStoreControllerContext];
+	[objectStore addObserver:self forKeyPath:DCTObjectStoreAttributes.objects options:options context:DCTObjectStoreQueryContext];
 
 	return self;
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
 
-	if (context != DCTObjectStoreControllerContext) {
+	if (context != DCTObjectStoreQueryContext) {
 		[super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
 		return;
 	}

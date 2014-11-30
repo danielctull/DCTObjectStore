@@ -1,5 +1,5 @@
 //
-//  DCTObjectStoreControllerTests.m
+//  DCTObjectStoreQueryTests.m
 //  DCTObjectStore
 //
 //  Created by Daniel Tull on 29.11.2014.
@@ -10,18 +10,18 @@
 @import DCTObjectStore;
 #import "Event.h"
 
-@interface DCTObjectStoreControllerTests : XCTestCase
+@interface DCTObjectStoreQueryTests : XCTestCase
 @property (nonatomic) DCTObjectStore *store;
-@property (nonatomic) DCTObjectStoreController *controller;
+@property (nonatomic) DCTObjectStoreQuery *controller;
 @end
 
-@implementation DCTObjectStoreControllerTests
+@implementation DCTObjectStoreQueryTests
 
 - (void)setUp {
 	[super setUp];
 	self.store = [DCTObjectStore objectStoreWithName:[[NSUUID UUID] UUIDString]];
 	NSArray *sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:EventAttributes.name ascending:YES]];
-	self.controller = [[DCTObjectStoreController alloc] initWithObjectStore:self.store predciate:nil sortDescriptors:sortDescriptors];
+	self.controller = [[DCTObjectStoreQuery alloc] initWithObjectStore:self.store predciate:nil sortDescriptors:sortDescriptors];
 }
 
 - (void)tearDown {

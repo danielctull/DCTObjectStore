@@ -102,6 +102,7 @@ static NSString *const DCTCloudObjectStoreType = @"DCTCloudObjectStoreType";
 
 		CKRecordID *recordID = record.recordID;
 		NSString *identifier = recordID.recordName;
+		self.records[identifier] = record;
 
 		// If the object is to be uploaded, we'll use that data rather than that on the server.
 		if (self.pendingChanges[identifier]) {

@@ -1,5 +1,5 @@
 //
-//  DCTObjectStoreController.h
+//  DCTObjectStoreQuery.h
 //  DCTObjectStore
 //
 //  Created by Daniel Tull on 16/08/2014.
@@ -8,10 +8,10 @@
 
 @import Foundation;
 @class DCTObjectStore;
-@protocol DCTObjectStoreControllerDelegate;
+@protocol DCTObjectStoreQueryDelegate;
 
 
-@interface DCTObjectStoreController : NSObject
+@interface DCTObjectStoreQuery : NSObject
 
 - (instancetype)initWithObjectStore:(DCTObjectStore *)objectStore predciate:(NSPredicate *)predicate sortDescriptors:(NSArray *)sortDescriptors;
 
@@ -20,6 +20,6 @@
 @property (nonatomic, readonly) NSArray *sortDescriptors;
 
 @property (nonatomic, readonly) NSArray *objects;
-@property (nonatomic, weak) id<DCTObjectStoreControllerDelegate> delegate;
+@property (nonatomic, weak) id<DCTObjectStoreQueryDelegate> delegate;
 
 @end
