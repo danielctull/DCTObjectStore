@@ -6,6 +6,7 @@
 //  Copyright (c) 2014 Daniel Tull. All rights reserved.
 //
 
+@import DCTObjectStore;
 #import "AppDelegate.h"
 
 @interface AppDelegate ()
@@ -18,9 +19,14 @@
 	return YES;
 }
 
+- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {}
+
+- (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
+	NSLog(@"%@:%@ %@", self, NSStringFromSelector(_cmd), error);
+}
+
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
-	NSLog(@"%@:%@ %@", self, NSStringFromSelector(_cmd), userInfo);
-//	[self.store didReceiveNotification:userInfo];
+	[DCTObjectStore handleRemoteNotification:userInfo];
 	completionHandler(UIBackgroundFetchResultNoData);
 }
 

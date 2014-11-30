@@ -28,4 +28,6 @@
 
 - (void)destroy;
 
+- (void)handleNotification:(CKRecordZoneNotification *)notification;
+
 @end

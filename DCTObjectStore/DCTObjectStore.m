@@ -6,6 +6,7 @@
 //  Copyright (c) 2014 Daniel Tull. All rights reserved.
 //
 
+@import CloudKit;
 #import "DCTObjectStore.h"
 #import "DCTObjectStoreAttributes.h"
 #import "DCTObjectStoreIdentifier.h"
@@ -20,6 +21,17 @@
 @end
 
 @implementation DCTObjectStore
+
++ (void)handleRemoteNotification:(NSDictionary *)remoteNotification {
+	CKRecordZoneNotification *notification = [CKRecordZoneNotification notificationFromRemoteNotificationDictionary:remoteNotification];
+	if (![notification isKindOfClass:[CKRecordZoneNotification class]]) {
+		return;
+	}
+
+	NSString *storeIdentifier = notification.recordZoneID.zoneName;
+	DCTObjectStore *objectStore = self.objectStores[storeIdentifier];
+	[objectStore.cloudStore handleNotification:notification];
+}
 
 + (NSMutableDictionary *)objectStores {
 	static NSMutableDictionary *objectStores;

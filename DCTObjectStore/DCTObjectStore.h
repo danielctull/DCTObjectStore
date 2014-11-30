@@ -38,4 +38,6 @@ FOUNDATION_EXPORT const unsigned char DCTObjectStoreVersionString[];
 
 - (void)destroy;
 
++ (void)handleRemoteNotification:(NSDictionary *)notification;
+
 @end
