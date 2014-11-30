@@ -36,14 +36,14 @@
 	return self;
 }
 
-- (void)saveObject:(id<NSSecureCoding>)object {
+- (void)saveObject:(id<DCTObjectStoreCoding>)object {
 	NSString *identifier = [DCTObjectStoreIdentifier identifierForObject:object];
 	NSURL *URL = [self.URL URLByAppendingPathComponent:identifier];
 	NSData *data = [NSKeyedArchiver archivedDataWithRootObject:object];
 	[data writeToURL:URL atomically:YES];
 }
 
-- (void)deleteObject:(id<NSSecureCoding>)object {
+- (void)deleteObject:(id<DCTObjectStoreCoding>)object {
 	NSString *identifier = [DCTObjectStoreIdentifier identifierForObject:object];
 	NSURL *URL = [self.URL URLByAppendingPathComponent:identifier];
 	[[NSFileManager defaultManager] removeItemAtURL:URL error:NULL];
@@ -61,7 +61,7 @@
 		@try {
 			NSData *data = [NSData dataWithContentsOfURL:URL];
 			NSString *identifier = [URL lastPathComponent];
-			id<NSSecureCoding> object = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+			id<DCTObjectStoreCoding> object = [NSKeyedUnarchiver unarchiveObjectWithData:data];
 			[DCTObjectStoreIdentifier setIdentifier:identifier forObject:object];
 			[objects addObject:object];
 		}

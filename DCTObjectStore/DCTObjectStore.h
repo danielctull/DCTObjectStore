@@ -12,6 +12,7 @@
 FOUNDATION_EXPORT double DCTObjectStoreVersionNumber;
 FOUNDATION_EXPORT const unsigned char DCTObjectStoreVersionString[];
 
+#import "DCTObjectStoreCoding.h"
 #import "DCTObjectStoreController.h"
 #import "DCTObjectStoreControllerDelegate.h"
 
@@ -32,8 +33,8 @@ FOUNDATION_EXPORT const unsigned char DCTObjectStoreVersionString[];
 
 @property (nonatomic, readonly) NSSet *objects;
 
-- (void)saveObject:(id<NSSecureCoding>)object;
-- (void)deleteObject:(id<NSSecureCoding>)object;
+- (void)saveObject:(id<DCTObjectStoreCoding>)object;
+- (void)deleteObject:(id<DCTObjectStoreCoding>)object;
 
 - (void)destroy;
 

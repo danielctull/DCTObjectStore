@@ -48,8 +48,8 @@
 
 		if (!record) {
 
-			NSAssert([object conformsToProtocol:@protocol(NSSecureCoding)], @"Object %@ should conform to NSSecureCoding.", object);
-			id<NSSecureCoding> secureCoding = object;
+			NSAssert([object conformsToProtocol:@protocol(DCTObjectStoreCoding)], @"Object %@ should conform to DCTObjectStoreCoding.", object);
+			id<DCTObjectStoreCoding> secureCoding = object;
 
 			CKRecord *currentRecord = self.currentRecord;
 

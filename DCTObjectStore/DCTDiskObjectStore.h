@@ -7,6 +7,7 @@
 //
 
 @import Foundation;
+@protocol DCTObjectStoreCoding;
 
 @interface DCTDiskObjectStore : NSObject
 
@@ -15,8 +16,8 @@
 @property (nonatomic, readonly) NSString *groupIdentifier;
 @property (nonatomic, readonly) NSURL *URL;
 
-- (void)saveObject:(id<NSSecureCoding>)object;
-- (void)deleteObject:(id<NSSecureCoding>)object;
+- (void)saveObject:(id<DCTObjectStoreCoding>)object;
+- (void)deleteObject:(id<DCTObjectStoreCoding>)object;
 
 - (NSSet *)objects;
 

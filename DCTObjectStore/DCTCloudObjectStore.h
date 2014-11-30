@@ -8,6 +8,7 @@
 
 @import Foundation;
 @protocol DCTCloudObjectStoreDelegate;
+@protocol DCTObjectStoreCoding;
 
 
 @interface DCTCloudObjectStore : NSObject
@@ -20,8 +21,8 @@
 
 @property (nonatomic, weak) id<DCTCloudObjectStoreDelegate> delegate;
 
-- (void)saveObject:(id<NSSecureCoding>)object;
-- (void)deleteObject:(id<NSSecureCoding>)object;
+- (void)saveObject:(id<DCTObjectStoreCoding>)object;
+- (void)deleteObject:(id<DCTObjectStoreCoding>)object;
 
 - (void)destroy;
 

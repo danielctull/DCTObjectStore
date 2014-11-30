@@ -40,7 +40,7 @@ const struct EventAttributes EventAttributes = {
 	return YES;
 }
 
-#pragma mark - NSSecureCoding
+#pragma mark - DCTObjectStoreCoding
 
 + (BOOL)supportsSecureCoding {
 	return YES;
@@ -49,14 +49,22 @@ const struct EventAttributes EventAttributes = {
 - (instancetype)initWithCoder:(NSCoder *)decoder {
 	self = [super init];
 	if (!self) return nil;
-	_name = [decoder decodeObjectOfClass:[NSString class] forKey:EventAttributes.name];
-	_date = [decoder decodeObjectOfClass:[NSString class] forKey:EventAttributes.date];
+	[self decodeWithCoder:decoder];
 	return self;
 }
 
 - (void)encodeWithCoder:(NSCoder *)encoder {
 	[encoder encodeObject:self.name forKey:EventAttributes.name];
 	[encoder encodeObject:self.date forKey:EventAttributes.date];
+}
+
+- (void)decodeWithCoder:(NSCoder *)decoder {
+
+	NSString *name = [decoder decodeObjectOfClass:[NSString class] forKey:EventAttributes.name];
+	if (name) self.name = name;
+
+	NSDate *date = [decoder decodeObjectOfClass:[NSDate class] forKey:EventAttributes.date];
+	if (date) self.date = date;
 }
 
 @end

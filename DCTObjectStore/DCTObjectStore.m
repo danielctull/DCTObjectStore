@@ -56,13 +56,13 @@
 	return objectStore;
 }
 
-- (void)saveObject:(id<NSSecureCoding>)object {
+- (void)saveObject:(id<DCTObjectStoreCoding>)object {
 	[self.diskStore saveObject:object];
 	[self.cloudStore saveObject:object];
 	[self updateObject:object];
 }
 
-- (void)deleteObject:(id<NSSecureCoding>)object {
+- (void)deleteObject:(id<DCTObjectStoreCoding>)object {
 	[self.diskStore deleteObject:object];
 	[self.cloudStore deleteObject:object];
 	[self removeObject:object];
@@ -98,7 +98,7 @@
 	return self;
 }
 
-- (void)updateObject:(id<NSSecureCoding>)object {
+- (void)updateObject:(id<DCTObjectStoreCoding>)object {
 
 	if ([self.objects containsObject:object]) {
 		return;
@@ -107,12 +107,12 @@
 	[self insertObject:object];
 }
 
-- (void)insertObject:(id<NSSecureCoding>)object {
+- (void)insertObject:(id<DCTObjectStoreCoding>)object {
 	NSMutableSet *set = [self mutableSetValueForKey:DCTObjectStoreAttributes.objects];
 	[set addObject:object];
 }
 
-- (void)removeObject:(id<NSSecureCoding>)object {
+- (void)removeObject:(id<DCTObjectStoreCoding>)object {
 	NSMutableSet *set = [self mutableSetValueForKey:DCTObjectStoreAttributes.objects];
 	[set removeObject:object];
 }

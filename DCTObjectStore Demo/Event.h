@@ -15,7 +15,7 @@ extern const struct EventAttributes {
 } EventAttributes;
 
 
-@interface Event : NSObject <NSSecureCoding>
+@interface Event : NSObject <DCTObjectStoreCoding>
 
 @property (nonatomic) NSString *name;
 @property (nonatomic) NSDate *date;
