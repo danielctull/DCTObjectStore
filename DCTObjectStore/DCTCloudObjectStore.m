@@ -13,6 +13,9 @@
 #import "DCTDiskObjectStore.h"
 #import "DCTObjectStoreIdentifier.h"
 
+#import "DCTCloudObjectStoreDecoder.h"
+#import "DCTObjectStoreCloudEncoder.h"
+
 static NSString *const DCTCloudObjectStoreType = @"DCTCloudObjectStoreType";
 
 @interface DCTCloudObjectStore ()
@@ -107,7 +110,9 @@ static NSString *const DCTCloudObjectStoreType = @"DCTCloudObjectStoreType";
 
 		id<DCTObjectStoreCoding> object = [self.delegate cloudObjectStore:self objectWithIdentifier:identifier];
 		if (object) {
-			[object decodeWithCoder:nil];
+
+			DCTCloudObjectStoreDecoder *decoder = [[DCTCloudObjectStoreDecoder alloc] initWithRecord:record];
+			[object decodeWithCoder:decoder];
 			[self.delegate cloudObjectStore:self didUpdateObject:object];
 
 		} else {
@@ -145,8 +150,8 @@ static NSString *const DCTCloudObjectStoreType = @"DCTCloudObjectStoreType";
 						record = [[CKRecord alloc] initWithRecordType:className recordID:recordID];
 					}
 
-					// ENCODE THE RECORD.
-
+					DCTObjectStoreCloudEncoder *encoder = [[DCTObjectStoreCloudEncoder alloc] initWithRecord:record];
+					[object encodeWithCoder:encoder];
 					[recordsToSave addObject:record];
 					break;
 				}

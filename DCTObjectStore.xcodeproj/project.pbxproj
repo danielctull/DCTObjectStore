@@ -51,6 +51,9 @@
 		24D52A621A2B4A4D00FDA615 /* DCTCloudObjectStoreChange.m in Sources */ = {isa = PBXBuildFile; fileRef = 24D52A601A2B4A4D00FDA615 /* DCTCloudObjectStoreChange.m */; };
 		24D52A631A2B4A4D00FDA615 /* DCTCloudObjectStoreChange.m in Sources */ = {isa = PBXBuildFile; fileRef = 24D52A601A2B4A4D00FDA615 /* DCTCloudObjectStoreChange.m */; };
 		24D52A661A2B59BF00FDA615 /* DCTObjectStoreCoding.h in Headers */ = {isa = PBXBuildFile; fileRef = 24D52A641A2B59BF00FDA615 /* DCTObjectStoreCoding.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		24D52A6B1A2B5DB900FDA615 /* DCTCloudObjectStoreDecoder.h in Headers */ = {isa = PBXBuildFile; fileRef = 24D52A691A2B5DB900FDA615 /* DCTCloudObjectStoreDecoder.h */; };
+		24D52A6C1A2B5DB900FDA615 /* DCTCloudObjectStoreDecoder.m in Sources */ = {isa = PBXBuildFile; fileRef = 24D52A6A1A2B5DB900FDA615 /* DCTCloudObjectStoreDecoder.m */; };
+		24D52A6D1A2B5DB900FDA615 /* DCTCloudObjectStoreDecoder.m in Sources */ = {isa = PBXBuildFile; fileRef = 24D52A6A1A2B5DB900FDA615 /* DCTCloudObjectStoreDecoder.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -146,6 +149,8 @@
 		24D52A5F1A2B4A4D00FDA615 /* DCTCloudObjectStoreChange.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = DCTCloudObjectStoreChange.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		24D52A601A2B4A4D00FDA615 /* DCTCloudObjectStoreChange.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = DCTCloudObjectStoreChange.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		24D52A641A2B59BF00FDA615 /* DCTObjectStoreCoding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = DCTObjectStoreCoding.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		24D52A691A2B5DB900FDA615 /* DCTCloudObjectStoreDecoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCTCloudObjectStoreDecoder.h; sourceTree = "<group>"; };
+		24D52A6A1A2B5DB900FDA615 /* DCTCloudObjectStoreDecoder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCTCloudObjectStoreDecoder.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -283,6 +288,8 @@
 				2464AB3A1A29207100F72B41 /* DCTObjectStoreAttributes.m */,
 				244775111A1260260091CBDD /* DCTObjectStoreCloudEncoder.h */,
 				244775121A1260260091CBDD /* DCTObjectStoreCloudEncoder.m */,
+				24D52A691A2B5DB900FDA615 /* DCTCloudObjectStoreDecoder.h */,
+				24D52A6A1A2B5DB900FDA615 /* DCTCloudObjectStoreDecoder.m */,
 			);
 			name = Private;
 			sourceTree = "<group>";
@@ -304,6 +311,7 @@
 				24D52A531A28EEB800FDA615 /* DCTObjectStoreController.h in Headers */,
 				242BEF7F19A8FBB00063F2F2 /* DCTObjectStore.h in Headers */,
 				2464AB3C1A2922B200F72B41 /* DCTObjectStoreAttributes.h in Headers */,
+				24D52A6B1A2B5DB900FDA615 /* DCTCloudObjectStoreDecoder.h in Headers */,
 				2464AB601A2A32C100F72B41 /* DCTDiskObjectStore.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -458,6 +466,7 @@
 			files = (
 				24D52A551A28EEB800FDA615 /* DCTObjectStoreController.m in Sources */,
 				242BEF8019A8FBD00063F2F2 /* DCTObjectStore.m in Sources */,
+				24D52A6D1A2B5DB900FDA615 /* DCTCloudObjectStoreDecoder.m in Sources */,
 				24D52A631A2B4A4D00FDA615 /* DCTCloudObjectStoreChange.m in Sources */,
 				2464AB3D1A2922B800F72B41 /* DCTObjectStoreAttributes.m in Sources */,
 				244775151A1260260091CBDD /* DCTObjectStoreCloudEncoder.m in Sources */,
@@ -473,6 +482,7 @@
 			files = (
 				24D52A541A28EEB800FDA615 /* DCTObjectStoreController.m in Sources */,
 				24501D191883DF9600FED266 /* DCTObjectStore.m in Sources */,
+				24D52A6C1A2B5DB900FDA615 /* DCTCloudObjectStoreDecoder.m in Sources */,
 				24D52A621A2B4A4D00FDA615 /* DCTCloudObjectStoreChange.m in Sources */,
 				244775141A1260260091CBDD /* DCTObjectStoreCloudEncoder.m in Sources */,
 				2464AB3B1A29207100F72B41 /* DCTObjectStoreAttributes.m in Sources */,
