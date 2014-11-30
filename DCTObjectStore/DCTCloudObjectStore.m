@@ -223,7 +223,11 @@ static NSString *const DCTCloudObjectStoreRecordZoneName = @"RecordZone";
 
 	if (!self.recordZone) return;
 
-	self.subscription = [[CKSubscription alloc] initWithZoneID:self.recordZone.zoneID options:(CKSubscriptionOptions)(CKSubscriptionOptionsFiresOnRecordCreation | CKSubscriptionOptionsFiresOnRecordDeletion | CKSubscriptionOptionsFiresOnRecordUpdate)];
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wassign-enum"
+	self.subscription = [[CKSubscription alloc] initWithZoneID:self.recordZone.zoneID options:0];
+#pragma clang diagnostic pop
+
 	[self.database saveSubscription:self.subscription completionHandler:nil];
 }
 
