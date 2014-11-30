@@ -19,6 +19,7 @@
 static NSString *const DCTCloudObjectStoreType = @"DCTCloudObjectStoreType";
 static NSString *const DCTCloudObjectStoreChangesName = @"Changes";
 static NSString *const DCTCloudObjectStoreServerChangeTokenName = @"ServerChangeToken";
+static NSString *const DCTCloudObjectStoreRecordZoneName = @"RecordZone";
 
 @interface DCTCloudObjectStore ()
 @property (nonatomic) CKContainer *container;
@@ -33,6 +34,7 @@ static NSString *const DCTCloudObjectStoreServerChangeTokenName = @"ServerChange
 @end
 
 @implementation DCTCloudObjectStore
+@synthesize recordZone = _recordZone;
 @synthesize serverChangeToken = _serverChangeToken;
 
 - (void)dealloc {
@@ -227,15 +229,33 @@ static NSString *const DCTCloudObjectStoreServerChangeTokenName = @"ServerChange
 
 #pragma mark - Record Zone
 
+- (NSURL *)recordZoneURL {
+	return [self.URL URLByAppendingPathComponent:DCTCloudObjectStoreRecordZoneName];
+}
+
 - (void)setRecordZone:(CKRecordZone *)recordZone {
 	_recordZone = recordZone;
+	[NSKeyedArchiver archiveRootObject:recordZone toFile:self.recordZoneURL.path];
+}
+
+- (CKRecordZone *)recordZone {
+
+	if (!_recordZone) {
+		_recordZone = [NSKeyedUnarchiver unarchiveObjectWithFile:self.recordZoneURL.path];
+	}
+
+	return _recordZone;
+}
+
+- (void)fetchRecordZone {
+
+	if (self.recordZone) {
 	[self saveSubscription];
 	[self downloadChangesWithCompletion:^{
 		[self uploadChanges];
 	}];
+		return;
 }
-
-- (void)fetchRecordZone {
 
 	__weak DCTCloudObjectStore *weakSelf = self;
 	NSString *storeIdentifier = self.storeIdentifier;
@@ -250,7 +270,12 @@ static NSString *const DCTCloudObjectStoreServerChangeTokenName = @"ServerChange
 
 		recordZone = [[CKRecordZone alloc] initWithZoneID:zoneID];
 		[self addRecordZone:recordZone completion:^(CKRecordZone *recordZone, NSError *operationError) {
-			weakSelf.recordZone = recordZone;
+			DCTCloudObjectStore *strongSelf = weakSelf;
+			strongSelf.recordZone = recordZone;
+			[strongSelf saveSubscription];
+			[strongSelf downloadChangesWithCompletion:^{
+				[strongSelf uploadChanges];
+			}];
 		}];
 	}];
 }
