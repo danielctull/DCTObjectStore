@@ -322,7 +322,7 @@ static NSString *const DCTCloudObjectStoreRecordZoneName = @"RecordZone";
 			completion();
 		}
 	};
-	[self.container addOperation:operation];
+	[self.database addOperation:operation];
 }
 
 - (void)saveRecords:(NSArray *)records deleteRecordIDs:(NSArray *)recordIDs completion:(void(^)(NSArray *modifiedRecordIDs, NSError *operationError))completion {
@@ -333,21 +333,21 @@ static NSString *const DCTCloudObjectStoreRecordZoneName = @"RecordZone";
 		NSArray *modifiedRecordIDs = [savedRecordIDs arrayByAddingObjectsFromArray:deletedRecordIDs];
 		completion(modifiedRecordIDs, error);
 	};
-	[self.container addOperation:operation];
+	[self.database addOperation:operation];
 }
 
 - (void)fetchRecordsWithIDs:(NSArray *)recordIDs completion:(void(^)(NSDictionary *records, NSError *error))completion {
 	CKFetchRecordsOperation *operation = [[CKFetchRecordsOperation alloc] initWithRecordIDs:recordIDs];
 	operation.queuePriority = NSOperationQueuePriorityHigh;
 	operation.fetchRecordsCompletionBlock = completion;
-	[self.container addOperation:operation];
+	[self.database addOperation:operation];
 }
 
 - (void)fetchZonesWithIDs:(NSArray *)zoneIDs completion:(void(^)(NSDictionary *zones, NSError *error))completion {
 	CKFetchRecordZonesOperation *operation = [[CKFetchRecordZonesOperation alloc] initWithRecordZoneIDs:zoneIDs];
 	operation.queuePriority = NSOperationQueuePriorityVeryHigh;
 	operation.fetchRecordZonesCompletionBlock = completion;
-	[self.container addOperation:operation];
+	[self.database addOperation:operation];
 }
 
 - (void)addRecordZone:(CKRecordZone *)recordZone completion:(void(^)(CKRecordZone *recordZone, NSError *operationError))completion {
@@ -365,7 +365,7 @@ static NSString *const DCTCloudObjectStoreRecordZoneName = @"RecordZone";
 
 		completion(recordZone, error);
 	};
-	[self.container addOperation:operation];
+	[self.database addOperation:operation];
 }
 
 @end
