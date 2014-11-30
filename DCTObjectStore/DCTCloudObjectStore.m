@@ -37,10 +37,6 @@ static NSString *const DCTCloudObjectStoreRecordZoneName = @"RecordZone";
 @synthesize recordZone = _recordZone;
 @synthesize serverChangeToken = _serverChangeToken;
 
-- (void)dealloc {
-	[self deleteSubscription];
-}
-
 - (instancetype)initWithStoreIdentifier:(NSString *)storeIdentifier
 						cloudIdentifier:(NSString *)cloudIdentifier
 									URL:(NSURL *)URL {
