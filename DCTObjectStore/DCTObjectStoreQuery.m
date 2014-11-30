@@ -50,8 +50,6 @@ void *DCTObjectStoreQueryContext = &DCTObjectStoreQueryContext;
 	NSArray *newObjects = change[NSKeyValueChangeNewKey];
 	NSArray *oldObjects = change[NSKeyValueChangeOldKey];
 
-	NSLog(@"%@:%@ %@", self, NSStringFromSelector(_cmd), change);
-
 	for (id object in newObjects) {
 
 		if ([oldObjects containsObject:object]) {
