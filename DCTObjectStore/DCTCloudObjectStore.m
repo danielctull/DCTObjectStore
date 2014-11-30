@@ -118,9 +118,9 @@ static NSString *const DCTCloudObjectStoreRecordZoneName = @"RecordZone";
 		}
 
 		id<DCTObjectStoreCoding> object = [self.delegate cloudObjectStore:self objectWithIdentifier:identifier];
+		DCTCloudObjectStoreDecoder *decoder = [[DCTCloudObjectStoreDecoder alloc] initWithRecord:record];
 		if (object) {
 
-			DCTCloudObjectStoreDecoder *decoder = [[DCTCloudObjectStoreDecoder alloc] initWithRecord:record];
 			[object decodeWithCoder:decoder];
 			[self.delegate cloudObjectStore:self didUpdateObject:object];
 
@@ -131,7 +131,7 @@ static NSString *const DCTCloudObjectStoreRecordZoneName = @"RecordZone";
 			// If the class is nil, this may be an older version of the app, so we ignore.
 			if (!class) return;
 
-			object = [[class alloc] initWithCoder:nil];
+			object = [[class alloc] initWithCoder:decoder];
 			[self.delegate cloudObjectStore:self didInsertObject:object];
 		}
 

@@ -11,8 +11,9 @@
 #import "DCTObjectStoreIdentifier.h"
 #import "DCTDiskObjectStore.h"
 #import "DCTCloudObjectStore.h"
+#import "DCTCloudObjectStoreDelegate.h"
 
-@interface DCTObjectStore ()
+@interface DCTObjectStore () <DCTCloudObjectStoreDelegate>
 @property (nonatomic, readonly) DCTDiskObjectStore *diskStore;
 @property (nonatomic, readonly) DCTCloudObjectStore *cloudStore;
 @property (nonatomic, readwrite) NSSet *objects;
@@ -107,6 +108,7 @@
 		_cloudStore = [[DCTCloudObjectStore alloc] initWithStoreIdentifier:storeIdentifier
 														   cloudIdentifier:cloudIdentifier
 																	   URL:cloudStoreURL];
+		_cloudStore.delegate = self;
 	}
 
 	return self;
@@ -129,6 +131,41 @@
 - (void)removeObject:(id<DCTObjectStoreCoding>)object {
 	NSMutableSet *set = [self mutableSetValueForKey:DCTObjectStoreAttributes.objects];
 	[set removeObject:object];
+}
+
+#pragma mark - DCTCloudObjectStoreDelegate
+
+- (void)cloudObjectStore:(DCTCloudObjectStore *)cloudObjectStore didInsertObject:(id)object {
+	dispatch_async(dispatch_get_main_queue(), ^{
+		[self insertObject:object];
+		[self.diskStore saveObject:object];
+	});
+}
+
+- (void)cloudObjectStore:(DCTCloudObjectStore *)cloudObjectStore didRemoveObject:(id)object {
+	dispatch_async(dispatch_get_main_queue(), ^{
+		[self insertObject:object];
+		[self.diskStore deleteObject:object];
+	});
+}
+
+- (void)cloudObjectStore:(DCTCloudObjectStore *)cloudObjectStore didUpdateObject:(id)object {
+	dispatch_async(dispatch_get_main_queue(), ^{
+		[self updateObject:object];
+		[self.diskStore saveObject:object];
+	});
+}
+
+- (id<DCTObjectStoreCoding>)cloudObjectStore:(DCTCloudObjectStore *)cloudObjectStore objectWithIdentifier:(NSString *)identifier {
+
+	for (id<DCTObjectStoreCoding> object in self.objects) {
+		NSString *objectIdentifier = [DCTObjectStoreIdentifier identifierForObject:object];
+		if ([objectIdentifier isEqualToString:identifier]) {
+			return object;
+		}
+	}
+
+	return nil;
 }
 
 @end
