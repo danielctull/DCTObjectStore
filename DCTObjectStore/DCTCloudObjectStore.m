@@ -205,7 +205,7 @@ static NSString *const DCTCloudObjectStoreRecordZoneName = @"RecordZone";
 	CKRecordID *recordID = [[CKRecordID alloc] initWithRecordName:recordName zoneID:self.recordZone.zoneID];
 	[self fetchRecordsWithIDs:@[recordID] completion:^(NSDictionary *records, NSError *error) {
 		CKRecord *record = records[recordName];
-		self.records[recordName] = record;
+		if (record) self.records[recordName] = record;
 		completion(record);
 	}];
 }
