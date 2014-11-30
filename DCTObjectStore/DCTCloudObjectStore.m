@@ -116,7 +116,12 @@ static NSString *const DCTCloudObjectStoreType = @"DCTCloudObjectStoreType";
 			[self.delegate cloudObjectStore:self didUpdateObject:object];
 
 		} else {
+
 			Class class = NSClassFromString(record.recordType);
+
+			// If the class is nil, this may be an older version of the app, so we ignore.
+			if (!class) return;
+
 			object = [[class alloc] initWithCoder:nil];
 			[self.delegate cloudObjectStore:self didInsertObject:object];
 		}
