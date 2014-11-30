@@ -15,24 +15,12 @@
 
 @implementation DCTDiskObjectStore
 
-- (instancetype)initWithStoreIdentifier:(NSString *)storeIdentifier groupIdentifier:(NSString *)groupIdentifier {
+- (instancetype)initWithURL:(NSURL *)URL {
 	self = [super init];
 	if (!self) return nil;
-	_storeIdentifier = [storeIdentifier copy];
-	_groupIdentifier = [groupIdentifier copy];
+	_URL = [URL copy];
 	_fileManager = [NSFileManager new];
-	
-	NSURL *baseURL;
-	if (self.groupIdentifier.length > 0) {
-		baseURL = [_fileManager containerURLForSecurityApplicationGroupIdentifier:_groupIdentifier];
-	} else {
-		baseURL = [[_fileManager URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
-	}
-	baseURL = [baseURL URLByAppendingPathComponent:NSStringFromClass([self class])];
-	
-	_URL = [baseURL URLByAppendingPathComponent:storeIdentifier];
 	[_fileManager createDirectoryAtURL:_URL withIntermediateDirectories:YES attributes:nil error:NULL];
-	
 	return self;
 }
 

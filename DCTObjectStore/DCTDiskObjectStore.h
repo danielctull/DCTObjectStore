@@ -11,9 +11,7 @@
 
 @interface DCTDiskObjectStore : NSObject
 
-- (instancetype)initWithStoreIdentifier:(NSString *)storeIdentifier groupIdentifier:(NSString *)groupIdentifier;
-@property (nonatomic, readonly) NSString *storeIdentifier;
-@property (nonatomic, readonly) NSString *groupIdentifier;
+- (instancetype)initWithURL:(NSURL *)URL;
 @property (nonatomic, readonly) NSURL *URL;
 
 - (void)saveObject:(id<DCTObjectStoreCoding>)object;

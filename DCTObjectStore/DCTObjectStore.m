@@ -87,12 +87,26 @@
 	_storeIdentifier = [storeIdentifier copy];
 	_groupIdentifier = [groupIdentifier copy];
 	_cloudIdentifier = [cloudIdentifier copy];
-	_diskStore = [[DCTDiskObjectStore alloc] initWithStoreIdentifier:storeIdentifier groupIdentifier:groupIdentifier];
+
+	NSFileManager *fileManager = [NSFileManager defaultManager];
+	NSURL *baseURL;
+	if (self.groupIdentifier.length > 0) {
+		baseURL = [fileManager containerURLForSecurityApplicationGroupIdentifier:_groupIdentifier];
+	} else {
+		baseURL = [[fileManager URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
+	}
+	baseURL = [baseURL URLByAppendingPathComponent:NSStringFromClass([self class])];
+	baseURL = [baseURL URLByAppendingPathComponent:storeIdentifier];
+
+	NSURL *diskStoreURL = [baseURL URLByAppendingPathComponent:NSStringFromClass([DCTDiskObjectStore class])];
+	_diskStore = [[DCTDiskObjectStore alloc] initWithURL:diskStoreURL];
 	_objects = _diskStore.objects;
 
 	if (cloudIdentifier) {
+		NSURL *cloudStoreURL = [baseURL URLByAppendingPathComponent:NSStringFromClass([DCTCloudObjectStore class])];
 		_cloudStore = [[DCTCloudObjectStore alloc] initWithStoreIdentifier:storeIdentifier
-														   cloudIdentifier:cloudIdentifier];
+														   cloudIdentifier:cloudIdentifier
+																	   URL:cloudStoreURL];
 	}
 
 	return self;

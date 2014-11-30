@@ -17,6 +17,8 @@
 #import "DCTObjectStoreCloudEncoder.h"
 
 static NSString *const DCTCloudObjectStoreType = @"DCTCloudObjectStoreType";
+static NSString *const DCTCloudObjectStoreChangesName = @"Changes";
+static NSString *const DCTCloudObjectStoreServerChangeTokenName = @"ServerChangeToken";
 
 @interface DCTCloudObjectStore ()
 @property (nonatomic) CKContainer *container;
@@ -38,7 +40,8 @@ static NSString *const DCTCloudObjectStoreType = @"DCTCloudObjectStoreType";
 }
 
 - (instancetype)initWithStoreIdentifier:(NSString *)storeIdentifier
-						cloudIdentifier:(NSString *)cloudIdentifier {
+						cloudIdentifier:(NSString *)cloudIdentifier
+									URL:(NSURL *)URL {
 
 	NSParameterAssert(storeIdentifier);
 	NSParameterAssert(cloudIdentifier);
@@ -48,10 +51,13 @@ static NSString *const DCTCloudObjectStoreType = @"DCTCloudObjectStoreType";
 
 	_storeIdentifier = [storeIdentifier copy];
 	_cloudIdentifier = [cloudIdentifier copy];
+	_URL = [URL copy];
+	NSURL *changesURL = [URL URLByAppendingPathComponent:DCTCloudObjectStoreChangesName];
+
 	_container = [CKContainer containerWithIdentifier:cloudIdentifier];
 	_database = _container.privateCloudDatabase;
 	_records = [NSMutableDictionary new];
-	_changesStore = nil;
+	_changesStore = [[DCTDiskObjectStore alloc] initWithURL:changesURL];
 
 	[self fetchRecordZone];
 
@@ -251,10 +257,14 @@ static NSString *const DCTCloudObjectStoreType = @"DCTCloudObjectStoreType";
 
 #pragma mark - Server Change Token
 
+- (NSURL *)serverChangeTokenURL {
+	return [self.URL URLByAppendingPathComponent:DCTCloudObjectStoreServerChangeTokenName];
+}
+
 - (CKServerChangeToken *)serverChangeToken {
 
 	if (!_serverChangeToken) {
-		// Unarchive from disk
+		_serverChangeToken = [NSKeyedUnarchiver unarchiveObjectWithFile:self.serverChangeTokenURL.path];
 	}
 
 	return _serverChangeToken;
@@ -262,7 +272,7 @@ static NSString *const DCTCloudObjectStoreType = @"DCTCloudObjectStoreType";
 
 - (void)setServerChangeToken:(CKServerChangeToken *)serverChangeToken {
 	_serverChangeToken = serverChangeToken;
-	// Archive to disk
+	[NSKeyedArchiver archiveRootObject:serverChangeToken toFile:self.serverChangeTokenURL.path];
 }
 
 #pragma mark - CloudKit Operations
