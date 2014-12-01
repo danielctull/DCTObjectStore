@@ -145,10 +145,14 @@ static NSString *const DCTCloudObjectStoreRecordZone = @"RecordZone";
 
 	if (!self.recordZone) return;
 
+	NSSet *changes = self.changeStore.objects;
+	if (changes.count == 0) {
+		return;
+	}
+
 	dispatch_group_t group = dispatch_group_create();
 	NSMutableArray *recordsToSave = [NSMutableArray new];
 	NSMutableArray *recordIDsToDelete = [NSMutableArray new];
-	NSSet *changes = self.changeStore.objects;
 	NSMutableDictionary *workingChanges = [[NSMutableDictionary alloc] initWithCapacity:changes.count];
 
 	for (DCTObjectStoreChange *change in changes) {
