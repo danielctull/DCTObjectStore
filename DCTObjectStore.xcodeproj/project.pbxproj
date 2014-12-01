@@ -34,6 +34,9 @@
 		2464AB6C1A2A7B1B00F72B41 /* DCTCloudObjectStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 2464AB691A2A7B1B00F72B41 /* DCTCloudObjectStore.m */; };
 		2464AB6E1A2A7E6000F72B41 /* DCTDiskObjectStoreTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2464AB6D1A2A7E6000F72B41 /* DCTDiskObjectStoreTests.m */; };
 		2464AB701A2A8AE800F72B41 /* DCTCloudObjectStoreDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 2464AB6F1A2A8AE800F72B41 /* DCTCloudObjectStoreDelegate.h */; };
+		246E61511A2CF33700F01AB4 /* DCTObjectStoreReachability.h in Headers */ = {isa = PBXBuildFile; fileRef = 246E614F1A2CF33700F01AB4 /* DCTObjectStoreReachability.h */; };
+		246E61521A2CF33700F01AB4 /* DCTObjectStoreReachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 246E61501A2CF33700F01AB4 /* DCTObjectStoreReachability.m */; };
+		246E61531A2CF33700F01AB4 /* DCTObjectStoreReachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 246E61501A2CF33700F01AB4 /* DCTObjectStoreReachability.m */; };
 		24D52A261A28E98C00FDA615 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 24D52A251A28E98C00FDA615 /* main.m */; };
 		24D52A291A28E98C00FDA615 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 24D52A281A28E98C00FDA615 /* AppDelegate.m */; };
 		24D52A2C1A28E98C00FDA615 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24D52A2B1A28E98C00FDA615 /* ViewController.m */; };
@@ -134,6 +137,8 @@
 		2464AB691A2A7B1B00F72B41 /* DCTCloudObjectStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = DCTCloudObjectStore.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		2464AB6D1A2A7E6000F72B41 /* DCTDiskObjectStoreTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCTDiskObjectStoreTests.m; sourceTree = "<group>"; };
 		2464AB6F1A2A8AE800F72B41 /* DCTCloudObjectStoreDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = DCTCloudObjectStoreDelegate.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		246E614F1A2CF33700F01AB4 /* DCTObjectStoreReachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCTObjectStoreReachability.h; sourceTree = "<group>"; };
+		246E61501A2CF33700F01AB4 /* DCTObjectStoreReachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCTObjectStoreReachability.m; sourceTree = "<group>"; };
 		24D52A211A28E98C00FDA615 /* DCTObjectStore.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DCTObjectStore.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		24D52A241A28E98C00FDA615 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		24D52A251A28E98C00FDA615 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -309,6 +314,8 @@
 				24D52A6A1A2B5DB900FDA615 /* DCTCloudObjectStoreDecoder.m */,
 				24D52A5F1A2B4A4D00FDA615 /* DCTObjectStoreChange.h */,
 				24D52A601A2B4A4D00FDA615 /* DCTObjectStoreChange.m */,
+				246E614F1A2CF33700F01AB4 /* DCTObjectStoreReachability.h */,
+				246E61501A2CF33700F01AB4 /* DCTObjectStoreReachability.m */,
 			);
 			name = Cloud;
 			sourceTree = "<group>";
@@ -338,6 +345,7 @@
 				2464AB651A2A34D700F72B41 /* DCTObjectStoreIdentifier.h in Headers */,
 				24D52A531A28EEB800FDA615 /* DCTObjectStoreQuery.h in Headers */,
 				242BEF7F19A8FBB00063F2F2 /* DCTObjectStore.h in Headers */,
+				246E61511A2CF33700F01AB4 /* DCTObjectStoreReachability.h in Headers */,
 				2464AB3C1A2922B200F72B41 /* DCTObjectStoreAttributes.h in Headers */,
 				24D52A6B1A2B5DB900FDA615 /* DCTCloudObjectStoreDecoder.h in Headers */,
 				2464AB601A2A32C100F72B41 /* DCTDiskObjectStore.h in Headers */,
@@ -508,6 +516,7 @@
 				24D52A831A2C9D5500FDA615 /* CKRecordID+DCTObjectStoreCoding.m in Sources */,
 				244775151A1260260091CBDD /* DCTCloudObjectStoreEncoder.m in Sources */,
 				2464AB671A2A34D700F72B41 /* DCTObjectStoreIdentifier.m in Sources */,
+				246E61531A2CF33700F01AB4 /* DCTObjectStoreReachability.m in Sources */,
 				2464AB6C1A2A7B1B00F72B41 /* DCTCloudObjectStore.m in Sources */,
 				2464AB621A2A32C100F72B41 /* DCTDiskObjectStore.m in Sources */,
 			);
@@ -525,6 +534,7 @@
 				24D52A821A2C9D5500FDA615 /* CKRecordID+DCTObjectStoreCoding.m in Sources */,
 				2464AB3B1A29207100F72B41 /* DCTObjectStoreAttributes.m in Sources */,
 				2464AB661A2A34D700F72B41 /* DCTObjectStoreIdentifier.m in Sources */,
+				246E61521A2CF33700F01AB4 /* DCTObjectStoreReachability.m in Sources */,
 				2464AB6B1A2A7B1B00F72B41 /* DCTCloudObjectStore.m in Sources */,
 				2464AB611A2A32C100F72B41 /* DCTDiskObjectStore.m in Sources */,
 			);

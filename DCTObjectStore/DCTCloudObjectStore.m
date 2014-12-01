@@ -15,6 +15,7 @@
 #import "DCTCloudObjectStoreEncoder.h"
 #import "DCTObjectStoreIdentifier.h"
 #import "CKRecordID+DCTObjectStoreCoding.h"
+#import "DCTObjectStoreReachability.h"
 
 static NSString *const DCTCloudObjectStoreChanges = @"Changes";
 static NSString *const DCTCloudObjectStoreRecordIDs = @"RecordIDs";
@@ -36,6 +37,10 @@ static NSString *const DCTCloudObjectStoreRecordZone = @"RecordZone";
 @implementation DCTCloudObjectStore
 @synthesize recordZone = _recordZone;
 @synthesize serverChangeToken = _serverChangeToken;
+
+- (void)dealloc {
+	[[NSNotificationCenter defaultCenter] removeObserver:self name:DCTObjectStoreReachabilityDidChangeNotification object:nil];
+}
 
 - (instancetype)initWithStoreIdentifier:(NSString *)storeIdentifier
 						cloudIdentifier:(NSString *)cloudIdentifier
@@ -62,6 +67,7 @@ static NSString *const DCTCloudObjectStoreRecordZone = @"RecordZone";
 	_records = [NSMutableDictionary new];
 
 	[self fetchRecordZone];
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reachabilityDidChangeNotification:) name:DCTObjectStoreReachabilityDidChangeNotification object:nil];
 
 	return self;
 }
@@ -88,6 +94,19 @@ static NSString *const DCTCloudObjectStoreRecordZone = @"RecordZone";
 
 - (void)handleNotification:(CKRecordZoneNotification *)notification {
 	[self downloadChangesWithCompletion:nil];
+}
+
+- (void)reachabilityDidChangeNotification:(NSNotification *)notification {
+
+	DCTObjectStoreReachability *reachability = notification.object;
+	if (!reachability.reachable) {
+		return;
+	}
+
+	[self saveSubscription];
+	[self downloadChangesWithCompletion:^{
+		[self uploadChanges];
+	}];
 }
 
 #pragma mark - Changes
@@ -291,12 +310,12 @@ static NSString *const DCTCloudObjectStoreRecordZone = @"RecordZone";
 - (void)fetchRecordZone {
 
 	if (self.recordZone) {
-	[self saveSubscription];
-	[self downloadChangesWithCompletion:^{
-		[self uploadChanges];
-	}];
+		[self saveSubscription];
+		[self downloadChangesWithCompletion:^{
+			[self uploadChanges];
+		}];
 		return;
-}
+	}
 
 	__weak DCTCloudObjectStore *weakSelf = self;
 	NSString *storeIdentifier = self.storeIdentifier;
