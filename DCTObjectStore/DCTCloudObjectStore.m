@@ -22,7 +22,6 @@ static NSString *const DCTCloudObjectStoreServerChangeTokenName = @"ServerChange
 static NSString *const DCTCloudObjectStoreRecordZoneName = @"RecordZone";
 
 @interface DCTCloudObjectStore ()
-@property (nonatomic) CKContainer *container;
 @property (nonatomic) CKDatabase *database;
 @property (nonatomic) CKRecordZone *recordZone;
 @property (nonatomic) CKSubscription *subscription;
@@ -52,8 +51,8 @@ static NSString *const DCTCloudObjectStoreRecordZoneName = @"RecordZone";
 	_URL = [URL copy];
 	NSURL *changesURL = [URL URLByAppendingPathComponent:DCTCloudObjectStoreChangesName];
 
-	_container = [CKContainer containerWithIdentifier:cloudIdentifier];
-	_database = _container.privateCloudDatabase;
+	CKContainer *container = [CKContainer containerWithIdentifier:cloudIdentifier];
+	_database = container.privateCloudDatabase;
 	_records = [NSMutableDictionary new];
 	_changesStore = [[DCTDiskObjectStore alloc] initWithURL:changesURL];
 
