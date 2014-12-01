@@ -31,13 +31,7 @@ static void* DCTObjectStoreObjectIdentifier = &DCTObjectStoreObjectIdentifier;
 }
 
 + (NSString *)identifierForObject:(id)object {
-	
-	NSString *identifier = objc_getAssociatedObject(object, DCTObjectStoreObjectIdentifier);
-	if (!identifier) {
-		identifier = [[NSUUID UUID] UUIDString];
-		[self setIdentifier:identifier forObject:object];
-	}
-	return identifier;
+	return objc_getAssociatedObject(object, DCTObjectStoreObjectIdentifier);
 }
 
 + (void)setIdentifier:(NSString *)identifier forObject:(id)object {

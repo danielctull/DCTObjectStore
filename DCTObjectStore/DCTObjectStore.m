@@ -70,6 +70,13 @@
 }
 
 - (void)saveObject:(id<DCTObjectStoreCoding>)object {
+
+	NSString *identifier = [DCTObjectStoreIdentifier identifierForObject:object];
+	if (!identifier) {
+		identifier = [[NSUUID UUID] UUIDString];
+		[DCTObjectStoreIdentifier setIdentifier:identifier forObject:object];
+	}
+
 	[self.diskStore saveObject:object];
 	[self.cloudStore saveObject:object];
 	[self updateObject:object];

@@ -16,6 +16,12 @@ const struct DCTObjectStoreChangeAttributes DCTObjectStoreChangeAttributes = {
 	.type = @"type"
 };
 
+static NSString *const DCTObjectStoreChangeTypeString[] = {
+	@"Save",
+	@"Delete"
+};
+
+
 @implementation DCTObjectStoreChange
 
 - (instancetype)initWithObject:(id<DCTObjectStoreCoding>)object type:(DCTObjectStoreChangeType)type {
@@ -26,6 +32,15 @@ const struct DCTObjectStoreChangeAttributes DCTObjectStoreChangeAttributes = {
 	_object = object;
 	_type = type;
 	return self;
+}
+
+- (NSString *)description {
+	return [NSString stringWithFormat:@"<%@: %p; %@ = %@; %@ = %@; %@ = %@>",
+			NSStringFromClass([self class]),
+			self,
+			DCTObjectStoreChangeAttributes.date, self.date,
+			DCTObjectStoreChangeAttributes.identifier, self.identifier,
+			DCTObjectStoreChangeAttributes.type, DCTObjectStoreChangeTypeString[self.type]];
 }
 
 #pragma mark - DCTObjectStoreCoding

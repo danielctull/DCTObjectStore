@@ -46,6 +46,7 @@
 
 - (void)saveObject:(id<DCTObjectStoreCoding>)object {
 	NSString *identifier = [DCTObjectStoreIdentifier identifierForObject:object];
+	NSParameterAssert(identifier);
 	NSURL *URL = [self.URL URLByAppendingPathComponent:identifier];
 	NSData *data = [NSKeyedArchiver archivedDataWithRootObject:object];
 	[data writeToURL:URL atomically:YES];
@@ -60,6 +61,7 @@
 	}
 
 	NSString *identifier = [DCTObjectStoreIdentifier identifierForObject:object];
+	NSParameterAssert(identifier);
 	NSURL *URL = [self.URL URLByAppendingPathComponent:identifier];
 	[self.fileManager removeItemAtURL:URL error:NULL];
 }

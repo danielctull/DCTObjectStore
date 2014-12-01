@@ -67,13 +67,16 @@ static NSString *const DCTCloudObjectStoreRecordZone = @"RecordZone";
 }
 
 - (void)saveObject:(id<DCTObjectStoreCoding>)object {
-	DCTObjectStoreChange *change = [[DCTObjectStoreChange alloc] initWithObject:object type:DCTObjectStoreChangeTypeSave];
-	[self.changeStore saveObject:change];
-	[self uploadChanges];
+	[self updateObject:object changeType:DCTObjectStoreChangeTypeSave];
 }
 
 - (void)deleteObject:(id<DCTObjectStoreCoding>)object {
-	DCTObjectStoreChange *change = [[DCTObjectStoreChange alloc] initWithObject:object type:DCTObjectStoreChangeTypeDelete];
+	[self updateObject:object changeType:DCTObjectStoreChangeTypeDelete];
+}
+
+- (void)updateObject:(id<DCTObjectStoreCoding>)object changeType:(DCTObjectStoreChangeType)changeType {
+	DCTObjectStoreChange *change = [[DCTObjectStoreChange alloc] initWithObject:object type:changeType];
+	[DCTObjectStoreIdentifier setIdentifier:change.identifier forObject:change];
 	[self.changeStore saveObject:change];
 	[self uploadChanges];
 }
@@ -102,7 +105,10 @@ static NSString *const DCTCloudObjectStoreRecordZone = @"RecordZone";
 
 		CKRecordID *recordID = record.recordID;
 		NSString *identifier = recordID.recordName;
+
+		[DCTObjectStoreIdentifier setIdentifier:identifier forObject:recordID];
 		[self.recordIDStore saveObject:recordID];
+
 		self.records[identifier] = record;
 
 		// Not the most ideal way, I know
@@ -149,6 +155,8 @@ static NSString *const DCTCloudObjectStoreRecordZone = @"RecordZone";
 		NSString *identifier = change.identifier;
 		workingChanges[identifier] = change;
 
+		
+
 		dispatch_group_enter(group);
 		[self fetchRecordWithName:identifier competion:^(CKRecord *record) {
 
@@ -160,6 +168,9 @@ static NSString *const DCTCloudObjectStoreRecordZone = @"RecordZone";
 					if (!record) {
 						CKRecordID *recordID = [[CKRecordID alloc] initWithRecordName:identifier zoneID:self.recordZone.zoneID];
 						record = [[CKRecord alloc] initWithRecordType:className recordID:recordID];
+
+						[DCTObjectStoreIdentifier setIdentifier:identifier forObject:recordID];
+						[self.recordIDStore saveObject:recordID];
 					}
 
 					DCTCloudObjectStoreEncoder *encoder = [[DCTCloudObjectStoreEncoder alloc] initWithRecord:record];
