@@ -156,7 +156,7 @@
 
 - (void)cloudObjectStore:(DCTCloudObjectStore *)cloudObjectStore didRemoveObject:(id)object {
 	dispatch_async(dispatch_get_main_queue(), ^{
-		[self insertObject:object];
+		[self removeObject:object];
 		[self.diskStore deleteObject:object];
 	});
 }
