@@ -192,8 +192,8 @@ static NSString *const DCTCloudObjectStoreRecordZone = @"RecordZone";
 					[object encodeWithCoder:encoder];
 					[recordsToSave addObject:record];
 
-			dispatch_group_leave(group);
-		}];
+					dispatch_group_leave(group);
+				}];
 
 				break;
 			}
