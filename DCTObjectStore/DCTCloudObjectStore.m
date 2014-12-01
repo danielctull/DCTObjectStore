@@ -369,6 +369,7 @@ static NSString *const DCTCloudObjectStoreRecordZone = @"RecordZone";
 - (void)saveRecords:(NSArray *)records deleteRecordIDs:(NSArray *)recordIDs completion:(void(^)(NSArray *modifiedRecordIDs, NSError *operationError))completion {
 	CKModifyRecordsOperation *operation = [[CKModifyRecordsOperation alloc] initWithRecordsToSave:records recordIDsToDelete:recordIDs];
 	operation.queuePriority = NSOperationQueuePriorityHigh;
+	operation.savePolicy = CKRecordSaveAllKeys;
 	operation.modifyRecordsCompletionBlock = ^(NSArray *savedRecords, NSArray *deletedRecordIDs, NSError *error) {
 		NSArray *savedRecordIDs = [savedRecords valueForKey:@"recordID"];
 		NSArray *modifiedRecordIDs = [savedRecordIDs arrayByAddingObjectsFromArray:deletedRecordIDs];
