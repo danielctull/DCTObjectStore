@@ -55,15 +55,18 @@
 
 - (void)deleteObject:(id<DCTObjectStoreCoding>)object {
 
+	NSString *identifier = [DCTObjectStoreIdentifier identifierForObject:object];
+	NSParameterAssert(identifier);
+
 	// If this particular instance is not in the store, ignore
-	if (![self.internalObjects.allValues containsObject:object]) {
+	id ourObject = [self objectForIdentifier:identifier];
+	if (![ourObject isEqual:object]) {
 		return;
 	}
 
-	NSString *identifier = [DCTObjectStoreIdentifier identifierForObject:object];
-	NSParameterAssert(identifier);
 	NSURL *URL = [self.URL URLByAppendingPathComponent:identifier];
 	[self.fileManager removeItemAtURL:URL error:NULL];
+	[self.internalObjects removeObjectForKey:identifier];
 }
 
 - (id<DCTObjectStoreCoding>)objectForIdentifier:(NSString *)identifier {
