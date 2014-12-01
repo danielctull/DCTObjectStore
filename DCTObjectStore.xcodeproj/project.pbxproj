@@ -149,7 +149,6 @@
 		24D52A591A28F36900FDA615 /* Event.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = Event.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		24D52A5A1A28F36900FDA615 /* Event.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = Event.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		24D52A5C1A28FAE300FDA615 /* DCTObjectStoreQueryDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DCTObjectStoreQueryDelegate.h; sourceTree = "<group>"; };
-		24D52A5E1A2B422100FDA615 /* DCTObjectStore+Private.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "DCTObjectStore+Private.h"; sourceTree = "<group>"; };
 		24D52A5F1A2B4A4D00FDA615 /* DCTObjectStoreChange.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = DCTObjectStoreChange.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		24D52A601A2B4A4D00FDA615 /* DCTObjectStoreChange.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = DCTObjectStoreChange.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		24D52A641A2B59BF00FDA615 /* DCTObjectStoreCoding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = DCTObjectStoreCoding.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
@@ -285,7 +284,6 @@
 		24D52A581A28F27500FDA615 /* Private */ = {
 			isa = PBXGroup;
 			children = (
-				24D52A5E1A2B422100FDA615 /* DCTObjectStore+Private.h */,
 				2464AB5E1A2A32C100F72B41 /* DCTDiskObjectStore.h */,
 				2464AB5F1A2A32C100F72B41 /* DCTDiskObjectStore.m */,
 				24D52A6E1A2B9A7E00FDA615 /* Cloud */,
