@@ -47,6 +47,18 @@
 	return cell;
 }
 
+#pragma mark - UITableViewDelegate
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {}
+
+- (NSArray *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath {
+	UITableViewRowAction *action = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDestructive title:@"Remove" handler:^(UITableViewRowAction *action, NSIndexPath *indexPath) {
+		Event *event = self.objectStoreQuery.objects[indexPath.row];
+		[self.objectStore deleteObject:event];
+	}];
+	return @[action];
+}
+
 #pragma mark - DCTObjectStoreQueryDelegate
 
 - (void)objectStoreController:(DCTObjectStoreQuery *)controller didInsertObject:(id)object atIndex:(NSUInteger)index {
