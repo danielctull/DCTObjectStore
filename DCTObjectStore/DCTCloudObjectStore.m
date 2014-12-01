@@ -14,8 +14,10 @@
 #import "DCTCloudObjectStoreDecoder.h"
 #import "DCTCloudObjectStoreEncoder.h"
 #import "DCTObjectStoreIdentifier.h"
+#import "CKRecordID+DCTObjectStoreCoding.h"
 
 static NSString *const DCTCloudObjectStoreChanges = @"Changes";
+static NSString *const DCTCloudObjectStoreRecordIDs = @"RecordIDs";
 static NSString *const DCTCloudObjectStoreServerChangeToken = @"ServerChangeToken";
 static NSString *const DCTCloudObjectStoreRecordZone = @"RecordZone";
 
@@ -28,6 +30,7 @@ static NSString *const DCTCloudObjectStoreRecordZone = @"RecordZone";
 @property (nonatomic) NSMutableDictionary *records;
 
 @property (nonatomic) DCTDiskObjectStore *changeStore;
+@property (nonatomic) DCTDiskObjectStore *recordIDStore;
 @end
 
 @implementation DCTCloudObjectStore
@@ -50,6 +53,9 @@ static NSString *const DCTCloudObjectStoreRecordZone = @"RecordZone";
 
 	NSURL *changesURL = [URL URLByAppendingPathComponent:DCTCloudObjectStoreChanges];
 	_changeStore = [[DCTDiskObjectStore alloc] initWithURL:changesURL];
+
+	NSURL *recordIDsURL = [URL URLByAppendingPathComponent:DCTCloudObjectStoreRecordIDs];
+	_recordIDStore = [[DCTDiskObjectStore alloc] initWithURL:recordIDsURL];
 
 	CKContainer *container = [CKContainer containerWithIdentifier:cloudIdentifier];
 	_database = container.privateCloudDatabase;
@@ -87,6 +93,7 @@ static NSString *const DCTCloudObjectStoreRecordZone = @"RecordZone";
 
 	[self fetchRecordChangesWithDeletionHandler:^(CKRecordID *recordID) {
 
+		[self.recordIDStore deleteObject:recordID];
 		NSString *identifier = recordID.recordName;
 		id<DCTObjectStoreCoding> object = [self.delegate cloudObjectStore:self objectWithIdentifier:identifier];
 		if (object) [self.delegate cloudObjectStore:self didRemoveObject:object];
@@ -95,6 +102,7 @@ static NSString *const DCTCloudObjectStoreRecordZone = @"RecordZone";
 
 		CKRecordID *recordID = record.recordID;
 		NSString *identifier = recordID.recordName;
+		[self.recordIDStore saveObject:recordID];
 		self.records[identifier] = record;
 
 		// Not the most ideal way, I know
@@ -193,9 +201,12 @@ static NSString *const DCTCloudObjectStoreRecordZone = @"RecordZone";
 		return;
 	}
 
-	if (!self.recordZone) return;
+	CKRecordID *recordID = (CKRecordID *)[self.recordIDStore objectForIdentifier:recordName];
+	if (!recordID) {
+		completion(nil);
+		return;
+	}
 
-	CKRecordID *recordID = [[CKRecordID alloc] initWithRecordName:recordName zoneID:self.recordZone.zoneID];
 	[self fetchRecordsWithIDs:@[recordID] completion:^(NSDictionary *records, NSError *error) {
 		CKRecord *record = records[recordName];
 		if (record) self.records[recordName] = record;
