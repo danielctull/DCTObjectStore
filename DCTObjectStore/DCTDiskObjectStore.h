@@ -16,6 +16,7 @@
 
 - (void)saveObject:(id<DCTObjectStoreCoding>)object;
 - (void)deleteObject:(id<DCTObjectStoreCoding>)object;
+- (id<DCTObjectStoreCoding>)objectForIdentifier:(NSString *)identifier;
 
 - (NSSet *)objects;
 

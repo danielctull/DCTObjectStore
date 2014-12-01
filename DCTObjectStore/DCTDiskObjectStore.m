@@ -11,6 +11,7 @@
 
 @interface DCTDiskObjectStore ()
 @property (nonatomic) NSFileManager *fileManager;
+@property (nonatomic) NSMutableDictionary *internalObjects;
 @end
 
 @implementation DCTDiskObjectStore
@@ -19,8 +20,27 @@
 	self = [super init];
 	if (!self) return nil;
 	_URL = [URL copy];
+	_internalObjects = [NSMutableDictionary new];
 	_fileManager = [NSFileManager new];
 	[_fileManager createDirectoryAtURL:_URL withIntermediateDirectories:YES attributes:nil error:NULL];
+
+	NSDirectoryEnumerator *enumerator = [_fileManager enumeratorAtURL:self.URL
+										   includingPropertiesForKeys:nil
+															  options:NSDirectoryEnumerationSkipsSubdirectoryDescendants
+														 errorHandler:nil];
+
+	for (NSURL *URL in enumerator) {
+		@try {
+			NSData *data = [NSData dataWithContentsOfURL:URL];
+			NSString *identifier = [URL lastPathComponent];
+			id<DCTObjectStoreCoding> object = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+			[DCTObjectStoreIdentifier setIdentifier:identifier forObject:object];
+			_internalObjects[identifier] = object;
+		}
+		@catch (__unused NSException *exception) {}
+	}
+
+
 	return self;
 }
 
@@ -29,34 +49,27 @@
 	NSURL *URL = [self.URL URLByAppendingPathComponent:identifier];
 	NSData *data = [NSKeyedArchiver archivedDataWithRootObject:object];
 	[data writeToURL:URL atomically:YES];
+	self.internalObjects[identifier] = object;
 }
 
 - (void)deleteObject:(id<DCTObjectStoreCoding>)object {
+
+	// If this particular instance is not in the store, ignore
+	if (![self.internalObjects.allValues containsObject:object]) {
+		return;
+	}
+
 	NSString *identifier = [DCTObjectStoreIdentifier identifierForObject:object];
 	NSURL *URL = [self.URL URLByAppendingPathComponent:identifier];
-	[[NSFileManager defaultManager] removeItemAtURL:URL error:NULL];
+	[self.fileManager removeItemAtURL:URL error:NULL];
+}
+
+- (id<DCTObjectStoreCoding>)objectForIdentifier:(NSString *)identifier {
+	return self.internalObjects[identifier];
 }
 
 - (NSSet *)objects {
-	NSFileManager *fileManager = [NSFileManager new];
-	NSDirectoryEnumerator *enumerator = [fileManager enumeratorAtURL:self.URL
-										  includingPropertiesForKeys:nil
-															 options:NSDirectoryEnumerationSkipsSubdirectoryDescendants
-														errorHandler:nil];
-	
-	NSMutableSet *objects = [NSMutableSet new];
-	for (NSURL *URL in enumerator) {
-		@try {
-			NSData *data = [NSData dataWithContentsOfURL:URL];
-			NSString *identifier = [URL lastPathComponent];
-			id<DCTObjectStoreCoding> object = [NSKeyedUnarchiver unarchiveObjectWithData:data];
-			[DCTObjectStoreIdentifier setIdentifier:identifier forObject:object];
-			[objects addObject:object];
-		}
-		@catch (__unused NSException *exception) {}
-	}
-	
-	return [objects copy];
+	return [NSSet setWithArray:self.internalObjects.allValues];
 }
 
 - (void)destroy {

@@ -9,7 +9,7 @@
 @import CloudKit;
 #import "DCTCloudObjectStore.h"
 #import "DCTCloudObjectStoreDelegate.h"
-#import "DCTChangeObjectStore.h"
+#import "DCTDiskObjectStore.h"
 #import "DCTObjectStoreChange.h"
 #import "DCTCloudObjectStoreDecoder.h"
 #import "DCTCloudObjectStoreEncoder.h"
@@ -27,7 +27,7 @@ static NSString *const DCTCloudObjectStoreRecordZone = @"RecordZone";
 
 @property (nonatomic) NSMutableDictionary *records;
 
-@property (nonatomic) DCTChangeObjectStore *changeStore;
+@property (nonatomic) DCTDiskObjectStore *changeStore;
 @end
 
 @implementation DCTCloudObjectStore
@@ -49,7 +49,7 @@ static NSString *const DCTCloudObjectStoreRecordZone = @"RecordZone";
 	_URL = [URL copy];
 
 	NSURL *changesURL = [URL URLByAppendingPathComponent:DCTCloudObjectStoreChanges];
-	_changeStore = [[DCTChangeObjectStore alloc] initWithURL:changesURL];
+	_changeStore = [[DCTDiskObjectStore alloc] initWithURL:changesURL];
 
 	CKContainer *container = [CKContainer containerWithIdentifier:cloudIdentifier];
 	_database = container.privateCloudDatabase;
@@ -62,13 +62,13 @@ static NSString *const DCTCloudObjectStoreRecordZone = @"RecordZone";
 
 - (void)saveObject:(id<DCTObjectStoreCoding>)object {
 	DCTObjectStoreChange *change = [[DCTObjectStoreChange alloc] initWithObject:object type:DCTObjectStoreChangeTypeSave];
-	[self.changeStore saveChange:change];
+	[self.changeStore saveObject:change];
 	[self uploadChanges];
 }
 
 - (void)deleteObject:(id<DCTObjectStoreCoding>)object {
 	DCTObjectStoreChange *change = [[DCTObjectStoreChange alloc] initWithObject:object type:DCTObjectStoreChangeTypeDelete];
-	[self.changeStore saveChange:change];
+	[self.changeStore saveObject:change];
 	[self uploadChanges];
 }
 
@@ -98,7 +98,7 @@ static NSString *const DCTCloudObjectStoreRecordZone = @"RecordZone";
 		self.records[identifier] = record;
 
 		// Not the most ideal way, I know
-		DCTObjectStoreChange *change = [self.changeStore changeForIdentifier:identifier];
+		DCTObjectStoreChange *change = [self.changeStore objectForIdentifier:identifier];
 		if ([change.date compare:record.modificationDate] == NSOrderedDescending) {
 			return;
 		}
@@ -133,7 +133,7 @@ static NSString *const DCTCloudObjectStoreRecordZone = @"RecordZone";
 	dispatch_group_t group = dispatch_group_create();
 	NSMutableArray *recordsToSave = [NSMutableArray new];
 	NSMutableArray *recordIDsToDelete = [NSMutableArray new];
-	NSArray *changes = self.changeStore.changes;
+	NSSet *changes = self.changeStore.objects;
 	NSMutableDictionary *workingChanges = [[NSMutableDictionary alloc] initWithCapacity:changes.count];
 
 	for (DCTObjectStoreChange *change in changes) {
@@ -177,7 +177,7 @@ static NSString *const DCTCloudObjectStoreRecordZone = @"RecordZone";
 			for	(CKRecordID *recordID in modifiedRecordIDs) {
 				NSString *identifier = recordID.recordName;
 				DCTObjectStoreChange *change = workingChanges[identifier];
-				[self.changeStore deleteChange:change];
+				[self.changeStore deleteObject:change];
 			}
 		}];
 	});

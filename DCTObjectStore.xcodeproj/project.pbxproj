@@ -55,9 +55,6 @@
 		24D52A6C1A2B5DB900FDA615 /* DCTCloudObjectStoreDecoder.m in Sources */ = {isa = PBXBuildFile; fileRef = 24D52A6A1A2B5DB900FDA615 /* DCTCloudObjectStoreDecoder.m */; };
 		24D52A6D1A2B5DB900FDA615 /* DCTCloudObjectStoreDecoder.m in Sources */ = {isa = PBXBuildFile; fileRef = 24D52A6A1A2B5DB900FDA615 /* DCTCloudObjectStoreDecoder.m */; };
 		24D52A731A2BBBA700FDA615 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24D52A721A2BBBA700FDA615 /* CloudKit.framework */; };
-		24D52A7B1A2C5FF500FDA615 /* DCTChangeObjectStore.h in Headers */ = {isa = PBXBuildFile; fileRef = 24D52A791A2C5FF500FDA615 /* DCTChangeObjectStore.h */; };
-		24D52A7C1A2C5FF500FDA615 /* DCTChangeObjectStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 24D52A7A1A2C5FF500FDA615 /* DCTChangeObjectStore.m */; };
-		24D52A7D1A2C5FF500FDA615 /* DCTChangeObjectStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 24D52A7A1A2C5FF500FDA615 /* DCTChangeObjectStore.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -156,8 +153,6 @@
 		24D52A6A1A2B5DB900FDA615 /* DCTCloudObjectStoreDecoder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCTCloudObjectStoreDecoder.m; sourceTree = "<group>"; };
 		24D52A6F1A2BB3C300FDA615 /* DCTObjectStore Demo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "DCTObjectStore Demo.entitlements"; sourceTree = "<group>"; };
 		24D52A721A2BBBA700FDA615 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
-		24D52A791A2C5FF500FDA615 /* DCTChangeObjectStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCTChangeObjectStore.h; sourceTree = "<group>"; };
-		24D52A7A1A2C5FF500FDA615 /* DCTChangeObjectStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCTChangeObjectStore.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -287,7 +282,6 @@
 				2464AB5E1A2A32C100F72B41 /* DCTDiskObjectStore.h */,
 				2464AB5F1A2A32C100F72B41 /* DCTDiskObjectStore.m */,
 				24D52A6E1A2B9A7E00FDA615 /* Cloud */,
-				24D52A7E1A2C5FFF00FDA615 /* Changes */,
 				2464AB631A2A34D700F72B41 /* DCTObjectStoreIdentifier.h */,
 				2464AB641A2A34D700F72B41 /* DCTObjectStoreIdentifier.m */,
 				2464AB391A29207100F72B41 /* DCTObjectStoreAttributes.h */,
@@ -306,6 +300,8 @@
 				244775121A1260260091CBDD /* DCTCloudObjectStoreEncoder.m */,
 				24D52A691A2B5DB900FDA615 /* DCTCloudObjectStoreDecoder.h */,
 				24D52A6A1A2B5DB900FDA615 /* DCTCloudObjectStoreDecoder.m */,
+				24D52A5F1A2B4A4D00FDA615 /* DCTObjectStoreChange.h */,
+				24D52A601A2B4A4D00FDA615 /* DCTObjectStoreChange.m */,
 			);
 			name = Cloud;
 			sourceTree = "<group>";
@@ -318,17 +314,6 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		24D52A7E1A2C5FFF00FDA615 /* Changes */ = {
-			isa = PBXGroup;
-			children = (
-				24D52A5F1A2B4A4D00FDA615 /* DCTObjectStoreChange.h */,
-				24D52A601A2B4A4D00FDA615 /* DCTObjectStoreChange.m */,
-				24D52A791A2C5FF500FDA615 /* DCTChangeObjectStore.h */,
-				24D52A7A1A2C5FF500FDA615 /* DCTChangeObjectStore.m */,
-			);
-			name = Changes;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -336,7 +321,6 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				24D52A7B1A2C5FF500FDA615 /* DCTChangeObjectStore.h in Headers */,
 				244775131A1260260091CBDD /* DCTCloudObjectStoreEncoder.h in Headers */,
 				24D52A661A2B59BF00FDA615 /* DCTObjectStoreCoding.h in Headers */,
 				24D52A611A2B4A4D00FDA615 /* DCTObjectStoreChange.h in Headers */,
@@ -516,7 +500,6 @@
 				244775151A1260260091CBDD /* DCTCloudObjectStoreEncoder.m in Sources */,
 				2464AB671A2A34D700F72B41 /* DCTObjectStoreIdentifier.m in Sources */,
 				2464AB6C1A2A7B1B00F72B41 /* DCTCloudObjectStore.m in Sources */,
-				24D52A7D1A2C5FF500FDA615 /* DCTChangeObjectStore.m in Sources */,
 				2464AB621A2A32C100F72B41 /* DCTDiskObjectStore.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -533,7 +516,6 @@
 				2464AB3B1A29207100F72B41 /* DCTObjectStoreAttributes.m in Sources */,
 				2464AB661A2A34D700F72B41 /* DCTObjectStoreIdentifier.m in Sources */,
 				2464AB6B1A2A7B1B00F72B41 /* DCTCloudObjectStore.m in Sources */,
-				24D52A7C1A2C5FF500FDA615 /* DCTChangeObjectStore.m in Sources */,
 				2464AB611A2A32C100F72B41 /* DCTDiskObjectStore.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
