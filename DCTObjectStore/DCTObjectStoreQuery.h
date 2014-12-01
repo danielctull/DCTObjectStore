@@ -11,6 +11,15 @@
 @protocol DCTObjectStoreQueryDelegate;
 
 
+
+extern const struct DCTObjectStoreQueryAttributes {
+	__unsafe_unretained NSString *predicate;
+	__unsafe_unretained NSString *sortDescriptors;
+	__unsafe_unretained NSString *objects;
+} DCTObjectStoreQueryAttributes;
+
+
+
 @interface DCTObjectStoreQuery : NSObject
 
 - (instancetype)initWithObjectStore:(DCTObjectStore *)objectStore predciate:(NSPredicate *)predicate sortDescriptors:(NSArray *)sortDescriptors;

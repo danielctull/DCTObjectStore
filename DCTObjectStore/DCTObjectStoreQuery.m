@@ -12,6 +12,12 @@
 
 void *DCTObjectStoreQueryContext = &DCTObjectStoreQueryContext;
 
+const struct DCTObjectStoreQueryAttributes DCTObjectStoreQueryAttributes = {
+	.predicate = @"predicate",
+	.sortDescriptors = @"sortDescriptors",
+	.objects = @"objects"
+};
+
 @interface DCTObjectStoreQuery ()
 @property (nonatomic, readwrite) NSArray *objects;
 @end
