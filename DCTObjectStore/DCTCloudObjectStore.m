@@ -8,7 +8,11 @@
 
 @import CloudKit;
 #import "DCTCloudObjectStore.h"
-#import "DCTCloudObjectStoreChange.h"
+#import "DCTChangeObjectStore.h"
+#import "DCTObjectStoreChange.h"
+
+
+
 #import "DCTCloudObjectStoreDelegate.h"
 #import "DCTDiskObjectStore.h"
 #import "DCTObjectStoreIdentifier.h"
@@ -17,19 +21,19 @@
 #import "DCTObjectStoreCloudEncoder.h"
 
 static NSString *const DCTCloudObjectStoreType = @"DCTCloudObjectStoreType";
-static NSString *const DCTCloudObjectStoreChangesName = @"Changes";
-static NSString *const DCTCloudObjectStoreServerChangeTokenName = @"ServerChangeToken";
-static NSString *const DCTCloudObjectStoreRecordZoneName = @"RecordZone";
+static NSString *const DCTCloudObjectStoreChanges = @"Changes";
+static NSString *const DCTCloudObjectStoreServerChangeToken = @"ServerChangeToken";
+static NSString *const DCTCloudObjectStoreRecordZone = @"RecordZone";
 
 @interface DCTCloudObjectStore ()
 @property (nonatomic) CKDatabase *database;
 @property (nonatomic) CKRecordZone *recordZone;
 @property (nonatomic) CKSubscription *subscription;
-@property (nonatomic) NSMutableDictionary *records;
 @property (nonatomic) CKServerChangeToken *serverChangeToken;
 
-@property (nonatomic) DCTDiskObjectStore *changesStore;
-@property (nonatomic, readonly) NSDictionary *pendingChanges;
+@property (nonatomic) NSMutableDictionary *records;
+
+@property (nonatomic) DCTChangeObjectStore *changeStore;
 @end
 
 @implementation DCTCloudObjectStore
@@ -49,12 +53,13 @@ static NSString *const DCTCloudObjectStoreRecordZoneName = @"RecordZone";
 	_storeIdentifier = [storeIdentifier copy];
 	_cloudIdentifier = [cloudIdentifier copy];
 	_URL = [URL copy];
-	NSURL *changesURL = [URL URLByAppendingPathComponent:DCTCloudObjectStoreChangesName];
+
+	NSURL *changesURL = [URL URLByAppendingPathComponent:DCTCloudObjectStoreChanges];
+	_changeStore = [[DCTChangeObjectStore alloc] initWithURL:changesURL];
 
 	CKContainer *container = [CKContainer containerWithIdentifier:cloudIdentifier];
 	_database = container.privateCloudDatabase;
 	_records = [NSMutableDictionary new];
-	_changesStore = [[DCTDiskObjectStore alloc] initWithURL:changesURL];
 
 	[self fetchRecordZone];
 
@@ -62,17 +67,14 @@ static NSString *const DCTCloudObjectStoreRecordZoneName = @"RecordZone";
 }
 
 - (void)saveObject:(id<DCTObjectStoreCoding>)object {
-	[self updateObject:object withChangeType:DCTCloudObjectStoreChangeTypeSave];
+	DCTObjectStoreChange *change = [[DCTObjectStoreChange alloc] initWithObject:object type:DCTObjectStoreChangeTypeSave];
+	[self.changeStore saveChange:change];
+	[self uploadChanges];
 }
 
 - (void)deleteObject:(id<DCTObjectStoreCoding>)object {
-	[self updateObject:object withChangeType:DCTCloudObjectStoreChangeTypeDelete];
-}
-
-- (void)updateObject:(id<DCTObjectStoreCoding>)object withChangeType:(DCTCloudObjectStoreChangeType)type {
-	NSString *identifier = [DCTObjectStoreIdentifier identifierForObject:object];
-	DCTCloudObjectStoreChange *change = [[DCTCloudObjectStoreChange alloc] initWithIdentifier:identifier object:object type:type];
-	[self.changesStore saveObject:change];
+	DCTObjectStoreChange *change = [[DCTObjectStoreChange alloc] initWithObject:object type:DCTObjectStoreChangeTypeDelete];
+	[self.changeStore saveChange:change];
 	[self uploadChanges];
 }
 
@@ -86,16 +88,6 @@ static NSString *const DCTCloudObjectStoreRecordZoneName = @"RecordZone";
 }
 
 #pragma mark - Changes
-
-- (NSDictionary *)pendingChanges {
-	NSSet *changes = self.changesStore.objects;
-	NSMutableDictionary *pendingChanges = [NSMutableDictionary new];
-	for (DCTCloudObjectStoreChange *change in changes) {
-		NSString *identifier = change.idenitfier;
-		pendingChanges[identifier] = change;
-	}
-	return [pendingChanges copy];
-}
 
 - (void)downloadChangesWithCompletion:(void(^)())completion {
 
@@ -111,8 +103,9 @@ static NSString *const DCTCloudObjectStoreRecordZoneName = @"RecordZone";
 		NSString *identifier = recordID.recordName;
 		self.records[identifier] = record;
 
-		// If the object is to be uploaded, we'll use that data rather than that on the server.
-		if (self.pendingChanges[identifier]) {
+		// Not the most ideal way, I know
+		DCTObjectStoreChange *change = [self.changeStore changeForIdentifier:identifier];
+		if ([change.date compare:record.modificationDate] == NSOrderedDescending) {
 			return;
 		}
 
@@ -144,16 +137,16 @@ static NSString *const DCTCloudObjectStoreRecordZoneName = @"RecordZone";
 	dispatch_group_t group = dispatch_group_create();
 	NSMutableArray *recordsToSave = [NSMutableArray new];
 	NSMutableArray *recordIDsToDelete = [NSMutableArray new];
-	NSDictionary *pendingChanges = self.pendingChanges;
+	NSArray *changes = self.changeStore.changes;
 
-	for (DCTCloudObjectStoreChange *change in pendingChanges.allValues) {
+	for (DCTObjectStoreChange *change in changes) {
 
-		NSString *identifier = change.idenitfier;
+		NSString *identifier = change.identifier;
 		dispatch_group_enter(group);
 		[self fetchRecordWithName:identifier competion:^(CKRecord *record) {
 
 			switch (change.type) {
-				case DCTCloudObjectStoreChangeTypeSave: {
+				case DCTObjectStoreChangeTypeSave: {
 
 					id<DCTObjectStoreCoding> object = change.object;
 					NSString *className = NSStringFromClass([object class]);
@@ -168,7 +161,7 @@ static NSString *const DCTCloudObjectStoreRecordZoneName = @"RecordZone";
 					break;
 				}
 
-				case DCTCloudObjectStoreChangeTypeDelete: {
+				case DCTObjectStoreChangeTypeDelete: {
 					if (record) {
 						[recordIDsToDelete addObject:record.recordID];
 					}
@@ -184,12 +177,13 @@ static NSString *const DCTCloudObjectStoreRecordZoneName = @"RecordZone";
 		[self saveRecords:recordsToSave deleteRecordIDs:recordIDsToDelete completion:^(NSArray *modifiedRecordIDs, NSError *operationError) {
 			for	(CKRecordID *recordID in modifiedRecordIDs) {
 				NSString *identifier = recordID.recordName;
-				DCTCloudObjectStoreChange *change = pendingChanges[identifier];
-				[self.changesStore deleteObject:change];
+				[self.changeStore deleteChangeWithIdentifier:identifier];
 			}
 		}];
 	});
 }
+
+#pragma mark - Records
 
 - (void)fetchRecordWithName:(NSString *)recordName competion:(void(^)(CKRecord *))completion {
 
@@ -233,7 +227,7 @@ static NSString *const DCTCloudObjectStoreRecordZoneName = @"RecordZone";
 #pragma mark - Record Zone
 
 - (NSURL *)recordZoneURL {
-	return [self.URL URLByAppendingPathComponent:DCTCloudObjectStoreRecordZoneName];
+	return [self.URL URLByAppendingPathComponent:DCTCloudObjectStoreRecordZone];
 }
 
 - (void)setRecordZone:(CKRecordZone *)recordZone {
@@ -286,7 +280,7 @@ static NSString *const DCTCloudObjectStoreRecordZoneName = @"RecordZone";
 #pragma mark - Server Change Token
 
 - (NSURL *)serverChangeTokenURL {
-	return [self.URL URLByAppendingPathComponent:DCTCloudObjectStoreServerChangeTokenName];
+	return [self.URL URLByAppendingPathComponent:DCTCloudObjectStoreServerChangeToken];
 }
 
 - (CKServerChangeToken *)serverChangeToken {

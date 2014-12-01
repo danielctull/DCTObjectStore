@@ -47,14 +47,17 @@
 		24D52A551A28EEB800FDA615 /* DCTObjectStoreQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = 24D52A521A28EEB800FDA615 /* DCTObjectStoreQuery.m */; };
 		24D52A5B1A28F36900FDA615 /* Event.m in Sources */ = {isa = PBXBuildFile; fileRef = 24D52A5A1A28F36900FDA615 /* Event.m */; };
 		24D52A5D1A28FBC400FDA615 /* DCTObjectStoreQueryDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 24D52A5C1A28FAE300FDA615 /* DCTObjectStoreQueryDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		24D52A611A2B4A4D00FDA615 /* DCTCloudObjectStoreChange.h in Headers */ = {isa = PBXBuildFile; fileRef = 24D52A5F1A2B4A4D00FDA615 /* DCTCloudObjectStoreChange.h */; };
-		24D52A621A2B4A4D00FDA615 /* DCTCloudObjectStoreChange.m in Sources */ = {isa = PBXBuildFile; fileRef = 24D52A601A2B4A4D00FDA615 /* DCTCloudObjectStoreChange.m */; };
-		24D52A631A2B4A4D00FDA615 /* DCTCloudObjectStoreChange.m in Sources */ = {isa = PBXBuildFile; fileRef = 24D52A601A2B4A4D00FDA615 /* DCTCloudObjectStoreChange.m */; };
+		24D52A611A2B4A4D00FDA615 /* DCTObjectStoreChange.h in Headers */ = {isa = PBXBuildFile; fileRef = 24D52A5F1A2B4A4D00FDA615 /* DCTObjectStoreChange.h */; };
+		24D52A621A2B4A4D00FDA615 /* DCTObjectStoreChange.m in Sources */ = {isa = PBXBuildFile; fileRef = 24D52A601A2B4A4D00FDA615 /* DCTObjectStoreChange.m */; };
+		24D52A631A2B4A4D00FDA615 /* DCTObjectStoreChange.m in Sources */ = {isa = PBXBuildFile; fileRef = 24D52A601A2B4A4D00FDA615 /* DCTObjectStoreChange.m */; };
 		24D52A661A2B59BF00FDA615 /* DCTObjectStoreCoding.h in Headers */ = {isa = PBXBuildFile; fileRef = 24D52A641A2B59BF00FDA615 /* DCTObjectStoreCoding.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		24D52A6B1A2B5DB900FDA615 /* DCTCloudObjectStoreDecoder.h in Headers */ = {isa = PBXBuildFile; fileRef = 24D52A691A2B5DB900FDA615 /* DCTCloudObjectStoreDecoder.h */; };
 		24D52A6C1A2B5DB900FDA615 /* DCTCloudObjectStoreDecoder.m in Sources */ = {isa = PBXBuildFile; fileRef = 24D52A6A1A2B5DB900FDA615 /* DCTCloudObjectStoreDecoder.m */; };
 		24D52A6D1A2B5DB900FDA615 /* DCTCloudObjectStoreDecoder.m in Sources */ = {isa = PBXBuildFile; fileRef = 24D52A6A1A2B5DB900FDA615 /* DCTCloudObjectStoreDecoder.m */; };
 		24D52A731A2BBBA700FDA615 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24D52A721A2BBBA700FDA615 /* CloudKit.framework */; };
+		24D52A7B1A2C5FF500FDA615 /* DCTChangeObjectStore.h in Headers */ = {isa = PBXBuildFile; fileRef = 24D52A791A2C5FF500FDA615 /* DCTChangeObjectStore.h */; };
+		24D52A7C1A2C5FF500FDA615 /* DCTChangeObjectStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 24D52A7A1A2C5FF500FDA615 /* DCTChangeObjectStore.m */; };
+		24D52A7D1A2C5FF500FDA615 /* DCTChangeObjectStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 24D52A7A1A2C5FF500FDA615 /* DCTChangeObjectStore.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -147,13 +150,15 @@
 		24D52A5A1A28F36900FDA615 /* Event.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = Event.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		24D52A5C1A28FAE300FDA615 /* DCTObjectStoreQueryDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DCTObjectStoreQueryDelegate.h; sourceTree = "<group>"; };
 		24D52A5E1A2B422100FDA615 /* DCTObjectStore+Private.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "DCTObjectStore+Private.h"; sourceTree = "<group>"; };
-		24D52A5F1A2B4A4D00FDA615 /* DCTCloudObjectStoreChange.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = DCTCloudObjectStoreChange.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
-		24D52A601A2B4A4D00FDA615 /* DCTCloudObjectStoreChange.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = DCTCloudObjectStoreChange.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		24D52A5F1A2B4A4D00FDA615 /* DCTObjectStoreChange.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = DCTObjectStoreChange.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		24D52A601A2B4A4D00FDA615 /* DCTObjectStoreChange.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = DCTObjectStoreChange.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		24D52A641A2B59BF00FDA615 /* DCTObjectStoreCoding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = DCTObjectStoreCoding.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		24D52A691A2B5DB900FDA615 /* DCTCloudObjectStoreDecoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCTCloudObjectStoreDecoder.h; sourceTree = "<group>"; };
 		24D52A6A1A2B5DB900FDA615 /* DCTCloudObjectStoreDecoder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCTCloudObjectStoreDecoder.m; sourceTree = "<group>"; };
 		24D52A6F1A2BB3C300FDA615 /* DCTObjectStore Demo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "DCTObjectStore Demo.entitlements"; sourceTree = "<group>"; };
 		24D52A721A2BBBA700FDA615 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
+		24D52A791A2C5FF500FDA615 /* DCTChangeObjectStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCTChangeObjectStore.h; sourceTree = "<group>"; };
+		24D52A7A1A2C5FF500FDA615 /* DCTChangeObjectStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCTChangeObjectStore.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -284,6 +289,7 @@
 				2464AB5E1A2A32C100F72B41 /* DCTDiskObjectStore.h */,
 				2464AB5F1A2A32C100F72B41 /* DCTDiskObjectStore.m */,
 				24D52A6E1A2B9A7E00FDA615 /* Cloud */,
+				24D52A7E1A2C5FFF00FDA615 /* Changes */,
 				2464AB631A2A34D700F72B41 /* DCTObjectStoreIdentifier.h */,
 				2464AB641A2A34D700F72B41 /* DCTObjectStoreIdentifier.m */,
 				2464AB391A29207100F72B41 /* DCTObjectStoreAttributes.h */,
@@ -298,8 +304,6 @@
 				2464AB681A2A7B1B00F72B41 /* DCTCloudObjectStore.h */,
 				2464AB691A2A7B1B00F72B41 /* DCTCloudObjectStore.m */,
 				2464AB6F1A2A8AE800F72B41 /* DCTCloudObjectStoreDelegate.h */,
-				24D52A5F1A2B4A4D00FDA615 /* DCTCloudObjectStoreChange.h */,
-				24D52A601A2B4A4D00FDA615 /* DCTCloudObjectStoreChange.m */,
 				244775111A1260260091CBDD /* DCTObjectStoreCloudEncoder.h */,
 				244775121A1260260091CBDD /* DCTObjectStoreCloudEncoder.m */,
 				24D52A691A2B5DB900FDA615 /* DCTCloudObjectStoreDecoder.h */,
@@ -316,6 +320,17 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		24D52A7E1A2C5FFF00FDA615 /* Changes */ = {
+			isa = PBXGroup;
+			children = (
+				24D52A5F1A2B4A4D00FDA615 /* DCTObjectStoreChange.h */,
+				24D52A601A2B4A4D00FDA615 /* DCTObjectStoreChange.m */,
+				24D52A791A2C5FF500FDA615 /* DCTChangeObjectStore.h */,
+				24D52A7A1A2C5FF500FDA615 /* DCTChangeObjectStore.m */,
+			);
+			name = Changes;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -323,9 +338,10 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				24D52A7B1A2C5FF500FDA615 /* DCTChangeObjectStore.h in Headers */,
 				244775131A1260260091CBDD /* DCTObjectStoreCloudEncoder.h in Headers */,
 				24D52A661A2B59BF00FDA615 /* DCTObjectStoreCoding.h in Headers */,
-				24D52A611A2B4A4D00FDA615 /* DCTCloudObjectStoreChange.h in Headers */,
+				24D52A611A2B4A4D00FDA615 /* DCTObjectStoreChange.h in Headers */,
 				2464AB701A2A8AE800F72B41 /* DCTCloudObjectStoreDelegate.h in Headers */,
 				2464AB6A1A2A7B1B00F72B41 /* DCTCloudObjectStore.h in Headers */,
 				24D52A5D1A28FBC400FDA615 /* DCTObjectStoreQueryDelegate.h in Headers */,
@@ -497,11 +513,12 @@
 				24D52A551A28EEB800FDA615 /* DCTObjectStoreQuery.m in Sources */,
 				242BEF8019A8FBD00063F2F2 /* DCTObjectStore.m in Sources */,
 				24D52A6D1A2B5DB900FDA615 /* DCTCloudObjectStoreDecoder.m in Sources */,
-				24D52A631A2B4A4D00FDA615 /* DCTCloudObjectStoreChange.m in Sources */,
+				24D52A631A2B4A4D00FDA615 /* DCTObjectStoreChange.m in Sources */,
 				2464AB3D1A2922B800F72B41 /* DCTObjectStoreAttributes.m in Sources */,
 				244775151A1260260091CBDD /* DCTObjectStoreCloudEncoder.m in Sources */,
 				2464AB671A2A34D700F72B41 /* DCTObjectStoreIdentifier.m in Sources */,
 				2464AB6C1A2A7B1B00F72B41 /* DCTCloudObjectStore.m in Sources */,
+				24D52A7D1A2C5FF500FDA615 /* DCTChangeObjectStore.m in Sources */,
 				2464AB621A2A32C100F72B41 /* DCTDiskObjectStore.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -513,11 +530,12 @@
 				24D52A541A28EEB800FDA615 /* DCTObjectStoreQuery.m in Sources */,
 				24501D191883DF9600FED266 /* DCTObjectStore.m in Sources */,
 				24D52A6C1A2B5DB900FDA615 /* DCTCloudObjectStoreDecoder.m in Sources */,
-				24D52A621A2B4A4D00FDA615 /* DCTCloudObjectStoreChange.m in Sources */,
+				24D52A621A2B4A4D00FDA615 /* DCTObjectStoreChange.m in Sources */,
 				244775141A1260260091CBDD /* DCTObjectStoreCloudEncoder.m in Sources */,
 				2464AB3B1A29207100F72B41 /* DCTObjectStoreAttributes.m in Sources */,
 				2464AB661A2A34D700F72B41 /* DCTObjectStoreIdentifier.m in Sources */,
 				2464AB6B1A2A7B1B00F72B41 /* DCTCloudObjectStore.m in Sources */,
+				24D52A7C1A2C5FF500FDA615 /* DCTChangeObjectStore.m in Sources */,
 				2464AB611A2A32C100F72B41 /* DCTDiskObjectStore.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
