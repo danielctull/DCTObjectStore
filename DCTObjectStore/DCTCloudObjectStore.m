@@ -13,6 +13,7 @@
 #import "DCTObjectStoreChange.h"
 #import "DCTCloudObjectStoreDecoder.h"
 #import "DCTCloudObjectStoreEncoder.h"
+#import "DCTObjectStoreIdentifier.h"
 
 static NSString *const DCTCloudObjectStoreChanges = @"Changes";
 static NSString *const DCTCloudObjectStoreServerChangeToken = @"ServerChangeToken";
@@ -88,7 +89,7 @@ static NSString *const DCTCloudObjectStoreRecordZone = @"RecordZone";
 
 		NSString *identifier = recordID.recordName;
 		id<DCTObjectStoreCoding> object = [self.delegate cloudObjectStore:self objectWithIdentifier:identifier];
-		[self.delegate cloudObjectStore:self didRemoveObject:object];
+		if (object) [self.delegate cloudObjectStore:self didRemoveObject:object];
 
 	} updateHandler:^(CKRecord *record) {
 
@@ -104,6 +105,7 @@ static NSString *const DCTCloudObjectStoreRecordZone = @"RecordZone";
 
 		id<DCTObjectStoreCoding> object = [self.delegate cloudObjectStore:self objectWithIdentifier:identifier];
 		DCTCloudObjectStoreDecoder *decoder = [[DCTCloudObjectStoreDecoder alloc] initWithRecord:record];
+
 		if (object) {
 
 			[object decodeWithCoder:decoder];
@@ -117,6 +119,7 @@ static NSString *const DCTCloudObjectStoreRecordZone = @"RecordZone";
 			if (!class) return;
 
 			object = [[class alloc] initWithCoder:decoder];
+			[DCTObjectStoreIdentifier setIdentifier:identifier forObject:object];
 			[self.delegate cloudObjectStore:self didInsertObject:object];
 		}
 
@@ -131,10 +134,13 @@ static NSString *const DCTCloudObjectStoreRecordZone = @"RecordZone";
 	NSMutableArray *recordsToSave = [NSMutableArray new];
 	NSMutableArray *recordIDsToDelete = [NSMutableArray new];
 	NSArray *changes = self.changeStore.changes;
+	NSMutableDictionary *workingChanges = [[NSMutableDictionary alloc] initWithCapacity:changes.count];
 
 	for (DCTObjectStoreChange *change in changes) {
 
 		NSString *identifier = change.identifier;
+		workingChanges[identifier] = change;
+
 		dispatch_group_enter(group);
 		[self fetchRecordWithName:identifier competion:^(CKRecord *record) {
 
@@ -170,7 +176,8 @@ static NSString *const DCTCloudObjectStoreRecordZone = @"RecordZone";
 		[self saveRecords:recordsToSave deleteRecordIDs:recordIDsToDelete completion:^(NSArray *modifiedRecordIDs, NSError *operationError) {
 			for	(CKRecordID *recordID in modifiedRecordIDs) {
 				NSString *identifier = recordID.recordName;
-				[self.changeStore deleteChangeWithIdentifier:identifier];
+				DCTObjectStoreChange *change = workingChanges[identifier];
+				[self.changeStore deleteChange:change];
 			}
 		}];
 	});
@@ -205,17 +212,29 @@ static NSString *const DCTCloudObjectStoreRecordZone = @"RecordZone";
 	[self.database deleteSubscriptionWithID:self.subscription.subscriptionID completionHandler:nil];
 }
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wassign-enum"
+
 - (void)saveSubscription {
 
 	if (!self.recordZone) return;
 
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wassign-enum"
-	self.subscription = [[CKSubscription alloc] initWithZoneID:self.recordZone.zoneID options:0];
+	NSString *subscriptionID = self.storeIdentifier;
+	[self.database fetchSubscriptionWithID:subscriptionID completionHandler:^(CKSubscription *subscription, NSError *error) {
+
+		if (subscription) {
+			self.subscription = subscription;
+			return;
+		}
+
+		CKSubscription *newSubscription = [[CKSubscription alloc] initWithZoneID:self.recordZone.zoneID subscriptionID:subscriptionID options:0];
+		[self.database saveSubscription:newSubscription completionHandler:^(CKSubscription *subscription, NSError *error) {
+			self.subscription = subscription;
+		}];
+	}];
+}
 #pragma clang diagnostic pop
 
-	[self.database saveSubscription:self.subscription completionHandler:nil];
-}
 
 #pragma mark - Record Zone
 

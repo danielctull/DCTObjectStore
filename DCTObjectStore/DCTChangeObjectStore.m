@@ -12,7 +12,7 @@
 
 @interface DCTChangeObjectStore ()
 @property (nonatomic) DCTDiskObjectStore *diskStore;
-@property (nonatomic) NSMutableDictionary *changesDictionary;
+@property (nonatomic) NSMutableArray *internalChanges;
 @end
 
 @implementation DCTChangeObjectStore
@@ -20,44 +20,35 @@
 - (instancetype)initWithURL:(NSURL *)URL {
 	self = [self init];
 	if (!self) return nil;
-
 	_URL = [URL copy];
-	_changesDictionary = [NSMutableDictionary new];
+	_internalChanges = [NSMutableArray new];
 	_diskStore = [[DCTDiskObjectStore alloc] initWithURL:URL];
-
-	NSSet *changes = _diskStore.objects;
-	for (DCTObjectStoreChange *change in changes) {
-		_changesDictionary[change.identifier] = change;
-	}
-
+	[_internalChanges addObjectsFromArray:_diskStore.objects.allObjects];
 	return self;
 }
 
 - (void)saveChange:(DCTObjectStoreChange *)change {
 	NSString *identifier = change.identifier;
-	[self deleteChangeWithIdentifier:identifier];
+	DCTObjectStoreChange *oldChange = [self changeForIdentifier:identifier];
+	if (oldChange) [self deleteChange:oldChange];
 
-	self.changesDictionary[identifier] = change;
+	[self.internalChanges addObject:change];
 	[self.diskStore saveObject:change];
 }
 
 - (void)deleteChange:(DCTObjectStoreChange *)change {
-	[self.changesDictionary removeObjectForKey:change.identifier];
-	[self.diskStore deleteObject:change];
-}
-
-- (void)deleteChangeWithIdentifier:(NSString *)identifier {
-	DCTObjectStoreChange *change = self.changesDictionary[identifier];
-	[self.changesDictionary removeObjectForKey:identifier];
+	[self.internalChanges removeObject:change];
 	[self.diskStore deleteObject:change];
 }
 
 - (DCTObjectStoreChange *)changeForIdentifier:(NSString *)identifier {
-	return self.changesDictionary[identifier];
+	NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %@", DCTObjectStoreChangeAttributes.identifier, identifier];
+	NSArray *filteredChanges = [self.internalChanges filteredArrayUsingPredicate:predicate];
+	return [filteredChanges firstObject];
 }
 
 - (NSArray *)changes {
-	return [self.changesDictionary allValues];
+	return [self.internalChanges copy];
 }
 
 @end

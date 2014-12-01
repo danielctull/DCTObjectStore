@@ -15,11 +15,9 @@
 @property (nonatomic, readonly) NSURL *URL;
 
 @property (nonatomic, readonly) NSArray *changes;
+- (DCTObjectStoreChange *)changeForIdentifier:(NSString *)identifier;
 
 - (void)saveChange:(DCTObjectStoreChange *)change;
 - (void)deleteChange:(DCTObjectStoreChange *)change;
-- (void)deleteChangeWithIdentifier:(NSString *)identifier;
-
-- (DCTObjectStoreChange *)changeForIdentifier:(NSString *)identifier;
 
 @end
