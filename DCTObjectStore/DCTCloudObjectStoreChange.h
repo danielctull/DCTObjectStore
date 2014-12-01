@@ -20,5 +20,6 @@ typedef NS_ENUM(NSInteger, DCTCloudObjectStoreChangeType) {
 @property (nonatomic, readonly) NSString *idenitfier;
 @property (nonatomic, readonly) id<DCTObjectStoreCoding> object;
 @property (nonatomic, readonly) DCTCloudObjectStoreChangeType type;
+@property (nonatomic, readonly) NSDate *date;
 
 @end
