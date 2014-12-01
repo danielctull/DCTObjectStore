@@ -96,8 +96,9 @@ static NSString *const DCTCloudObjectStoreRecordZone = @"RecordZone";
 
 	[self fetchRecordChangesWithDeletionHandler:^(CKRecordID *recordID) {
 
-		[self.recordIDStore deleteObject:recordID];
 		NSString *identifier = recordID.recordName;
+		[DCTObjectStoreIdentifier setIdentifier:identifier forObject:recordID];
+		[self.recordIDStore deleteObject:recordID];
 		id<DCTObjectStoreCoding> object = [self.delegate cloudObjectStore:self objectWithIdentifier:identifier];
 		if (object) [self.delegate cloudObjectStore:self didRemoveObject:object];
 
@@ -155,16 +156,26 @@ static NSString *const DCTCloudObjectStoreRecordZone = @"RecordZone";
 		NSString *identifier = change.identifier;
 		workingChanges[identifier] = change;
 
+		switch (change.type) {
 		
+			case DCTObjectStoreChangeTypeDelete: {
 
-		dispatch_group_enter(group);
-		[self fetchRecordWithName:identifier competion:^(CKRecord *record) {
+				CKRecordID *recordID = (CKRecordID *)[self.recordIDStore objectForIdentifier:identifier];
+				if (recordID) {
+					[recordIDsToDelete addObject:recordID];
+				}
 
-			switch (change.type) {
+				break;
+			}
+
 				case DCTObjectStoreChangeTypeSave: {
+
+				dispatch_group_enter(group);
+				[self fetchRecordWithName:identifier competion:^(CKRecord *record) {
 
 					id<DCTObjectStoreCoding> object = change.object;
 					NSString *className = NSStringFromClass([object class]);
+
 					if (!record) {
 						CKRecordID *recordID = [[CKRecordID alloc] initWithRecordName:identifier zoneID:self.recordZone.zoneID];
 						record = [[CKRecord alloc] initWithRecordType:className recordID:recordID];
@@ -176,18 +187,13 @@ static NSString *const DCTCloudObjectStoreRecordZone = @"RecordZone";
 					DCTCloudObjectStoreEncoder *encoder = [[DCTCloudObjectStoreEncoder alloc] initWithRecord:record];
 					[object encodeWithCoder:encoder];
 					[recordsToSave addObject:record];
-					break;
-				}
-
-				case DCTObjectStoreChangeTypeDelete: {
-					if (record) {
-						[recordIDsToDelete addObject:record.recordID];
-					}
-				}
-			}
 
 			dispatch_group_leave(group);
 		}];
+
+				break;
+			}
+		}
 	}
 
 	dispatch_group_notify(group, dispatch_get_main_queue(), ^{
