@@ -1,5 +1,5 @@
 //
-//  DCTObjectStoreCloudEncoder.h
+//  DCTCloudObjectStoreEncoder.h
 //  DCTObjectStore
 //
 //  Created by Daniel Tull on 11.11.2014.
@@ -10,7 +10,7 @@
 @import CloudKit;
 
 
-@interface DCTObjectStoreCloudEncoder : NSCoder
+@interface DCTCloudObjectStoreEncoder : NSCoder
 
 - (instancetype)initWithRecord:(CKRecord *)record;
 @property (nonatomic, readonly) CKRecord *record;

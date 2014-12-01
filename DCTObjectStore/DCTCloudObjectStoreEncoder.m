@@ -1,15 +1,15 @@
 //
-//  DCTObjectStoreCloudEncoder.m
+//  DCTCloudObjectStoreEncoder.m
 //  DCTObjectStore
 //
 //  Created by Daniel Tull on 11.11.2014.
 //  Copyright (c) 2014 Daniel Tull. All rights reserved.
 //
 
-#import "DCTObjectStoreCloudEncoder.h"
+#import "DCTCloudObjectStoreEncoder.h"
 #import "DCTObjectStore.h"
 
-@implementation DCTObjectStoreCloudEncoder
+@implementation DCTCloudObjectStoreEncoder
 
 - (instancetype)initWithRecord:(CKRecord *)record {
 	self = [super init];

@@ -12,7 +12,7 @@
 #import "DCTChangeObjectStore.h"
 #import "DCTObjectStoreChange.h"
 #import "DCTCloudObjectStoreDecoder.h"
-#import "DCTObjectStoreCloudEncoder.h"
+#import "DCTCloudObjectStoreEncoder.h"
 
 static NSString *const DCTCloudObjectStoreChanges = @"Changes";
 static NSString *const DCTCloudObjectStoreServerChangeToken = @"ServerChangeToken";
@@ -148,7 +148,7 @@ static NSString *const DCTCloudObjectStoreRecordZone = @"RecordZone";
 						record = [[CKRecord alloc] initWithRecordType:className recordID:recordID];
 					}
 
-					DCTObjectStoreCloudEncoder *encoder = [[DCTObjectStoreCloudEncoder alloc] initWithRecord:record];
+					DCTCloudObjectStoreEncoder *encoder = [[DCTCloudObjectStoreEncoder alloc] initWithRecord:record];
 					[object encodeWithCoder:encoder];
 					[recordsToSave addObject:record];
 					break;

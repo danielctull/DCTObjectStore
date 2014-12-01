@@ -9,9 +9,9 @@
 /* Begin PBXBuildFile section */
 		242BEF7F19A8FBB00063F2F2 /* DCTObjectStore.h in Headers */ = {isa = PBXBuildFile; fileRef = 24501D161883DF9600FED266 /* DCTObjectStore.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		242BEF8019A8FBD00063F2F2 /* DCTObjectStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 24501D181883DF9600FED266 /* DCTObjectStore.m */; };
-		244775131A1260260091CBDD /* DCTObjectStoreCloudEncoder.h in Headers */ = {isa = PBXBuildFile; fileRef = 244775111A1260260091CBDD /* DCTObjectStoreCloudEncoder.h */; };
-		244775141A1260260091CBDD /* DCTObjectStoreCloudEncoder.m in Sources */ = {isa = PBXBuildFile; fileRef = 244775121A1260260091CBDD /* DCTObjectStoreCloudEncoder.m */; };
-		244775151A1260260091CBDD /* DCTObjectStoreCloudEncoder.m in Sources */ = {isa = PBXBuildFile; fileRef = 244775121A1260260091CBDD /* DCTObjectStoreCloudEncoder.m */; };
+		244775131A1260260091CBDD /* DCTCloudObjectStoreEncoder.h in Headers */ = {isa = PBXBuildFile; fileRef = 244775111A1260260091CBDD /* DCTCloudObjectStoreEncoder.h */; };
+		244775141A1260260091CBDD /* DCTCloudObjectStoreEncoder.m in Sources */ = {isa = PBXBuildFile; fileRef = 244775121A1260260091CBDD /* DCTCloudObjectStoreEncoder.m */; };
+		244775151A1260260091CBDD /* DCTCloudObjectStoreEncoder.m in Sources */ = {isa = PBXBuildFile; fileRef = 244775121A1260260091CBDD /* DCTCloudObjectStoreEncoder.m */; };
 		24501D171883DF9600FED266 /* DCTObjectStore.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 24501D161883DF9600FED266 /* DCTObjectStore.h */; };
 		24501D191883DF9600FED266 /* DCTObjectStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 24501D181883DF9600FED266 /* DCTObjectStore.m */; };
 		2464AB3B1A29207100F72B41 /* DCTObjectStoreAttributes.m in Sources */ = {isa = PBXBuildFile; fileRef = 2464AB3A1A29207100F72B41 /* DCTObjectStoreAttributes.m */; };
@@ -104,8 +104,8 @@
 /* Begin PBXFileReference section */
 		242BEEFC19A8F53B0063F2F2 /* DCTObjectStore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = DCTObjectStore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		242BEF1219A8F55F0063F2F2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		244775111A1260260091CBDD /* DCTObjectStoreCloudEncoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCTObjectStoreCloudEncoder.h; sourceTree = "<group>"; };
-		244775121A1260260091CBDD /* DCTObjectStoreCloudEncoder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = DCTObjectStoreCloudEncoder.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		244775111A1260260091CBDD /* DCTCloudObjectStoreEncoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCTCloudObjectStoreEncoder.h; sourceTree = "<group>"; };
+		244775121A1260260091CBDD /* DCTCloudObjectStoreEncoder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = DCTCloudObjectStoreEncoder.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		244DE8D019A9235100A91DC7 /* Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
 		244DE8D119A9235100A91DC7 /* iOS Application.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "iOS Application.xcconfig"; sourceTree = "<group>"; };
 		244DE8D219A9235100A91DC7 /* iOS Bundle.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "iOS Bundle.xcconfig"; sourceTree = "<group>"; };
@@ -302,8 +302,8 @@
 				2464AB681A2A7B1B00F72B41 /* DCTCloudObjectStore.h */,
 				2464AB691A2A7B1B00F72B41 /* DCTCloudObjectStore.m */,
 				2464AB6F1A2A8AE800F72B41 /* DCTCloudObjectStoreDelegate.h */,
-				244775111A1260260091CBDD /* DCTObjectStoreCloudEncoder.h */,
-				244775121A1260260091CBDD /* DCTObjectStoreCloudEncoder.m */,
+				244775111A1260260091CBDD /* DCTCloudObjectStoreEncoder.h */,
+				244775121A1260260091CBDD /* DCTCloudObjectStoreEncoder.m */,
 				24D52A691A2B5DB900FDA615 /* DCTCloudObjectStoreDecoder.h */,
 				24D52A6A1A2B5DB900FDA615 /* DCTCloudObjectStoreDecoder.m */,
 			);
@@ -337,7 +337,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				24D52A7B1A2C5FF500FDA615 /* DCTChangeObjectStore.h in Headers */,
-				244775131A1260260091CBDD /* DCTObjectStoreCloudEncoder.h in Headers */,
+				244775131A1260260091CBDD /* DCTCloudObjectStoreEncoder.h in Headers */,
 				24D52A661A2B59BF00FDA615 /* DCTObjectStoreCoding.h in Headers */,
 				24D52A611A2B4A4D00FDA615 /* DCTObjectStoreChange.h in Headers */,
 				2464AB701A2A8AE800F72B41 /* DCTCloudObjectStoreDelegate.h in Headers */,
@@ -513,7 +513,7 @@
 				24D52A6D1A2B5DB900FDA615 /* DCTCloudObjectStoreDecoder.m in Sources */,
 				24D52A631A2B4A4D00FDA615 /* DCTObjectStoreChange.m in Sources */,
 				2464AB3D1A2922B800F72B41 /* DCTObjectStoreAttributes.m in Sources */,
-				244775151A1260260091CBDD /* DCTObjectStoreCloudEncoder.m in Sources */,
+				244775151A1260260091CBDD /* DCTCloudObjectStoreEncoder.m in Sources */,
 				2464AB671A2A34D700F72B41 /* DCTObjectStoreIdentifier.m in Sources */,
 				2464AB6C1A2A7B1B00F72B41 /* DCTCloudObjectStore.m in Sources */,
 				24D52A7D1A2C5FF500FDA615 /* DCTChangeObjectStore.m in Sources */,
@@ -529,7 +529,7 @@
 				24501D191883DF9600FED266 /* DCTObjectStore.m in Sources */,
 				24D52A6C1A2B5DB900FDA615 /* DCTCloudObjectStoreDecoder.m in Sources */,
 				24D52A621A2B4A4D00FDA615 /* DCTObjectStoreChange.m in Sources */,
-				244775141A1260260091CBDD /* DCTObjectStoreCloudEncoder.m in Sources */,
+				244775141A1260260091CBDD /* DCTCloudObjectStoreEncoder.m in Sources */,
 				2464AB3B1A29207100F72B41 /* DCTObjectStoreAttributes.m in Sources */,
 				2464AB661A2A34D700F72B41 /* DCTObjectStoreIdentifier.m in Sources */,
 				2464AB6B1A2A7B1B00F72B41 /* DCTCloudObjectStore.m in Sources */,
