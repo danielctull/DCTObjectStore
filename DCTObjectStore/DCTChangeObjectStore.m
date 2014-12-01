@@ -20,7 +20,16 @@
 - (instancetype)initWithURL:(NSURL *)URL {
 	self = [self init];
 	if (!self) return nil;
+
 	_URL = [URL copy];
+	_changesDictionary = [NSMutableDictionary new];
+	_diskStore = [[DCTDiskObjectStore alloc] initWithURL:URL];
+
+	NSSet *changes = _diskStore.objects;
+	for (DCTObjectStoreChange *change in changes) {
+		_changesDictionary[change.identifier] = change;
+	}
+
 	return self;
 }
 
