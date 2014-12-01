@@ -8,19 +8,12 @@
 
 @import CloudKit;
 #import "DCTCloudObjectStore.h"
+#import "DCTCloudObjectStoreDelegate.h"
 #import "DCTChangeObjectStore.h"
 #import "DCTObjectStoreChange.h"
-
-
-
-#import "DCTCloudObjectStoreDelegate.h"
-#import "DCTDiskObjectStore.h"
-#import "DCTObjectStoreIdentifier.h"
-
 #import "DCTCloudObjectStoreDecoder.h"
 #import "DCTObjectStoreCloudEncoder.h"
 
-static NSString *const DCTCloudObjectStoreType = @"DCTCloudObjectStoreType";
 static NSString *const DCTCloudObjectStoreChanges = @"Changes";
 static NSString *const DCTCloudObjectStoreServerChangeToken = @"ServerChangeToken";
 static NSString *const DCTCloudObjectStoreRecordZone = @"RecordZone";
