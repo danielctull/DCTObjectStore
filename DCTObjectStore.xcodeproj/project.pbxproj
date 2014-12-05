@@ -10,11 +10,7 @@
 		242BEF7F19A8FBB00063F2F2 /* DCTObjectStore.h in Headers */ = {isa = PBXBuildFile; fileRef = 24501D161883DF9600FED266 /* DCTObjectStore.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		242BEF8019A8FBD00063F2F2 /* DCTObjectStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 24501D181883DF9600FED266 /* DCTObjectStore.m */; };
 		244775131A1260260091CBDD /* DCTCloudObjectStoreEncoder.h in Headers */ = {isa = PBXBuildFile; fileRef = 244775111A1260260091CBDD /* DCTCloudObjectStoreEncoder.h */; };
-		244775141A1260260091CBDD /* DCTCloudObjectStoreEncoder.m in Sources */ = {isa = PBXBuildFile; fileRef = 244775121A1260260091CBDD /* DCTCloudObjectStoreEncoder.m */; };
 		244775151A1260260091CBDD /* DCTCloudObjectStoreEncoder.m in Sources */ = {isa = PBXBuildFile; fileRef = 244775121A1260260091CBDD /* DCTCloudObjectStoreEncoder.m */; };
-		24501D171883DF9600FED266 /* DCTObjectStore.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 24501D161883DF9600FED266 /* DCTObjectStore.h */; };
-		24501D191883DF9600FED266 /* DCTObjectStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 24501D181883DF9600FED266 /* DCTObjectStore.m */; };
-		2464AB3B1A29207100F72B41 /* DCTObjectStoreAttributes.m in Sources */ = {isa = PBXBuildFile; fileRef = 2464AB3A1A29207100F72B41 /* DCTObjectStoreAttributes.m */; };
 		2464AB3C1A2922B200F72B41 /* DCTObjectStoreAttributes.h in Headers */ = {isa = PBXBuildFile; fileRef = 2464AB391A29207100F72B41 /* DCTObjectStoreAttributes.h */; };
 		2464AB3D1A2922B800F72B41 /* DCTObjectStoreAttributes.m in Sources */ = {isa = PBXBuildFile; fileRef = 2464AB3A1A29207100F72B41 /* DCTObjectStoreAttributes.m */; };
 		2464AB4B1A2931D800F72B41 /* DCTObjectStoreTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2464AB4A1A2931D800F72B41 /* DCTObjectStoreTests.m */; };
@@ -24,18 +20,14 @@
 		2464AB5B1A29C79900F72B41 /* DCTObjectStoreQueryPredicateTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2464AB5A1A29C79900F72B41 /* DCTObjectStoreQueryPredicateTests.m */; };
 		2464AB5D1A29C8BA00F72B41 /* DCTObjectStoreQuerySortDescriptorTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2464AB5C1A29C8BA00F72B41 /* DCTObjectStoreQuerySortDescriptorTests.m */; };
 		2464AB601A2A32C100F72B41 /* DCTDiskObjectStore.h in Headers */ = {isa = PBXBuildFile; fileRef = 2464AB5E1A2A32C100F72B41 /* DCTDiskObjectStore.h */; };
-		2464AB611A2A32C100F72B41 /* DCTDiskObjectStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 2464AB5F1A2A32C100F72B41 /* DCTDiskObjectStore.m */; };
 		2464AB621A2A32C100F72B41 /* DCTDiskObjectStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 2464AB5F1A2A32C100F72B41 /* DCTDiskObjectStore.m */; };
 		2464AB651A2A34D700F72B41 /* DCTObjectStoreIdentifier.h in Headers */ = {isa = PBXBuildFile; fileRef = 2464AB631A2A34D700F72B41 /* DCTObjectStoreIdentifier.h */; };
-		2464AB661A2A34D700F72B41 /* DCTObjectStoreIdentifier.m in Sources */ = {isa = PBXBuildFile; fileRef = 2464AB641A2A34D700F72B41 /* DCTObjectStoreIdentifier.m */; };
 		2464AB671A2A34D700F72B41 /* DCTObjectStoreIdentifier.m in Sources */ = {isa = PBXBuildFile; fileRef = 2464AB641A2A34D700F72B41 /* DCTObjectStoreIdentifier.m */; };
 		2464AB6A1A2A7B1B00F72B41 /* DCTCloudObjectStore.h in Headers */ = {isa = PBXBuildFile; fileRef = 2464AB681A2A7B1B00F72B41 /* DCTCloudObjectStore.h */; };
-		2464AB6B1A2A7B1B00F72B41 /* DCTCloudObjectStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 2464AB691A2A7B1B00F72B41 /* DCTCloudObjectStore.m */; };
 		2464AB6C1A2A7B1B00F72B41 /* DCTCloudObjectStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 2464AB691A2A7B1B00F72B41 /* DCTCloudObjectStore.m */; };
 		2464AB6E1A2A7E6000F72B41 /* DCTDiskObjectStoreTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2464AB6D1A2A7E6000F72B41 /* DCTDiskObjectStoreTests.m */; };
 		2464AB701A2A8AE800F72B41 /* DCTCloudObjectStoreDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 2464AB6F1A2A8AE800F72B41 /* DCTCloudObjectStoreDelegate.h */; };
 		246E61511A2CF33700F01AB4 /* DCTObjectStoreReachability.h in Headers */ = {isa = PBXBuildFile; fileRef = 246E614F1A2CF33700F01AB4 /* DCTObjectStoreReachability.h */; };
-		246E61521A2CF33700F01AB4 /* DCTObjectStoreReachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 246E61501A2CF33700F01AB4 /* DCTObjectStoreReachability.m */; };
 		246E61531A2CF33700F01AB4 /* DCTObjectStoreReachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 246E61501A2CF33700F01AB4 /* DCTObjectStoreReachability.m */; };
 		24D52A261A28E98C00FDA615 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 24D52A251A28E98C00FDA615 /* main.m */; };
 		24D52A291A28E98C00FDA615 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 24D52A281A28E98C00FDA615 /* AppDelegate.m */; };
@@ -46,20 +38,16 @@
 		24D52A471A28EB1C00FDA615 /* DCTObjectStore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 242BEEFC19A8F53B0063F2F2 /* DCTObjectStore.framework */; };
 		24D52A481A28EB1C00FDA615 /* DCTObjectStore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 242BEEFC19A8F53B0063F2F2 /* DCTObjectStore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		24D52A531A28EEB800FDA615 /* DCTObjectStoreQuery.h in Headers */ = {isa = PBXBuildFile; fileRef = 24D52A511A28EEB800FDA615 /* DCTObjectStoreQuery.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		24D52A541A28EEB800FDA615 /* DCTObjectStoreQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = 24D52A521A28EEB800FDA615 /* DCTObjectStoreQuery.m */; };
 		24D52A551A28EEB800FDA615 /* DCTObjectStoreQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = 24D52A521A28EEB800FDA615 /* DCTObjectStoreQuery.m */; };
 		24D52A5B1A28F36900FDA615 /* Event.m in Sources */ = {isa = PBXBuildFile; fileRef = 24D52A5A1A28F36900FDA615 /* Event.m */; };
 		24D52A5D1A28FBC400FDA615 /* DCTObjectStoreQueryDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 24D52A5C1A28FAE300FDA615 /* DCTObjectStoreQueryDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		24D52A611A2B4A4D00FDA615 /* DCTObjectStoreChange.h in Headers */ = {isa = PBXBuildFile; fileRef = 24D52A5F1A2B4A4D00FDA615 /* DCTObjectStoreChange.h */; };
-		24D52A621A2B4A4D00FDA615 /* DCTObjectStoreChange.m in Sources */ = {isa = PBXBuildFile; fileRef = 24D52A601A2B4A4D00FDA615 /* DCTObjectStoreChange.m */; };
 		24D52A631A2B4A4D00FDA615 /* DCTObjectStoreChange.m in Sources */ = {isa = PBXBuildFile; fileRef = 24D52A601A2B4A4D00FDA615 /* DCTObjectStoreChange.m */; };
 		24D52A661A2B59BF00FDA615 /* DCTObjectStoreCoding.h in Headers */ = {isa = PBXBuildFile; fileRef = 24D52A641A2B59BF00FDA615 /* DCTObjectStoreCoding.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		24D52A6B1A2B5DB900FDA615 /* DCTCloudObjectStoreDecoder.h in Headers */ = {isa = PBXBuildFile; fileRef = 24D52A691A2B5DB900FDA615 /* DCTCloudObjectStoreDecoder.h */; };
-		24D52A6C1A2B5DB900FDA615 /* DCTCloudObjectStoreDecoder.m in Sources */ = {isa = PBXBuildFile; fileRef = 24D52A6A1A2B5DB900FDA615 /* DCTCloudObjectStoreDecoder.m */; };
 		24D52A6D1A2B5DB900FDA615 /* DCTCloudObjectStoreDecoder.m in Sources */ = {isa = PBXBuildFile; fileRef = 24D52A6A1A2B5DB900FDA615 /* DCTCloudObjectStoreDecoder.m */; };
 		24D52A731A2BBBA700FDA615 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24D52A721A2BBBA700FDA615 /* CloudKit.framework */; };
 		24D52A811A2C9D5500FDA615 /* CKRecordID+DCTObjectStoreCoding.h in Headers */ = {isa = PBXBuildFile; fileRef = 24D52A7F1A2C9D5500FDA615 /* CKRecordID+DCTObjectStoreCoding.h */; };
-		24D52A821A2C9D5500FDA615 /* CKRecordID+DCTObjectStoreCoding.m in Sources */ = {isa = PBXBuildFile; fileRef = 24D52A801A2C9D5500FDA615 /* CKRecordID+DCTObjectStoreCoding.m */; };
 		24D52A831A2C9D5500FDA615 /* CKRecordID+DCTObjectStoreCoding.m in Sources */ = {isa = PBXBuildFile; fileRef = 24D52A801A2C9D5500FDA615 /* CKRecordID+DCTObjectStoreCoding.m */; };
 /* End PBXBuildFile section */
 
@@ -81,16 +69,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		24501D0C1883DF9600FED266 /* CopyFiles */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "include/$(PRODUCT_NAME)";
-			dstSubfolderSpec = 16;
-			files = (
-				24501D171883DF9600FED266 /* DCTObjectStore.h in CopyFiles */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		24D52A4B1A28EB1D00FDA615 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -118,7 +96,6 @@
 		244DE8D619A9235100A91DC7 /* OS X Framework.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "OS X Framework.xcconfig"; sourceTree = "<group>"; };
 		244DE8D719A9235100A91DC7 /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
 		244DE8D819A9235100A91DC7 /* Shared.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Shared.xcconfig; sourceTree = "<group>"; };
-		24501D0E1883DF9600FED266 /* libDCTObjectStore.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libDCTObjectStore.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		24501D161883DF9600FED266 /* DCTObjectStore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = DCTObjectStore.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		24501D181883DF9600FED266 /* DCTObjectStore.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = DCTObjectStore.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		2464AB391A29207100F72B41 /* DCTObjectStoreAttributes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCTObjectStoreAttributes.h; sourceTree = "<group>"; };
@@ -167,13 +144,6 @@
 
 /* Begin PBXFrameworksBuildPhase section */
 		242BEEF819A8F53B0063F2F2 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		24501D0B1883DF9600FED266 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -231,7 +201,6 @@
 		24501D0F1883DF9600FED266 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				24501D0E1883DF9600FED266 /* libDCTObjectStore.a */,
 				242BEEFC19A8F53B0063F2F2 /* DCTObjectStore.framework */,
 				24D52A211A28E98C00FDA615 /* DCTObjectStore.app */,
 				2464AB461A2931D800F72B41 /* DCTObjectStore Tests.xctest */,
@@ -373,23 +342,6 @@
 			productReference = 242BEEFC19A8F53B0063F2F2 /* DCTObjectStore.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		24501D0D1883DF9600FED266 /* DCTObjectStore */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 24501D311883DF9600FED266 /* Build configuration list for PBXNativeTarget "DCTObjectStore" */;
-			buildPhases = (
-				24501D0A1883DF9600FED266 /* Sources */,
-				24501D0B1883DF9600FED266 /* Frameworks */,
-				24501D0C1883DF9600FED266 /* CopyFiles */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = DCTObjectStore;
-			productName = DCTObjectStore;
-			productReference = 24501D0E1883DF9600FED266 /* libDCTObjectStore.a */;
-			productType = "com.apple.product-type.library.static";
-		};
 		2464AB451A2931D800F72B41 /* DCTObjectStore Tests */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2464AB4F1A2931D800F72B41 /* Build configuration list for PBXNativeTarget "DCTObjectStore Tests" */;
@@ -468,7 +420,6 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				24501D0D1883DF9600FED266 /* DCTObjectStore */,
 				242BEEFB19A8F53B0063F2F2 /* DCTObjectStore iOS */,
 				24D52A201A28E98C00FDA615 /* DCTObjectStore Demo */,
 				2464AB451A2931D800F72B41 /* DCTObjectStore Tests */,
@@ -519,24 +470,6 @@
 				246E61531A2CF33700F01AB4 /* DCTObjectStoreReachability.m in Sources */,
 				2464AB6C1A2A7B1B00F72B41 /* DCTCloudObjectStore.m in Sources */,
 				2464AB621A2A32C100F72B41 /* DCTDiskObjectStore.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		24501D0A1883DF9600FED266 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				24D52A541A28EEB800FDA615 /* DCTObjectStoreQuery.m in Sources */,
-				24501D191883DF9600FED266 /* DCTObjectStore.m in Sources */,
-				24D52A6C1A2B5DB900FDA615 /* DCTCloudObjectStoreDecoder.m in Sources */,
-				24D52A621A2B4A4D00FDA615 /* DCTObjectStoreChange.m in Sources */,
-				244775141A1260260091CBDD /* DCTCloudObjectStoreEncoder.m in Sources */,
-				24D52A821A2C9D5500FDA615 /* CKRecordID+DCTObjectStoreCoding.m in Sources */,
-				2464AB3B1A29207100F72B41 /* DCTObjectStoreAttributes.m in Sources */,
-				2464AB661A2A34D700F72B41 /* DCTObjectStoreIdentifier.m in Sources */,
-				246E61521A2CF33700F01AB4 /* DCTObjectStoreReachability.m in Sources */,
-				2464AB6B1A2A7B1B00F72B41 /* DCTCloudObjectStore.m in Sources */,
-				2464AB611A2A32C100F72B41 /* DCTDiskObjectStore.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -636,20 +569,6 @@
 			};
 			name = Release;
 		};
-		24501D321883DF9600FED266 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 244DE8D419A9235100A91DC7 /* iOS Static Library.xcconfig */;
-			buildSettings = {
-			};
-			name = Debug;
-		};
-		24501D331883DF9600FED266 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 244DE8D419A9235100A91DC7 /* iOS Static Library.xcconfig */;
-			buildSettings = {
-			};
-			name = Release;
-		};
 		2464AB501A2931D800F72B41 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 244DE8D519A9235100A91DC7 /* iOS Tests.xcconfig */;
@@ -705,15 +624,6 @@
 			buildConfigurations = (
 				24501D2F1883DF9600FED266 /* Debug */,
 				24501D301883DF9600FED266 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		24501D311883DF9600FED266 /* Build configuration list for PBXNativeTarget "DCTObjectStore" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				24501D321883DF9600FED266 /* Debug */,
-				24501D331883DF9600FED266 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
