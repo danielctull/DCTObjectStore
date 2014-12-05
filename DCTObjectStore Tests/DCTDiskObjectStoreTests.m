@@ -8,6 +8,7 @@
 
 @import XCTest;
 #import "DCTDiskObjectStore.h"
+#import "DCTObjectStoreIdentifier.h"
 #import "Event.h"
 
 @interface DCTDiskObjectStoreTests : XCTestCase
@@ -18,7 +19,9 @@
 
 - (void)setUp {
     [super setUp];
-	self.diskStore = [[DCTDiskObjectStore alloc] initWithStoreIdentifier:[[NSUUID UUID] UUIDString] groupIdentifier:nil];
+	NSURL *URL = [[[NSFileManager new] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
+	URL = [URL URLByAppendingPathComponent:[[NSUUID UUID] UUIDString]];
+	self.diskStore = [[DCTDiskObjectStore alloc] initWithURL:URL];
 }
 
 - (void)tearDown {
@@ -26,18 +29,24 @@
     [super tearDown];
 }
 
+- (void)testUnidentifiedObject {
+	Event *event = [Event new];
+	XCTAssertThrows([self.diskStore saveObject:event], @"Should throw an exception because there's no associated identifier.");
+}
+
 - (void)testInsertion {
 	Event *event = [Event new];
+	[DCTObjectStoreIdentifier setIdentifier:[[NSUUID UUID] UUIDString] forObject:event];
 	[self.diskStore saveObject:event];
 	NSSet *objects = self.diskStore.objects;
 	XCTAssertEqual(objects.count, (NSUInteger)1, @"Should contain one object.");
 	Event *event2 = objects.anyObject;
-	XCTAssertNotEqualObjects(event, event2, @"Should be a different instances.");
-	XCTAssert([event isEqualToEvent:event2], @"Should be equivalent events.");
+	XCTAssertEqualObjects(event, event2, @"Should be the same instance.");
 }
 
 - (void)testDeletion {
 	Event *event = [Event new];
+	[DCTObjectStoreIdentifier setIdentifier:[[NSUUID UUID] UUIDString] forObject:event];
 	[self.diskStore saveObject:event];
 	[self.diskStore deleteObject:event];
 	XCTAssertEqual(self.diskStore.objects.count, (NSUInteger)0, @"Shouldn't contain any objects.");
