@@ -15,7 +15,7 @@ static NSString *const DCTObjectStoreQueryPredicateTestsNotString = @"B";
 
 @interface DCTObjectStoreQueryPredicateTests : XCTestCase
 @property (nonatomic) DCTObjectStore *store;
-@property (nonatomic) DCTObjectStoreQuery *controller;
+@property (nonatomic) DCTObjectStoreQuery *query;
 @end
 
 @implementation DCTObjectStoreQueryPredicateTests
@@ -25,11 +25,11 @@ static NSString *const DCTObjectStoreQueryPredicateTestsNotString = @"B";
 	self.store = [DCTObjectStore objectStoreWithName:[[NSUUID UUID] UUIDString]];
 	NSArray *sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:EventAttributes.name ascending:YES]];
 	NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %@", EventAttributes.name, DCTObjectStoreQueryPredicateTestsString];
-	self.controller = [[DCTObjectStoreQuery alloc] initWithObjectStore:self.store predciate:predicate sortDescriptors:sortDescriptors];
+	self.query = [[DCTObjectStoreQuery alloc] initWithObjectStore:self.store predciate:predicate sortDescriptors:sortDescriptors];
 }
 
 - (void)tearDown {
-	self.controller = nil;
+	self.query = nil;
 	[self.store destroy];
 	[super tearDown];
 }
@@ -38,15 +38,15 @@ static NSString *const DCTObjectStoreQueryPredicateTestsNotString = @"B";
 	Event *event = [Event new];
 	event.name = DCTObjectStoreQueryPredicateTestsString;
 	[self.store saveObject:event];
-	XCTAssertEqual(self.controller.objects.count, (NSUInteger)1, @"Object count should be 1.");
-	XCTAssertEqualObjects([self.controller.objects firstObject], event, @"Object should be the event.");
+	XCTAssertEqual(self.query.objects.count, (NSUInteger)1, @"Object count should be 1.");
+	XCTAssertEqualObjects([self.query.objects firstObject], event, @"Object should be the event.");
 }
 
 - (void)testNotInsertion {
 	Event *event = [Event new];
 	event.name = DCTObjectStoreQueryPredicateTestsNotString;
 	[self.store saveObject:event];
-	XCTAssertEqual(self.controller.objects.count, (NSUInteger)0, @"Object count should be 0.");
+	XCTAssertEqual(self.query.objects.count, (NSUInteger)0, @"Object count should be 0.");
 }
 
 @end

@@ -61,23 +61,23 @@
 
 #pragma mark - DCTObjectStoreQueryDelegate
 
-- (void)objectStoreController:(DCTObjectStoreQuery *)controller didInsertObject:(id)object atIndex:(NSUInteger)index {
+- (void)objectStoreQuery:(DCTObjectStoreQuery *)query didInsertObject:(id)object atIndex:(NSUInteger)index {
 	NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:0];
 	[self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
 }
 
-- (void)objectStoreController:(DCTObjectStoreQuery *)controller didMoveObject:(id)object fromIndex:(NSUInteger)fromIndex toIndex:(NSUInteger)toIndex {
+- (void)objectStoreQuery:(DCTObjectStoreQuery *)query didMoveObject:(id)object fromIndex:(NSUInteger)fromIndex toIndex:(NSUInteger)toIndex {
 	NSIndexPath *fromIndexPath = [NSIndexPath indexPathForRow:fromIndex inSection:0];
 	NSIndexPath *toIndexPath = [NSIndexPath indexPathForRow:toIndex inSection:0];
 	[self.tableView moveRowAtIndexPath:fromIndexPath toIndexPath:toIndexPath];
 }
 
-- (void)objectStoreController:(DCTObjectStoreQuery *)controller didRemoveObject:(id)object fromIndex:(NSUInteger)index {
+- (void)objectStoreQuery:(DCTObjectStoreQuery *)query didRemoveObject:(id)object fromIndex:(NSUInteger)index {
 	NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:0];
 	[self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
 }
 
-- (void)objectStoreController:(DCTObjectStoreQuery *)controller didUpdateObject:(id)object atIndex:(NSUInteger)index {
+- (void)objectStoreQuery:(DCTObjectStoreQuery *)query didUpdateObject:(id)object atIndex:(NSUInteger)index {
 	NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:0];
 	[self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
 }

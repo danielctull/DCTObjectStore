@@ -26,7 +26,7 @@
 	return [self.internalEvents copy];
 }
 
-- (void)objectStoreController:(DCTObjectStoreQuery *)query didInsertObject:(id)object atIndex:(NSUInteger)index {
+- (void)objectStoreQuery:(DCTObjectStoreQuery *)query didInsertObject:(id)object atIndex:(NSUInteger)index {
 	DCTTestObjectStoreQueryDelegateEvent *event = [[DCTTestObjectStoreQueryDelegateEvent alloc] initWithObjectStoreQuery:query
 																												  object:object
 																													type:DCTTestObjectStoreQueryDelegateEventTypeInsert
@@ -35,7 +35,7 @@
 	[self.internalEvents addObject:event];
 }
 
-- (void)objectStoreController:(DCTObjectStoreQuery *)query didRemoveObject:(id)object fromIndex:(NSUInteger)index {
+- (void)objectStoreQuery:(DCTObjectStoreQuery *)query didRemoveObject:(id)object fromIndex:(NSUInteger)index {
 	DCTTestObjectStoreQueryDelegateEvent *event = [[DCTTestObjectStoreQueryDelegateEvent alloc] initWithObjectStoreQuery:query
 																												  object:object
 																													type:DCTTestObjectStoreQueryDelegateEventTypeRemove
@@ -44,7 +44,7 @@
 	[self.internalEvents addObject:event];
 }
 
-- (void)objectStoreController:(DCTObjectStoreQuery *)query didMoveObject:(id)object fromIndex:(NSUInteger)fromIndex toIndex:(NSUInteger)toIndex {
+- (void)objectStoreQuery:(DCTObjectStoreQuery *)query didMoveObject:(id)object fromIndex:(NSUInteger)fromIndex toIndex:(NSUInteger)toIndex {
 	DCTTestObjectStoreQueryDelegateEvent *event = [[DCTTestObjectStoreQueryDelegateEvent alloc] initWithObjectStoreQuery:query
 																												  object:object
 																													type:DCTTestObjectStoreQueryDelegateEventTypeMove
@@ -53,7 +53,7 @@
 	[self.internalEvents addObject:event];
 }
 
-- (void)objectStoreController:(DCTObjectStoreQuery *)query didUpdateObject:(id)object atIndex:(NSUInteger)index {
+- (void)objectStoreQuery:(DCTObjectStoreQuery *)query didUpdateObject:(id)object atIndex:(NSUInteger)index {
 	DCTTestObjectStoreQueryDelegateEvent *event = [[DCTTestObjectStoreQueryDelegateEvent alloc] initWithObjectStoreQuery:query
 																												  object:object
 																													type:DCTTestObjectStoreQueryDelegateEventTypeUpdate

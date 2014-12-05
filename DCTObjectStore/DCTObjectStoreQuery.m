@@ -114,22 +114,22 @@ const struct DCTObjectStoreQueryAttributes DCTObjectStoreQueryAttributes = {
 	NSMutableArray *array = [self mutableArrayValueForKey:@"objects"];
 	[array insertObject:object atIndex:index];
 
-	[self.delegate objectStoreController:self didInsertObject:object atIndex:index];
+	[self.delegate objectStoreQuery:self didInsertObject:object atIndex:index];
 }
 
 - (void)removeObject:(id)object fromIndex:(NSUInteger)index {
 	NSMutableArray *array = [self mutableArrayValueForKey:@"objects"];
 	[array removeObject:object];
 
-	[self.delegate objectStoreController:self didRemoveObject:object fromIndex:index];
+	[self.delegate objectStoreQuery:self didRemoveObject:object fromIndex:index];
 }
 
 - (void)moveObject:(id)object fromIndex:(NSUInteger)fromIndex toIndex:(NSUInteger)toIndex {
-	[self.delegate objectStoreController:self didMoveObject:object fromIndex:fromIndex toIndex:toIndex];
+	[self.delegate objectStoreQuery:self didMoveObject:object fromIndex:fromIndex toIndex:toIndex];
 }
 
 - (void)updateObject:(id)object atIndex:(NSUInteger)index {
-	[self.delegate objectStoreController:self didUpdateObject:object atIndex:index];
+	[self.delegate objectStoreQuery:self didUpdateObject:object atIndex:index];
 }
 
 #pragma mark - Helper methods
