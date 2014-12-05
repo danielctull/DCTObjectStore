@@ -133,9 +133,31 @@
 	return self;
 }
 
+#pragma mark - Key Value Coding
+
++ (BOOL)automaticallyNotifiesObserversForKey:(NSString *)key {
+
+	if ([key isEqualToString:DCTObjectStoreAttributes.objects]) {
+		return NO;
+	}
+
+	return [super automaticallyNotifiesObserversForKey:key];
+}
+
 - (void)updateObject:(id<DCTObjectStoreCoding>)object {
 
 	if ([self.objects containsObject:object]) {
+
+		NSSet *objects = self.objects;
+
+		id fake = [NSObject new];
+		NSMutableSet *fakeObjects = [NSMutableSet setWithSet:self.objects];
+		[fakeObjects removeObject:object];
+		[fakeObjects addObject:fake];
+		self.objects = fakeObjects;
+		[self willChangeValueForKey:DCTObjectStoreAttributes.objects withSetMutation:NSKeyValueSetSetMutation usingObjects:[NSSet setWithObject:object]];
+		self.objects = objects;
+		[self didChangeValueForKey:DCTObjectStoreAttributes.objects withSetMutation:NSKeyValueSetSetMutation usingObjects:[NSSet setWithObject:object]];
 		return;
 	}
 
@@ -143,13 +165,17 @@
 }
 
 - (void)insertObject:(id<DCTObjectStoreCoding>)object {
+	[self willChangeValueForKey:DCTObjectStoreAttributes.objects withSetMutation:NSKeyValueUnionSetMutation usingObjects:[NSSet setWithObject:object]];
 	NSMutableSet *set = [self mutableSetValueForKey:DCTObjectStoreAttributes.objects];
 	[set addObject:object];
+	[self didChangeValueForKey:DCTObjectStoreAttributes.objects withSetMutation:NSKeyValueUnionSetMutation usingObjects:[NSSet setWithObject:object]];
 }
 
 - (void)removeObject:(id<DCTObjectStoreCoding>)object {
+	[self willChangeValueForKey:DCTObjectStoreAttributes.objects withSetMutation:NSKeyValueMinusSetMutation usingObjects:[NSSet setWithObject:object]];
 	NSMutableSet *set = [self mutableSetValueForKey:DCTObjectStoreAttributes.objects];
 	[set removeObject:object];
+	[self didChangeValueForKey:DCTObjectStoreAttributes.objects withSetMutation:NSKeyValueMinusSetMutation usingObjects:[NSSet setWithObject:object]];
 }
 
 #pragma mark - DCTCloudObjectStoreDelegate

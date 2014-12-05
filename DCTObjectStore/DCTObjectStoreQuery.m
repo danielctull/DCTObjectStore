@@ -55,23 +55,31 @@ const struct DCTObjectStoreQueryAttributes DCTObjectStoreQueryAttributes = {
 
 	NSArray *newObjects = change[NSKeyValueChangeNewKey];
 	NSArray *oldObjects = change[NSKeyValueChangeOldKey];
+	NSKeyValueChange kind = [change[NSKeyValueChangeKindKey] unsignedIntegerValue];
 
-	for (id object in newObjects) {
+	switch (kind) {
 
-		if ([oldObjects containsObject:object]) {
-			[self moveObject:object];
-
-		} else if ([self.objects containsObject:object]) {
-			[self updateObject:object];
-
-		} else {
-			[self insertObject:object];
+		case NSKeyValueChangeInsertion: {
+			for (id object in newObjects) {
+				[self insertObject:object];
+			}
+			break;
 		}
-	}
 
-	for (id object in oldObjects) {
-		if ([self.objects containsObject:object]) {
-			[self removeObject:object];
+		case NSKeyValueChangeRemoval: {
+			for (id object in oldObjects) {
+				if ([self.objects containsObject:object]) {
+					[self removeObject:object];
+				}
+			}
+			break;
+		}
+
+		case NSKeyValueChangeSetting:
+		case NSKeyValueChangeReplacement: {
+			for (id object in newObjects) {
+				[self updateObject:object];
+			}
 		}
 	}
 }
@@ -98,6 +106,13 @@ const struct DCTObjectStoreQueryAttributes DCTObjectStoreQueryAttributes = {
 
 - (void)updateObject:(id)object {
 	NSUInteger index = [self.objects indexOfObject:object];
+	NSUInteger newIndex = [self newIndexOfObject:object];
+
+	if (index != newIndex) {
+		[self moveObject:object fromIndex:index toIndex:newIndex];
+		return;
+	}
+
 	[self updateObject:object atIndex:index];
 }
 
@@ -111,14 +126,14 @@ const struct DCTObjectStoreQueryAttributes DCTObjectStoreQueryAttributes = {
 #pragma mark - Raw
 
 - (void)insertObject:(id)object atIndex:(NSUInteger)index {
-	NSMutableArray *array = [self mutableArrayValueForKey:@"objects"];
+	NSMutableArray *array = [self mutableArrayValueForKey:DCTObjectStoreQueryAttributes.objects];
 	[array insertObject:object atIndex:index];
 
 	[self.delegate objectStoreQuery:self didInsertObject:object atIndex:index];
 }
 
 - (void)removeObject:(id)object fromIndex:(NSUInteger)index {
-	NSMutableArray *array = [self mutableArrayValueForKey:@"objects"];
+	NSMutableArray *array = [self mutableArrayValueForKey:DCTObjectStoreQueryAttributes.objects];
 	[array removeObject:object];
 
 	[self.delegate objectStoreQuery:self didRemoveObject:object fromIndex:index];

@@ -8,6 +8,13 @@
 
 #import "DCTTestObjectStoreQueryDelegateEvent.h"
 
+static NSString *const DCTTestObjectStoreQueryDelegateEventTypeString[] = {
+	@"Insert",
+	@"Remove",
+	@"Move",
+	@"Update"
+};
+
 @implementation DCTTestObjectStoreQueryDelegateEvent
 
 - (instancetype)initWithObjectStoreQuery:(DCTObjectStoreQuery *)query
@@ -24,6 +31,15 @@
 	_fromIndex = fromIndex;
 	_toIndex = toIndex;
 	return self;
+}
+
+- (NSString *)description {
+	return [NSString stringWithFormat:@"<%@: %p; type = %@; from = %@; to = %@>",
+			NSStringFromClass([self class]),
+			self,
+			DCTTestObjectStoreQueryDelegateEventTypeString[self.type],
+			@(self.fromIndex),
+			@(self.toIndex)];
 }
 
 @end
