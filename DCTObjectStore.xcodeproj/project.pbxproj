@@ -29,6 +29,9 @@
 		2464AB701A2A8AE800F72B41 /* DCTCloudObjectStoreDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 2464AB6F1A2A8AE800F72B41 /* DCTCloudObjectStoreDelegate.h */; };
 		246E61511A2CF33700F01AB4 /* DCTObjectStoreReachability.h in Headers */ = {isa = PBXBuildFile; fileRef = 246E614F1A2CF33700F01AB4 /* DCTObjectStoreReachability.h */; };
 		246E61531A2CF33700F01AB4 /* DCTObjectStoreReachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 246E61501A2CF33700F01AB4 /* DCTObjectStoreReachability.m */; };
+		24A06C031A3220AB0047AC36 /* DCTObjectStoreQueryDelegateTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 24A06C021A3220AB0047AC36 /* DCTObjectStoreQueryDelegateTests.m */; };
+		24A06C061A3221170047AC36 /* DCTTestObjectStoreQueryDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 24A06C051A3221170047AC36 /* DCTTestObjectStoreQueryDelegate.m */; };
+		24A06C091A3222B40047AC36 /* DCTTestObjectStoreQueryDelegateEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 24A06C081A3222B40047AC36 /* DCTTestObjectStoreQueryDelegateEvent.m */; };
 		24D52A261A28E98C00FDA615 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 24D52A251A28E98C00FDA615 /* main.m */; };
 		24D52A291A28E98C00FDA615 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 24D52A281A28E98C00FDA615 /* AppDelegate.m */; };
 		24D52A2C1A28E98C00FDA615 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24D52A2B1A28E98C00FDA615 /* ViewController.m */; };
@@ -116,6 +119,11 @@
 		2464AB6F1A2A8AE800F72B41 /* DCTCloudObjectStoreDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = DCTCloudObjectStoreDelegate.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		246E614F1A2CF33700F01AB4 /* DCTObjectStoreReachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCTObjectStoreReachability.h; sourceTree = "<group>"; };
 		246E61501A2CF33700F01AB4 /* DCTObjectStoreReachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCTObjectStoreReachability.m; sourceTree = "<group>"; };
+		24A06C021A3220AB0047AC36 /* DCTObjectStoreQueryDelegateTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCTObjectStoreQueryDelegateTests.m; sourceTree = "<group>"; };
+		24A06C041A3221170047AC36 /* DCTTestObjectStoreQueryDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCTTestObjectStoreQueryDelegate.h; sourceTree = "<group>"; };
+		24A06C051A3221170047AC36 /* DCTTestObjectStoreQueryDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCTTestObjectStoreQueryDelegate.m; sourceTree = "<group>"; };
+		24A06C071A3222B40047AC36 /* DCTTestObjectStoreQueryDelegateEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCTTestObjectStoreQueryDelegateEvent.h; sourceTree = "<group>"; };
+		24A06C081A3222B40047AC36 /* DCTTestObjectStoreQueryDelegateEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCTTestObjectStoreQueryDelegateEvent.m; sourceTree = "<group>"; };
 		24D52A211A28E98C00FDA615 /* DCTObjectStore.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DCTObjectStore.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		24D52A241A28E98C00FDA615 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		24D52A251A28E98C00FDA615 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -230,8 +238,13 @@
 				2464AB581A29C42D00F72B41 /* DCTObjectStoreQueryTests.m */,
 				2464AB5A1A29C79900F72B41 /* DCTObjectStoreQueryPredicateTests.m */,
 				2464AB5C1A29C8BA00F72B41 /* DCTObjectStoreQuerySortDescriptorTests.m */,
+				24A06C021A3220AB0047AC36 /* DCTObjectStoreQueryDelegateTests.m */,
 				2464AB6D1A2A7E6000F72B41 /* DCTDiskObjectStoreTests.m */,
 				2464AB491A2931D800F72B41 /* Info.plist */,
+				24A06C041A3221170047AC36 /* DCTTestObjectStoreQueryDelegate.h */,
+				24A06C051A3221170047AC36 /* DCTTestObjectStoreQueryDelegate.m */,
+				24A06C071A3222B40047AC36 /* DCTTestObjectStoreQueryDelegateEvent.h */,
+				24A06C081A3222B40047AC36 /* DCTTestObjectStoreQueryDelegateEvent.m */,
 			);
 			path = "DCTObjectStore Tests";
 			sourceTree = "<group>";
@@ -480,6 +493,9 @@
 				2464AB591A29C42D00F72B41 /* DCTObjectStoreQueryTests.m in Sources */,
 				2464AB521A29334D00F72B41 /* Event.m in Sources */,
 				2464AB5B1A29C79900F72B41 /* DCTObjectStoreQueryPredicateTests.m in Sources */,
+				24A06C091A3222B40047AC36 /* DCTTestObjectStoreQueryDelegateEvent.m in Sources */,
+				24A06C031A3220AB0047AC36 /* DCTObjectStoreQueryDelegateTests.m in Sources */,
+				24A06C061A3221170047AC36 /* DCTTestObjectStoreQueryDelegate.m in Sources */,
 				2464AB6E1A2A7E6000F72B41 /* DCTDiskObjectStoreTests.m in Sources */,
 				2464AB5D1A29C8BA00F72B41 /* DCTObjectStoreQuerySortDescriptorTests.m in Sources */,
 				2464AB4B1A2931D800F72B41 /* DCTObjectStoreTests.m in Sources */,
