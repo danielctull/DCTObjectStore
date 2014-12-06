@@ -122,6 +122,9 @@ const struct DCTObjectStoreQueryAttributes DCTObjectStoreQueryAttributes = {
 }
 
 - (void)moveObject:(id)object fromIndex:(NSUInteger)fromIndex toIndex:(NSUInteger)toIndex {
+	NSMutableArray *array = [self mutableArrayValueForKey:DCTObjectStoreQueryAttributes.objects];
+	[array sortUsingDescriptors:self.sortDescriptors];
+
 	[self.delegate objectStoreQuery:self didMoveObject:object fromIndex:fromIndex toIndex:toIndex];
 }
 
