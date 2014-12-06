@@ -14,6 +14,11 @@
 #import "DCTCloudObjectStore.h"
 #import "DCTCloudObjectStoreDelegate.h"
 
+NSString *const DCTObjectStoreDidInsertObjectNotification = @"DCTObjectStoreDidInsertObjectNotification";
+NSString *const DCTObjectStoreDidChangeObjectNotification = @"DCTObjectStoreDidChangeObjectNotification";
+NSString *const DCTObjectStoreDidRemoveObjectNotification = @"DCTObjectStoreDidRemoveObjectNotification";
+NSString *const DCTObjectStoreObjectKey = @"DCTObjectStoreObjectKey";
+
 @interface DCTObjectStore () <DCTCloudObjectStoreDelegate>
 @property (nonatomic, readonly) DCTDiskObjectStore *diskStore;
 @property (nonatomic, readonly) DCTCloudObjectStore *cloudStore;
@@ -133,31 +138,15 @@
 	return self;
 }
 
-#pragma mark - Key Value Coding
-
-+ (BOOL)automaticallyNotifiesObserversForKey:(NSString *)key {
-
-	if ([key isEqualToString:DCTObjectStoreAttributes.objects]) {
-		return NO;
-	}
-
-	return [super automaticallyNotifiesObserversForKey:key];
+- (void)postNotificationWithName:(NSString *)name forObject:(id)object {
+	NSDictionary *info = @{ DCTObjectStoreObjectKey : object };
+	[[NSNotificationCenter defaultCenter] postNotificationName:name object:self userInfo:info];
 }
 
 - (void)updateObject:(id<DCTObjectStoreCoding>)object {
 
 	if ([self.objects containsObject:object]) {
-
-		NSSet *objects = self.objects;
-
-		id fake = [NSObject new];
-		NSMutableSet *fakeObjects = [NSMutableSet setWithSet:self.objects];
-		[fakeObjects removeObject:object];
-		[fakeObjects addObject:fake];
-		self.objects = fakeObjects;
-		[self willChangeValueForKey:DCTObjectStoreAttributes.objects withSetMutation:NSKeyValueSetSetMutation usingObjects:[NSSet setWithObject:object]];
-		self.objects = objects;
-		[self didChangeValueForKey:DCTObjectStoreAttributes.objects withSetMutation:NSKeyValueSetSetMutation usingObjects:[NSSet setWithObject:object]];
+		[self postNotificationWithName:DCTObjectStoreDidChangeObjectNotification forObject:object];
 		return;
 	}
 
@@ -165,17 +154,15 @@
 }
 
 - (void)insertObject:(id<DCTObjectStoreCoding>)object {
-	[self willChangeValueForKey:DCTObjectStoreAttributes.objects withSetMutation:NSKeyValueUnionSetMutation usingObjects:[NSSet setWithObject:object]];
 	NSMutableSet *set = [self mutableSetValueForKey:DCTObjectStoreAttributes.objects];
 	[set addObject:object];
-	[self didChangeValueForKey:DCTObjectStoreAttributes.objects withSetMutation:NSKeyValueUnionSetMutation usingObjects:[NSSet setWithObject:object]];
+	[self postNotificationWithName:DCTObjectStoreDidInsertObjectNotification forObject:object];
 }
 
 - (void)removeObject:(id<DCTObjectStoreCoding>)object {
-	[self willChangeValueForKey:DCTObjectStoreAttributes.objects withSetMutation:NSKeyValueMinusSetMutation usingObjects:[NSSet setWithObject:object]];
 	NSMutableSet *set = [self mutableSetValueForKey:DCTObjectStoreAttributes.objects];
 	[set removeObject:object];
-	[self didChangeValueForKey:DCTObjectStoreAttributes.objects withSetMutation:NSKeyValueMinusSetMutation usingObjects:[NSSet setWithObject:object]];
+	[self postNotificationWithName:DCTObjectStoreDidRemoveObjectNotification forObject:object];
 }
 
 #pragma mark - DCTCloudObjectStoreDelegate

@@ -17,6 +17,11 @@ FOUNDATION_EXPORT const unsigned char DCTObjectStoreVersionString[];
 #import "DCTObjectStoreQueryDelegate.h"
 
 
+extern NSString *const DCTObjectStoreDidInsertObjectNotification;
+extern NSString *const DCTObjectStoreDidChangeObjectNotification;
+extern NSString *const DCTObjectStoreDidRemoveObjectNotification;
+extern NSString *const DCTObjectStoreObjectKey;
+
 
 @interface DCTObjectStore : NSObject
 

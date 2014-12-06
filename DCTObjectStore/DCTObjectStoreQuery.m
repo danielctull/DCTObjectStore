@@ -10,8 +10,6 @@
 #import "DCTObjectStore.h"
 #import "DCTObjectStoreAttributes.h"
 
-void *DCTObjectStoreQueryContext = &DCTObjectStoreQueryContext;
-
 const struct DCTObjectStoreQueryAttributes DCTObjectStoreQueryAttributes = {
 	.predicate = @"predicate",
 	.sortDescriptors = @"sortDescriptors",
@@ -25,7 +23,10 @@ const struct DCTObjectStoreQueryAttributes DCTObjectStoreQueryAttributes = {
 @implementation DCTObjectStoreQuery
 
 - (void)dealloc {
-	[self.objectStore removeObserver:self forKeyPath:DCTObjectStoreAttributes.objects context:DCTObjectStoreQueryContext];
+	NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
+	[notificationCenter removeObserver:self name:DCTObjectStoreDidInsertObjectNotification object:_objectStore];
+	[notificationCenter removeObserver:self name:DCTObjectStoreDidChangeObjectNotification object:_objectStore];
+	[notificationCenter removeObserver:self name:DCTObjectStoreDidRemoveObjectNotification object:_objectStore];
 }
 
 - (instancetype)initWithObjectStore:(DCTObjectStore *)objectStore predciate:(NSPredicate *)predicate sortDescriptors:(NSArray *)sortDescriptors {
@@ -40,48 +41,29 @@ const struct DCTObjectStoreQueryAttributes DCTObjectStoreQueryAttributes = {
 	_sortDescriptors = [sortDescriptors copy];
 	_objects = [self objectsFromObjectStore:objectStore predciate:predicate sortDescriptors:sortDescriptors];
 
-	NSKeyValueObservingOptions options = (NSKeyValueObservingOptions)(NSKeyValueObservingOptionOld | NSKeyValueObservingOptionNew);
-	[objectStore addObserver:self forKeyPath:DCTObjectStoreAttributes.objects options:options context:DCTObjectStoreQueryContext];
+	NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
+	[notificationCenter addObserver:self selector:@selector(objectStoreDidInsertObjectNotification:) name:DCTObjectStoreDidInsertObjectNotification object:objectStore];
+	[notificationCenter addObserver:self selector:@selector(objectStoreDidChangeObjectNotification:) name:DCTObjectStoreDidChangeObjectNotification object:objectStore];
+	[notificationCenter addObserver:self selector:@selector(objectStoreDidRemoveObjectNotification:) name:DCTObjectStoreDidRemoveObjectNotification object:objectStore];
 
 	return self;
 }
 
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
+#pragma mark - Notifications
 
-	if (context != DCTObjectStoreQueryContext) {
-		[super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
-		return;
-	}
+- (void)objectStoreDidInsertObjectNotification:(NSNotification *)notification {
+	id object = notification.userInfo[DCTObjectStoreObjectKey];
+	[self insertObject:object];
+}
 
-	NSArray *newObjects = change[NSKeyValueChangeNewKey];
-	NSArray *oldObjects = change[NSKeyValueChangeOldKey];
-	NSKeyValueChange kind = [change[NSKeyValueChangeKindKey] unsignedIntegerValue];
+- (void)objectStoreDidChangeObjectNotification:(NSNotification *)notification {
+	id object = notification.userInfo[DCTObjectStoreObjectKey];
+	[self updateObject:object];
+}
 
-	switch (kind) {
-
-		case NSKeyValueChangeInsertion: {
-			for (id object in newObjects) {
-				[self insertObject:object];
-			}
-			break;
-		}
-
-		case NSKeyValueChangeRemoval: {
-			for (id object in oldObjects) {
-				if ([self.objects containsObject:object]) {
-					[self removeObject:object];
-				}
-			}
-			break;
-		}
-
-		case NSKeyValueChangeSetting:
-		case NSKeyValueChangeReplacement: {
-			for (id object in newObjects) {
-				[self updateObject:object];
-			}
-		}
-	}
+- (void)objectStoreDidRemoveObjectNotification:(NSNotification *)notification {
+	id object = notification.userInfo[DCTObjectStoreObjectKey];
+	[self removeObject:object];
 }
 
 - (void)insertObject:(id)object {
