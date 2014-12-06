@@ -1,23 +1,41 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Ndj-Or-pJr">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Ndj-Or-pJr">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
     </dependencies>
     <scenes>
         <!--DCTObjectStore-->
         <scene sceneID="1dQ-78-hCk">
             <objects>
                 <tableViewController id="bbd-i4-730" customClass="ViewController" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="LPe-iP-wPh">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="onDrag" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="LPe-iP-wPh">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" id="bMl-4C-zxg">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="cell" rowHeight="44" id="bMl-4C-zxg" customClass="EventCell">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="bMl-4C-zxg" id="agH-Mi-UV5">
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="tAL-vp-sqB">
+                                            <rect key="frame" x="15" y="13" width="570" height="17"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <textInputTraits key="textInputTraits"/>
+                                            <connections>
+                                                <outlet property="delegate" destination="bMl-4C-zxg" id="w21-Ds-gga"/>
+                                            </connections>
+                                        </textField>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="tAL-vp-sqB" firstAttribute="leading" secondItem="agH-Mi-UV5" secondAttribute="leading" constant="15" id="Ipx-Ax-boO"/>
+                                        <constraint firstAttribute="centerY" secondItem="tAL-vp-sqB" secondAttribute="centerY" id="fVh-HR-zBO"/>
+                                        <constraint firstAttribute="trailing" secondItem="tAL-vp-sqB" secondAttribute="trailing" constant="15" id="zvz-bV-WXY"/>
+                                    </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="textField" destination="tAL-vp-sqB" id="vh1-0x-2RW"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -26,16 +44,24 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="DCTObjectStore" id="xam-eh-eM9">
+                        <barButtonItem key="leftBarButtonItem" style="done" systemItem="done" id="JhL-Nv-dd8">
+                            <connections>
+                                <action selector="dismissKeyboard:" destination="bbd-i4-730" id="s7L-Lx-Zga"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="koa-0x-nSE">
                             <connections>
                                 <action selector="addEvent:" destination="bbd-i4-730" id="3HS-MT-N3z"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="doneEditingButton" destination="JhL-Nv-dd8" id="QuF-RR-Wkq"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AOj-c5-4e8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="850" y="107"/>
+            <point key="canvasLocation" x="850" y="106"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="ddR-hq-gZ9">

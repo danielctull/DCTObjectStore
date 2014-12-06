@@ -8,23 +8,48 @@
 
 @import DCTObjectStore;
 #import "ViewController.h"
+#import "EventCell.h"
 #import "Event.h"
 
 @interface ViewController () <DCTObjectStoreQueryDelegate>
+@property (nonatomic) IBOutlet UIBarButtonItem *doneEditingButton;
 @property (nonatomic) DCTObjectStore *objectStore;
 @property (nonatomic) DCTObjectStoreQuery *objectStoreQuery;
 @end
 
 @implementation ViewController
 
+- (void)dealloc {
+	NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
+	[notificationCenter removeObserver:self name:UIKeyboardWillHideNotification object:nil];
+	[notificationCenter removeObserver:self name:UIKeyboardWillShowNotification object:nil];
+}
+
 - (void)viewDidLoad {
 	[super viewDidLoad];
 
 	self.objectStore = [DCTObjectStore objectStoreWithName:@"Test" groupIdentifier:nil cloudIdentifier:@"iCloud.uk.co.danieltull.DCTObjectStore"];
 
-	NSArray *sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:EventAttributes.date ascending:YES]];
+	NSArray *sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:EventAttributes.name ascending:YES]];
 	self.objectStoreQuery = [[DCTObjectStoreQuery alloc] initWithObjectStore:self.objectStore predciate:nil sortDescriptors:sortDescriptors];
 	self.objectStoreQuery.delegate = self;
+
+	NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
+	[notificationCenter addObserver:self selector:@selector(keyboardWillHideNotification:) name:UIKeyboardWillHideNotification object:nil];
+	[notificationCenter addObserver:self selector:@selector(keyboardWillShowNotification:) name:UIKeyboardWillShowNotification object:nil];
+	self.navigationItem.leftBarButtonItem = nil;
+}
+
+- (void)keyboardWillHideNotification:(NSNotification *)notification {
+	[self.navigationItem setLeftBarButtonItem:nil animated:YES];
+}
+
+- (void)keyboardWillShowNotification:(NSNotification *)notification {
+	[self.navigationItem setLeftBarButtonItem:self.doneEditingButton animated:YES];
+}
+
+- (IBAction)dismissKeyboard:(id)sender {
+	[self.view endEditing:YES];
 }
 
 - (IBAction)addEvent:(id)sender {
@@ -41,9 +66,16 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-	UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
+	EventCell *cell = (EventCell *)[tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
 	Event *event = self.objectStoreQuery.objects[indexPath.row];
-	cell.textLabel.text = event.date.description;
+	DCTObjectStore *objectStore = self.objectStore;
+	cell.name = event.name;
+	cell.nameDidChangeBlock = ^(NSString *name) {
+		if (![event.name isEqualToString:name]) {
+			event.name = name;
+			[objectStore saveObject:event];
+		}
+	};
 	return cell;
 }
 

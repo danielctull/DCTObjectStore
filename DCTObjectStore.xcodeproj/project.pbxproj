@@ -32,6 +32,7 @@
 		24A06C031A3220AB0047AC36 /* DCTObjectStoreQueryDelegateTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 24A06C021A3220AB0047AC36 /* DCTObjectStoreQueryDelegateTests.m */; };
 		24A06C061A3221170047AC36 /* DCTTestObjectStoreQueryDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 24A06C051A3221170047AC36 /* DCTTestObjectStoreQueryDelegate.m */; };
 		24A06C091A3222B40047AC36 /* DCTTestObjectStoreQueryDelegateEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 24A06C081A3222B40047AC36 /* DCTTestObjectStoreQueryDelegateEvent.m */; };
+		24A06C0C1A3380F10047AC36 /* EventCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 24A06C0B1A3380F10047AC36 /* EventCell.m */; };
 		24D52A261A28E98C00FDA615 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 24D52A251A28E98C00FDA615 /* main.m */; };
 		24D52A291A28E98C00FDA615 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 24D52A281A28E98C00FDA615 /* AppDelegate.m */; };
 		24D52A2C1A28E98C00FDA615 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24D52A2B1A28E98C00FDA615 /* ViewController.m */; };
@@ -124,6 +125,8 @@
 		24A06C051A3221170047AC36 /* DCTTestObjectStoreQueryDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCTTestObjectStoreQueryDelegate.m; sourceTree = "<group>"; };
 		24A06C071A3222B40047AC36 /* DCTTestObjectStoreQueryDelegateEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCTTestObjectStoreQueryDelegateEvent.h; sourceTree = "<group>"; };
 		24A06C081A3222B40047AC36 /* DCTTestObjectStoreQueryDelegateEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCTTestObjectStoreQueryDelegateEvent.m; sourceTree = "<group>"; };
+		24A06C0A1A3380F10047AC36 /* EventCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventCell.h; sourceTree = "<group>"; };
+		24A06C0B1A3380F10047AC36 /* EventCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventCell.m; sourceTree = "<group>"; };
 		24D52A211A28E98C00FDA615 /* DCTObjectStore.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DCTObjectStore.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		24D52A241A28E98C00FDA615 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		24D52A251A28E98C00FDA615 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -256,6 +259,8 @@
 				24D52A281A28E98C00FDA615 /* AppDelegate.m */,
 				24D52A2A1A28E98C00FDA615 /* ViewController.h */,
 				24D52A2B1A28E98C00FDA615 /* ViewController.m */,
+				24A06C0A1A3380F10047AC36 /* EventCell.h */,
+				24A06C0B1A3380F10047AC36 /* EventCell.m */,
 				24D52A591A28F36900FDA615 /* Event.h */,
 				24D52A5A1A28F36900FDA615 /* Event.m */,
 				24D52A2D1A28E98C00FDA615 /* Main.storyboard */,
@@ -507,6 +512,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				24D52A5B1A28F36900FDA615 /* Event.m in Sources */,
+				24A06C0C1A3380F10047AC36 /* EventCell.m in Sources */,
 				24D52A2C1A28E98C00FDA615 /* ViewController.m in Sources */,
 				24D52A291A28E98C00FDA615 /* AppDelegate.m in Sources */,
 				24D52A261A28E98C00FDA615 /* main.m in Sources */,
