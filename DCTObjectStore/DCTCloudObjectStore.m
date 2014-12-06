@@ -92,7 +92,7 @@ static NSString *const DCTCloudObjectStoreRecordZone = @"RecordZone";
 	[self.database deleteRecordZoneWithID:self.recordZone.zoneID completionHandler:nil];
 }
 
-- (void)handleNotification:(CKRecordZoneNotification *)notification {
+- (void)handleNotification:(__unused CKRecordZoneNotification *)notification {
 	[self downloadChangesWithCompletion:nil];
 }
 

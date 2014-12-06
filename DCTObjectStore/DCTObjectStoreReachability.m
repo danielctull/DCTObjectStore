@@ -24,7 +24,7 @@ static BOOL DCTObjectStoreReachabilityIsReachable(SCNetworkReachabilityFlags fla
 	return (flags & kSCNetworkReachabilityFlagsReachable) && !(flags & kSCNetworkReachabilityFlagsConnectionRequired);
 }
 
-static void DCTObjectStoreReachabilityCallback(SCNetworkReachabilityRef reachabilityRef, SCNetworkReachabilityFlags flags, void* info) {
+static void DCTObjectStoreReachabilityCallback(__unused SCNetworkReachabilityRef reachabilityRef, SCNetworkReachabilityFlags flags, void* info) {
 
 	NSCAssert(info != NULL, @"info was NULL in ReachabilityCallback");
 
