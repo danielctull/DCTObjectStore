@@ -8,7 +8,6 @@
 
 @import ObjectiveC.runtime;
 #import "DCTObjectStoreIdentifier.h"
-#import "DCTObjectStore.h"
 
 static void* DCTObjectStoreObjectIdentifier = &DCTObjectStoreObjectIdentifier;
 

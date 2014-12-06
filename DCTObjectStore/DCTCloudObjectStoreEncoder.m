@@ -7,7 +7,6 @@
 //
 
 #import "DCTCloudObjectStoreEncoder.h"
-#import "DCTObjectStore.h"
 
 @implementation DCTCloudObjectStoreEncoder
 
