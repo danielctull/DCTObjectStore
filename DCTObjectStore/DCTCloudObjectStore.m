@@ -90,8 +90,15 @@ static NSString *const DCTCloudObjectStoreRecordZone = @"RecordZone";
 }
 
 - (void)destroy {
-	[self.database deleteSubscriptionWithID:self.subscription.subscriptionID completionHandler:nil];
-	[self.database deleteRecordZoneWithID:self.recordZone.zoneID completionHandler:nil];
+	[self.changeStore destroy];
+	[self.recordIDStore destroy];
+
+	NSError *error;
+	BOOL success = [[NSFileManager new] removeItemAtURL:self.URL error:&error];
+	if (!success) NSLog(@"%@:%@ %@", self, NSStringFromSelector(_cmd), error);
+
+	if (self.subscription) [self.database deleteSubscriptionWithID:self.subscription.subscriptionID completionHandler:nil];
+	if (self.recordZone) [self.database deleteRecordZoneWithID:self.recordZone.zoneID completionHandler:nil];
 }
 
 - (void)handleNotification:(__unused CKRecordZoneNotification *)notification {
