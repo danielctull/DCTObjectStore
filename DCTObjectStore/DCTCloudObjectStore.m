@@ -42,9 +42,10 @@ static NSString *const DCTCloudObjectStoreRecordZone = @"RecordZone";
 	[[NSNotificationCenter defaultCenter] removeObserver:self name:DCTObjectStoreReachabilityDidChangeNotification object:nil];
 }
 
-- (instancetype)initWithStoreIdentifier:(NSString *)storeIdentifier
-						cloudIdentifier:(NSString *)cloudIdentifier
-									URL:(NSURL *)URL {
+- (instancetype)initWithName:(NSString *)name
+			 storeIdentifier:(NSString *)storeIdentifier
+			 cloudIdentifier:(NSString *)cloudIdentifier
+						 URL:(NSURL *)URL {
 
 	NSParameterAssert(storeIdentifier);
 	NSParameterAssert(cloudIdentifier);
@@ -52,6 +53,7 @@ static NSString *const DCTCloudObjectStoreRecordZone = @"RecordZone";
 	self = [super init];
 	if (!self) return nil;
 
+	_name = [name copy];
 	_storeIdentifier = [storeIdentifier copy];
 	_cloudIdentifier = [cloudIdentifier copy];
 	_URL = [URL copy];
@@ -318,11 +320,10 @@ static NSString *const DCTCloudObjectStoreRecordZone = @"RecordZone";
 	}
 
 	__weak DCTCloudObjectStore *weakSelf = self;
-	NSString *storeIdentifier = self.storeIdentifier;
-	CKRecordZoneID *zoneID = [[CKRecordZoneID alloc] initWithZoneName:storeIdentifier ownerName:CKOwnerDefaultName];
+	CKRecordZoneID *zoneID = [[CKRecordZoneID alloc] initWithZoneName:self.name ownerName:CKOwnerDefaultName];
 	[self fetchZonesWithIDs:@[zoneID] completion:^(NSDictionary *zones, NSError *error) {
 
-		CKRecordZone *recordZone = zones[storeIdentifier];
+		CKRecordZone *recordZone = zones[zoneID];
 		if (recordZone) {
 			weakSelf.recordZone = recordZone;
 			return;

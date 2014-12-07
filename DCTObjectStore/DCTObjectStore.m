@@ -33,9 +33,13 @@ NSString *const DCTObjectStoreObjectKey = @"DCTObjectStoreObjectKey";
 		return;
 	}
 
-	NSString *storeIdentifier = notification.recordZoneID.zoneName;
-	DCTObjectStore *objectStore = self.objectStores[storeIdentifier];
-	[objectStore.cloudStore handleNotification:notification];
+	NSString *name = notification.recordZoneID.zoneName;
+	NSString *cloudIdentifier = notification.containerIdentifier;
+	for (DCTObjectStore *objectStore in self.objectStores.allValues) {
+		if ([objectStore.name isEqualToString:name] && [objectStore.cloudIdentifier isEqualToString:cloudIdentifier]) {
+			[objectStore.cloudStore handleNotification:notification];
+		}
+	}
 }
 
 + (NSMutableDictionary *)objectStores {
@@ -129,9 +133,10 @@ NSString *const DCTObjectStoreObjectKey = @"DCTObjectStoreObjectKey";
 
 	if (cloudIdentifier) {
 		NSURL *cloudStoreURL = [baseURL URLByAppendingPathComponent:NSStringFromClass([DCTCloudObjectStore class])];
-		_cloudStore = [[DCTCloudObjectStore alloc] initWithStoreIdentifier:storeIdentifier
-														   cloudIdentifier:cloudIdentifier
-																	   URL:cloudStoreURL];
+		_cloudStore = [[DCTCloudObjectStore alloc] initWithName:name
+												storeIdentifier:storeIdentifier
+												cloudIdentifier:cloudIdentifier
+															URL:cloudStoreURL];
 		_cloudStore.delegate = self;
 	}
 
