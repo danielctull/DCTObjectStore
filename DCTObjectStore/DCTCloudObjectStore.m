@@ -249,9 +249,12 @@ static NSString *const DCTCloudObjectStoreRecordZone = @"RecordZone";
 		return;
 	}
 
-	[self fetchRecordsWithIDs:@[recordID] completion:^(NSDictionary *records, NSError *error) {
-		CKRecord *record = records[recordName];
-		if (record) self.records[recordName] = record;
+	[self fetchRecordWithID:recordID completion:^(CKRecord *record, NSError *error) {
+
+		if (record) {
+			self.records[recordName] = record;
+		}
+
 		completion(record);
 	}];
 }
@@ -321,9 +324,8 @@ static NSString *const DCTCloudObjectStoreRecordZone = @"RecordZone";
 
 	__weak DCTCloudObjectStore *weakSelf = self;
 	CKRecordZoneID *zoneID = [[CKRecordZoneID alloc] initWithZoneName:self.name ownerName:CKOwnerDefaultName];
-	[self fetchZonesWithIDs:@[zoneID] completion:^(NSDictionary *zones, NSError *error) {
+	[self fetchRecordZoneWithID:zoneID completion:^(CKRecordZone *recordZone, NSError *error) {
 
-		CKRecordZone *recordZone = zones[zoneID];
 		if (recordZone) {
 			weakSelf.recordZone = recordZone;
 			return;
@@ -398,17 +400,23 @@ static NSString *const DCTCloudObjectStoreRecordZone = @"RecordZone";
 	[self.database addOperation:operation];
 }
 
-- (void)fetchRecordsWithIDs:(NSArray *)recordIDs completion:(void(^)(NSDictionary *records, NSError *error))completion {
-	CKFetchRecordsOperation *operation = [[CKFetchRecordsOperation alloc] initWithRecordIDs:recordIDs];
+- (void)fetchRecordWithID:(CKRecordID *)recordID completion:(void(^)(CKRecord *record, NSError *error))completion {
+	CKFetchRecordsOperation *operation = [[CKFetchRecordsOperation alloc] initWithRecordIDs:@[recordID]];
 	operation.queuePriority = NSOperationQueuePriorityHigh;
-	operation.fetchRecordsCompletionBlock = completion;
+	operation.fetchRecordsCompletionBlock = ^(NSDictionary *recordsByRecordID, NSError *error) {
+		CKRecord *record = recordsByRecordID[recordID];
+		completion(record, error);
+	};
 	[self.database addOperation:operation];
 }
 
-- (void)fetchZonesWithIDs:(NSArray *)zoneIDs completion:(void(^)(NSDictionary *zones, NSError *error))completion {
-	CKFetchRecordZonesOperation *operation = [[CKFetchRecordZonesOperation alloc] initWithRecordZoneIDs:zoneIDs];
+- (void)fetchRecordZoneWithID:(CKRecordZoneID *)recordZoneID completion:(void(^)(CKRecordZone *recordZone, NSError *error))completion {
+	CKFetchRecordZonesOperation *operation = [[CKFetchRecordZonesOperation alloc] initWithRecordZoneIDs:@[recordZoneID]];
 	operation.queuePriority = NSOperationQueuePriorityVeryHigh;
-	operation.fetchRecordZonesCompletionBlock = completion;
+	operation.fetchRecordZonesCompletionBlock = ^(NSDictionary *recordZonesByZoneID, NSError *error) {
+		CKRecordZone *recordZone = recordZonesByZoneID[recordZoneID];
+		completion(recordZone, error);
+	};
 	[self.database addOperation:operation];
 }
 
