@@ -129,6 +129,10 @@ const struct DCTObjectStoreQueryAttributes DCTObjectStoreQueryAttributes = {
 }
 
 - (void)updateObject:(id)object atIndex:(NSUInteger)index {
+	NSMutableArray *array = [self mutableArrayValueForKey:DCTObjectStoreQueryAttributes.objects];
+	[array removeObject:object];
+	[array insertObject:object atIndex:index];
+
 	[self.delegate objectStoreQuery:self didUpdateObject:object atIndex:index];
 }
 
