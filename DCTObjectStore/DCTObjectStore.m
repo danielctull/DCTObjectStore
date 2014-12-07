@@ -117,30 +117,45 @@ NSString *const DCTObjectStoreObjectKey = @"DCTObjectStoreObjectKey";
 	_groupIdentifier = [groupIdentifier copy];
 	_cloudIdentifier = [cloudIdentifier copy];
 
-	NSFileManager *fileManager = [NSFileManager defaultManager];
-	NSURL *baseURL;
-	if (self.groupIdentifier.length > 0) {
-		baseURL = [fileManager containerURLForSecurityApplicationGroupIdentifier:_groupIdentifier];
-	} else {
-		baseURL = [[fileManager URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
-	}
-	baseURL = [baseURL URLByAppendingPathComponent:NSStringFromClass([self class])];
-	baseURL = [baseURL URLByAppendingPathComponent:storeIdentifier];
+	NSURL *storeURL = [self URLWithBaseURL:self.documentsURL];
 
-	NSURL *diskStoreURL = [baseURL URLByAppendingPathComponent:NSStringFromClass([DCTDiskObjectStore class])];
+	NSURL *diskStoreURL = [storeURL URLByAppendingPathComponent:NSStringFromClass([DCTDiskObjectStore class])];
 	_diskStore = [[DCTDiskObjectStore alloc] initWithURL:diskStoreURL];
 	_objects = _diskStore.objects;
 
 	if (cloudIdentifier) {
-		NSURL *cloudStoreURL = [baseURL URLByAppendingPathComponent:NSStringFromClass([DCTCloudObjectStore class])];
+		NSURL *cacheURL = [self URLWithBaseURL:self.cachesURL];
+		NSURL *cloudStoreURL = [storeURL URLByAppendingPathComponent:NSStringFromClass([DCTCloudObjectStore class])];
+		NSURL *cloudCacheURL = [cacheURL URLByAppendingPathComponent:NSStringFromClass([DCTCloudObjectStore class])];
 		_cloudStore = [[DCTCloudObjectStore alloc] initWithName:name
 												storeIdentifier:storeIdentifier
 												cloudIdentifier:cloudIdentifier
-															URL:cloudStoreURL];
+															URL:cloudStoreURL
+													   cacheURL:cloudCacheURL];
 		_cloudStore.delegate = self;
 	}
 
 	return self;
+}
+
+- (NSURL *)cachesURL {
+	NSFileManager *fileManager = [NSFileManager defaultManager];
+	return [[fileManager URLsForDirectory:NSCachesDirectory inDomains:NSUserDomainMask] lastObject];
+}
+
+- (NSURL *)documentsURL {
+	NSFileManager *fileManager = [NSFileManager defaultManager];
+	if (self.groupIdentifier.length > 0) {
+		return [fileManager containerURLForSecurityApplicationGroupIdentifier:self.groupIdentifier];
+	} else {
+		return [[fileManager URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
+	}
+}
+
+- (NSURL *)URLWithBaseURL:(NSURL *)baseURL {
+	baseURL = [baseURL URLByAppendingPathComponent:NSStringFromClass([self class])];
+	baseURL = [baseURL URLByAppendingPathComponent:self.storeIdentifier];
+	return baseURL;
 }
 
 - (void)postNotificationWithName:(NSString *)name forObject:(id)object {

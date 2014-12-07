@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2406954E1A34970E005BB314 /* CKRecord+DCTObjectStoreCoding.h in Headers */ = {isa = PBXBuildFile; fileRef = 2406954C1A34970E005BB314 /* CKRecord+DCTObjectStoreCoding.h */; };
+		2406954F1A34970E005BB314 /* CKRecord+DCTObjectStoreCoding.m in Sources */ = {isa = PBXBuildFile; fileRef = 2406954D1A34970E005BB314 /* CKRecord+DCTObjectStoreCoding.m */; };
 		242BEF7F19A8FBB00063F2F2 /* DCTObjectStore.h in Headers */ = {isa = PBXBuildFile; fileRef = 24501D161883DF9600FED266 /* DCTObjectStore.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		242BEF8019A8FBD00063F2F2 /* DCTObjectStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 24501D181883DF9600FED266 /* DCTObjectStore.m */; };
 		244775131A1260260091CBDD /* DCTCloudObjectStoreEncoder.h in Headers */ = {isa = PBXBuildFile; fileRef = 244775111A1260260091CBDD /* DCTCloudObjectStoreEncoder.h */; };
@@ -87,6 +89,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		2406954C1A34970E005BB314 /* CKRecord+DCTObjectStoreCoding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CKRecord+DCTObjectStoreCoding.h"; sourceTree = "<group>"; };
+		2406954D1A34970E005BB314 /* CKRecord+DCTObjectStoreCoding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CKRecord+DCTObjectStoreCoding.m"; sourceTree = "<group>"; };
 		242BEEFC19A8F53B0063F2F2 /* DCTObjectStore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = DCTObjectStore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		242BEF1219A8F55F0063F2F2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		244775111A1260260091CBDD /* DCTCloudObjectStoreEncoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCTCloudObjectStoreEncoder.h; sourceTree = "<group>"; };
@@ -285,6 +289,8 @@
 				2464AB3A1A29207100F72B41 /* DCTObjectStoreAttributes.m */,
 				24D52A7F1A2C9D5500FDA615 /* CKRecordID+DCTObjectStoreCoding.h */,
 				24D52A801A2C9D5500FDA615 /* CKRecordID+DCTObjectStoreCoding.m */,
+				2406954C1A34970E005BB314 /* CKRecord+DCTObjectStoreCoding.h */,
+				2406954D1A34970E005BB314 /* CKRecord+DCTObjectStoreCoding.m */,
 			);
 			name = Private;
 			sourceTree = "<group>";
@@ -327,6 +333,7 @@
 				24D52A811A2C9D5500FDA615 /* CKRecordID+DCTObjectStoreCoding.h in Headers */,
 				24D52A611A2B4A4D00FDA615 /* DCTObjectStoreChange.h in Headers */,
 				2464AB701A2A8AE800F72B41 /* DCTCloudObjectStoreDelegate.h in Headers */,
+				2406954E1A34970E005BB314 /* CKRecord+DCTObjectStoreCoding.h in Headers */,
 				2464AB6A1A2A7B1B00F72B41 /* DCTCloudObjectStore.h in Headers */,
 				24D52A5D1A28FBC400FDA615 /* DCTObjectStoreQueryDelegate.h in Headers */,
 				2464AB651A2A34D700F72B41 /* DCTObjectStoreIdentifier.h in Headers */,
@@ -482,6 +489,7 @@
 				24D52A6D1A2B5DB900FDA615 /* DCTCloudObjectStoreDecoder.m in Sources */,
 				24D52A631A2B4A4D00FDA615 /* DCTObjectStoreChange.m in Sources */,
 				2464AB3D1A2922B800F72B41 /* DCTObjectStoreAttributes.m in Sources */,
+				2406954F1A34970E005BB314 /* CKRecord+DCTObjectStoreCoding.m in Sources */,
 				24D52A831A2C9D5500FDA615 /* CKRecordID+DCTObjectStoreCoding.m in Sources */,
 				244775151A1260260091CBDD /* DCTCloudObjectStoreEncoder.m in Sources */,
 				2464AB671A2A34D700F72B41 /* DCTObjectStoreIdentifier.m in Sources */,

@@ -16,12 +16,14 @@
 - (instancetype)initWithName:(NSString *)name
 			 storeIdentifier:(NSString *)storeIdentifier
 			 cloudIdentifier:(NSString *)cloudIdentifier
-						 URL:(NSURL *)URL;
+						 URL:(NSURL *)URL
+					cacheURL:(NSURL *)cacheURL;
 
 @property (nonatomic, readonly) NSString *name;
 @property (nonatomic, readonly) NSString *storeIdentifier;
 @property (nonatomic, readonly) NSString *cloudIdentifier;
 @property (nonatomic, readonly) NSURL *URL;
+@property (nonatomic, readonly) NSURL *cacheURL;
 
 @property (nonatomic, weak) id<DCTCloudObjectStoreDelegate> delegate;
 

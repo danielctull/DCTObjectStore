@@ -15,10 +15,12 @@
 #import "DCTCloudObjectStoreEncoder.h"
 #import "DCTObjectStoreIdentifier.h"
 #import "CKRecordID+DCTObjectStoreCoding.h"
+#import "CKRecord+DCTObjectStoreCoding.h"
 #import "DCTObjectStoreReachability.h"
 
 static NSString *const DCTCloudObjectStoreChanges = @"Changes";
 static NSString *const DCTCloudObjectStoreRecordIDs = @"RecordIDs";
+static NSString *const DCTCloudObjectStoreRecords = @"Records";
 static NSString *const DCTCloudObjectStoreServerChangeToken = @"ServerChangeToken";
 static NSString *const DCTCloudObjectStoreRecordZone = @"RecordZone";
 
@@ -28,10 +30,9 @@ static NSString *const DCTCloudObjectStoreRecordZone = @"RecordZone";
 @property (nonatomic) CKSubscription *subscription;
 @property (nonatomic) CKServerChangeToken *serverChangeToken;
 
-@property (nonatomic) NSMutableDictionary *records;
-
 @property (nonatomic) DCTDiskObjectStore *changeStore;
 @property (nonatomic) DCTDiskObjectStore *recordIDStore;
+@property (nonatomic) DCTDiskObjectStore *recordStore;
 @end
 
 @implementation DCTCloudObjectStore
@@ -45,7 +46,8 @@ static NSString *const DCTCloudObjectStoreRecordZone = @"RecordZone";
 - (instancetype)initWithName:(NSString *)name
 			 storeIdentifier:(NSString *)storeIdentifier
 			 cloudIdentifier:(NSString *)cloudIdentifier
-						 URL:(NSURL *)URL {
+						 URL:(NSURL *)URL
+					cacheURL:(NSURL *)cacheURL {
 
 	NSParameterAssert(storeIdentifier);
 	NSParameterAssert(cloudIdentifier);
@@ -57,6 +59,7 @@ static NSString *const DCTCloudObjectStoreRecordZone = @"RecordZone";
 	_storeIdentifier = [storeIdentifier copy];
 	_cloudIdentifier = [cloudIdentifier copy];
 	_URL = [URL copy];
+	_cacheURL = [URL copy];
 
 	NSURL *changesURL = [URL URLByAppendingPathComponent:DCTCloudObjectStoreChanges];
 	_changeStore = [[DCTDiskObjectStore alloc] initWithURL:changesURL];
@@ -64,9 +67,11 @@ static NSString *const DCTCloudObjectStoreRecordZone = @"RecordZone";
 	NSURL *recordIDsURL = [URL URLByAppendingPathComponent:DCTCloudObjectStoreRecordIDs];
 	_recordIDStore = [[DCTDiskObjectStore alloc] initWithURL:recordIDsURL];
 
+	NSURL *recordsURL = [cacheURL URLByAppendingPathComponent:DCTCloudObjectStoreRecords];
+	_recordStore = [[DCTDiskObjectStore alloc] initWithURL:recordsURL];
+
 	CKContainer *container = [CKContainer containerWithIdentifier:cloudIdentifier];
 	_database = container.privateCloudDatabase;
-	_records = [NSMutableDictionary new];
 
 	[self fetchRecordZone];
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reachabilityDidChangeNotification:) name:DCTObjectStoreReachabilityDidChangeNotification object:nil];
@@ -138,7 +143,8 @@ static NSString *const DCTCloudObjectStoreRecordZone = @"RecordZone";
 		[DCTObjectStoreIdentifier setIdentifier:identifier forObject:recordID];
 		[self.recordIDStore saveObject:recordID];
 
-		self.records[identifier] = record;
+		[DCTObjectStoreIdentifier setIdentifier:identifier forObject:record];
+		[self.recordStore saveObject:record];
 
 		// Not the most ideal way, I know
 		DCTObjectStoreChange *change = [self.changeStore objectForIdentifier:identifier];
@@ -245,7 +251,9 @@ static NSString *const DCTCloudObjectStoreRecordZone = @"RecordZone";
 					if (recordError.code == CKErrorServerRecordChanged) {
 						NSString *identifier = recordID.recordName;
 						CKRecord *serverRecord = recordError.userInfo[CKRecordChangedErrorServerRecordKey];
-						self.records[identifier] = serverRecord;
+
+						[DCTObjectStoreIdentifier setIdentifier:identifier forObject:serverRecord];
+						[self.recordStore saveObject:serverRecord];
 
 						// If the server change is more recent, ignore the change
 						DCTObjectStoreChange *change = workingChanges[identifier];
@@ -264,7 +272,7 @@ static NSString *const DCTCloudObjectStoreRecordZone = @"RecordZone";
 
 - (void)fetchRecordWithName:(NSString *)recordName competion:(void(^)(CKRecord *))completion {
 
-	CKRecord *record = self.records[recordName];
+	CKRecord *record = (CKRecord *)[self.recordStore objectForIdentifier:recordName];
 	if (record) {
 		completion(record);
 		return;
@@ -279,7 +287,8 @@ static NSString *const DCTCloudObjectStoreRecordZone = @"RecordZone";
 	[self fetchRecordWithID:recordID completion:^(CKRecord *record, NSError *error) {
 
 		if (record) {
-			self.records[recordName] = record;
+			[DCTObjectStoreIdentifier setIdentifier:recordName forObject:recordID];
+			[self.recordIDStore saveObject:recordID];
 		}
 
 		completion(record);
