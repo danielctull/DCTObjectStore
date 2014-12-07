@@ -174,22 +174,22 @@ NSString *const DCTObjectStoreObjectKey = @"DCTObjectStoreObjectKey";
 
 - (void)cloudObjectStore:(DCTCloudObjectStore *)cloudObjectStore didInsertObject:(id)object {
 	dispatch_async(dispatch_get_main_queue(), ^{
-		[self insertObject:object];
 		[self.diskStore saveObject:object];
+		[self insertObject:object];
 	});
 }
 
 - (void)cloudObjectStore:(DCTCloudObjectStore *)cloudObjectStore didRemoveObject:(id)object {
 	dispatch_async(dispatch_get_main_queue(), ^{
-		[self removeObject:object];
 		[self.diskStore deleteObject:object];
+		[self removeObject:object];
 	});
 }
 
 - (void)cloudObjectStore:(DCTCloudObjectStore *)cloudObjectStore didUpdateObject:(id)object {
 	dispatch_async(dispatch_get_main_queue(), ^{
-		[self updateObject:object];
 		[self.diskStore saveObject:object];
+		[self updateObject:object];
 	});
 }
 
