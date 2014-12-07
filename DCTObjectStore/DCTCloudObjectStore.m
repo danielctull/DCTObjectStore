@@ -231,10 +231,30 @@ static NSString *const DCTCloudObjectStoreRecordZone = @"RecordZone";
 	dispatch_group_notify(group, dispatch_get_main_queue(), ^{
 
 		[self saveRecords:recordsToSave deleteRecordIDs:recordIDsToDelete completion:^(NSArray *modifiedRecordIDs, NSError *operationError) {
-			for	(CKRecordID *recordID in modifiedRecordIDs) {
+
+			for (CKRecordID *recordID in modifiedRecordIDs) {
 				NSString *identifier = recordID.recordName;
 				DCTObjectStoreChange *change = workingChanges[identifier];
 				[self.changeStore deleteObject:change];
+			}
+
+			if ([operationError.domain isEqualToString:CKErrorDomain] && operationError.code == CKErrorPartialFailure) {
+				NSDictionary *errors = operationError.userInfo[CKPartialErrorsByItemIDKey];
+				[errors enumerateKeysAndObjectsUsingBlock:^(CKRecordID *recordID, NSError *recordError, BOOL *stop) {
+
+					if (recordError.code == CKErrorServerRecordChanged) {
+						NSString *identifier = recordID.recordName;
+						CKRecord *serverRecord = recordError.userInfo[CKRecordChangedErrorServerRecordKey];
+						self.records[identifier] = serverRecord;
+
+						// If the server change is more recent, ignore the change
+						DCTObjectStoreChange *change = workingChanges[identifier];
+						if ([change.date compare:serverRecord.modificationDate] == NSOrderedDescending) {
+							[self.changeStore deleteObject:change];
+						}
+					}
+				}];
+				[self uploadChanges];
 			}
 		}];
 	});
@@ -397,7 +417,6 @@ static NSString *const DCTCloudObjectStoreRecordZone = @"RecordZone";
 - (void)saveRecords:(NSArray *)records deleteRecordIDs:(NSArray *)recordIDs completion:(void(^)(NSArray *modifiedRecordIDs, NSError *operationError))completion {
 	CKModifyRecordsOperation *operation = [[CKModifyRecordsOperation alloc] initWithRecordsToSave:records recordIDsToDelete:recordIDs];
 	operation.queuePriority = NSOperationQueuePriorityHigh;
-	operation.savePolicy = CKRecordSaveAllKeys;
 	operation.modifyRecordsCompletionBlock = ^(NSArray *savedRecords, NSArray *deletedRecordIDs, NSError *error) {
 		NSArray *savedRecordIDs = [savedRecords valueForKey:@"recordID"];
 		NSArray *modifiedRecordIDs = [savedRecordIDs arrayByAddingObjectsFromArray:deletedRecordIDs];
