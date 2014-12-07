@@ -301,6 +301,10 @@ static NSString *const DCTCloudObjectStoreRecordZone = @"RecordZone";
 - (void)setRecordZone:(CKRecordZone *)recordZone {
 	_recordZone = recordZone;
 	[NSKeyedArchiver archiveRootObject:recordZone toFile:self.recordZoneURL.path];
+	[self saveSubscription];
+	[self downloadChangesWithCompletion:^{
+		[self uploadChanges];
+	}];
 }
 
 - (CKRecordZone *)recordZone {
@@ -333,12 +337,7 @@ static NSString *const DCTCloudObjectStoreRecordZone = @"RecordZone";
 
 		recordZone = [[CKRecordZone alloc] initWithZoneID:zoneID];
 		[self addRecordZone:recordZone completion:^(CKRecordZone *recordZone, NSError *operationError) {
-			DCTCloudObjectStore *strongSelf = weakSelf;
-			strongSelf.recordZone = recordZone;
-			[strongSelf saveSubscription];
-			[strongSelf downloadChangesWithCompletion:^{
-				[strongSelf uploadChanges];
-			}];
+			weakSelf.recordZone = recordZone;
 		}];
 	}];
 }
