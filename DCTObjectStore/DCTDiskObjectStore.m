@@ -7,7 +7,7 @@
 //
 
 #import "DCTDiskObjectStore.h"
-#import "DCTObjectStoreIdentifier.h"
+#import "DCTObjectStoreIdentifierInternal.h"
 
 @interface DCTDiskObjectStore ()
 @property (nonatomic) NSFileManager *fileManager;
@@ -34,7 +34,7 @@
 			NSData *data = [NSData dataWithContentsOfURL:URL];
 			NSString *identifier = [URL lastPathComponent];
 			id<DCTObjectStoreCoding> object = [NSKeyedUnarchiver unarchiveObjectWithData:data];
-			[DCTObjectStoreIdentifier setIdentifier:identifier forObject:object];
+			[DCTObjectStoreIdentifierInternal setIdentifier:identifier forObject:object];
 			_internalObjects[identifier] = object;
 		}
 		@catch (__unused NSException *exception) {}
@@ -45,7 +45,7 @@
 }
 
 - (void)saveObject:(id<DCTObjectStoreCoding>)object {
-	NSString *identifier = [DCTObjectStoreIdentifier identifierForObject:object];
+	NSString *identifier = [DCTObjectStoreIdentifierInternal identifierForObject:object];
 	NSParameterAssert(identifier);
 	NSURL *URL = [self.URL URLByAppendingPathComponent:identifier];
 	NSData *data = [NSKeyedArchiver archivedDataWithRootObject:object];
@@ -55,7 +55,7 @@
 
 - (void)deleteObject:(id<DCTObjectStoreCoding>)object {
 
-	NSString *identifier = [DCTObjectStoreIdentifier identifierForObject:object];
+	NSString *identifier = [DCTObjectStoreIdentifierInternal identifierForObject:object];
 	NSParameterAssert(identifier);
 
 	// If this particular instance is not in the store, ignore

@@ -7,7 +7,7 @@
 //
 
 #import "DCTObjectStoreChange.h"
-#import "DCTObjectStoreIdentifier.h"
+#import "DCTObjectStoreIdentifierInternal.h"
 
 const struct DCTObjectStoreChangeAttributes DCTObjectStoreChangeAttributes = {
 	.date = @"date",
@@ -28,7 +28,7 @@ static NSString *const DCTObjectStoreChangeTypeString[] = {
 	self = [super init];
 	if (!self) return nil;
 	_date = [NSDate new];
-	_identifier = [DCTObjectStoreIdentifier identifierForObject:object];
+	_identifier = [DCTObjectStoreIdentifierInternal identifierForObject:object];
 	_object = object;
 	_type = type;
 	return self;

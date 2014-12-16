@@ -7,11 +7,11 @@
 //
 
 @import ObjectiveC.runtime;
-#import "DCTObjectStoreIdentifier.h"
+#import "DCTObjectStoreIdentifierInternal.h"
 
 static void* DCTObjectStoreObjectIdentifier = &DCTObjectStoreObjectIdentifier;
 
-@implementation DCTObjectStoreIdentifier
+@implementation DCTObjectStoreIdentifierInternal
 
 + (NSString *)storeIdentifierWithName:(NSString *)name
 					  groupIdentifier:(NSString *)groupIdentifier

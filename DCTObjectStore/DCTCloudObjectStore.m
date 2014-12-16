@@ -13,7 +13,7 @@
 #import "DCTObjectStoreChange.h"
 #import "DCTCloudObjectStoreDecoder.h"
 #import "DCTCloudObjectStoreEncoder.h"
-#import "DCTObjectStoreIdentifier.h"
+#import "DCTObjectStoreIdentifierInternal.h"
 #import "CKRecordID+DCTObjectStoreCoding.h"
 #import "CKRecord+DCTObjectStoreCoding.h"
 #import "DCTObjectStoreReachability.h"
@@ -89,7 +89,7 @@ static NSString *const DCTCloudObjectStoreRecordZone = @"RecordZone";
 
 - (void)updateObject:(id<DCTObjectStoreCoding>)object changeType:(DCTObjectStoreChangeType)changeType {
 	DCTObjectStoreChange *change = [[DCTObjectStoreChange alloc] initWithObject:object type:changeType];
-	[DCTObjectStoreIdentifier setIdentifier:change.identifier forObject:change];
+	[DCTObjectStoreIdentifierInternal setIdentifier:change.identifier forObject:change];
 	[self.changeStore saveObject:change];
 	[self uploadChanges];
 }
@@ -130,7 +130,7 @@ static NSString *const DCTCloudObjectStoreRecordZone = @"RecordZone";
 	[self fetchRecordChangesWithDeletionHandler:^(CKRecordID *recordID) {
 
 		NSString *identifier = recordID.recordName;
-		[DCTObjectStoreIdentifier setIdentifier:identifier forObject:recordID];
+		[DCTObjectStoreIdentifierInternal setIdentifier:identifier forObject:recordID];
 		[self.recordIDStore deleteObject:recordID];
 		id<DCTObjectStoreCoding> object = [self.delegate cloudObjectStore:self objectWithIdentifier:identifier];
 		if (object) [self.delegate cloudObjectStore:self didRemoveObject:object];
@@ -140,10 +140,10 @@ static NSString *const DCTCloudObjectStoreRecordZone = @"RecordZone";
 		CKRecordID *recordID = record.recordID;
 		NSString *identifier = recordID.recordName;
 
-		[DCTObjectStoreIdentifier setIdentifier:identifier forObject:recordID];
+		[DCTObjectStoreIdentifierInternal setIdentifier:identifier forObject:recordID];
 		[self.recordIDStore saveObject:recordID];
 
-		[DCTObjectStoreIdentifier setIdentifier:identifier forObject:record];
+		[DCTObjectStoreIdentifierInternal setIdentifier:identifier forObject:record];
 		[self.recordStore saveObject:record];
 
 		// Not the most ideal way, I know
@@ -168,7 +168,7 @@ static NSString *const DCTCloudObjectStoreRecordZone = @"RecordZone";
 			if (!class) return;
 
 			object = [[class alloc] initWithCoder:decoder];
-			[DCTObjectStoreIdentifier setIdentifier:identifier forObject:object];
+			[DCTObjectStoreIdentifierInternal setIdentifier:identifier forObject:object];
 			[self.delegate cloudObjectStore:self didInsertObject:object];
 		}
 
@@ -218,7 +218,7 @@ static NSString *const DCTCloudObjectStoreRecordZone = @"RecordZone";
 						CKRecordID *recordID = [[CKRecordID alloc] initWithRecordName:identifier zoneID:self.recordZone.zoneID];
 						record = [[CKRecord alloc] initWithRecordType:className recordID:recordID];
 
-						[DCTObjectStoreIdentifier setIdentifier:identifier forObject:recordID];
+						[DCTObjectStoreIdentifierInternal setIdentifier:identifier forObject:recordID];
 						[self.recordIDStore saveObject:recordID];
 					}
 
@@ -252,7 +252,7 @@ static NSString *const DCTCloudObjectStoreRecordZone = @"RecordZone";
 						NSString *identifier = recordID.recordName;
 						CKRecord *serverRecord = recordError.userInfo[CKRecordChangedErrorServerRecordKey];
 
-						[DCTObjectStoreIdentifier setIdentifier:identifier forObject:serverRecord];
+						[DCTObjectStoreIdentifierInternal setIdentifier:identifier forObject:serverRecord];
 						[self.recordStore saveObject:serverRecord];
 
 						// If the server change is more recent, ignore the change
@@ -287,7 +287,7 @@ static NSString *const DCTCloudObjectStoreRecordZone = @"RecordZone";
 	[self fetchRecordWithID:recordID completion:^(CKRecord *record, NSError *error) {
 
 		if (record) {
-			[DCTObjectStoreIdentifier setIdentifier:recordName forObject:recordID];
+			[DCTObjectStoreIdentifierInternal setIdentifier:recordName forObject:recordID];
 			[self.recordIDStore saveObject:recordID];
 		}
 

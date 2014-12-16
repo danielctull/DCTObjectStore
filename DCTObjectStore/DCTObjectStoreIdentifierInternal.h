@@ -9,7 +9,7 @@
 @import Foundation;
 @class DCTObjectStore;
 
-@interface DCTObjectStoreIdentifier : NSObject
+@interface DCTObjectStoreIdentifierInternal : NSObject
 
 + (NSString *)storeIdentifierWithName:(NSString *)name
 					  groupIdentifier:(NSString *)groupIdentifier

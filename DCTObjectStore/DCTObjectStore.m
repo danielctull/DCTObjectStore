@@ -9,7 +9,7 @@
 @import CloudKit;
 #import "DCTObjectStore.h"
 #import "DCTObjectStoreAttributes.h"
-#import "DCTObjectStoreIdentifier.h"
+#import "DCTObjectStoreIdentifierInternal.h"
 #import "DCTDiskObjectStore.h"
 #import "DCTCloudObjectStore.h"
 #import "DCTCloudObjectStoreDelegate.h"
@@ -60,7 +60,7 @@ NSString *const DCTObjectStoreObjectKey = @"DCTObjectStoreObjectKey";
 					cloudIdentifier:(NSString *)cloudIdentifier {
 
 	NSMutableDictionary *objectStores = [self objectStores];
-	NSString *storeIdentifier = [DCTObjectStoreIdentifier storeIdentifierWithName:name
+	NSString *storeIdentifier = [DCTObjectStoreIdentifierInternal storeIdentifierWithName:name
 																  groupIdentifier:groupIdentifier
 																  cloudIdentifier:cloudIdentifier];
 	
@@ -80,10 +80,10 @@ NSString *const DCTObjectStoreObjectKey = @"DCTObjectStoreObjectKey";
 
 - (void)saveObject:(id<DCTObjectStoreCoding>)object {
 
-	NSString *identifier = [DCTObjectStoreIdentifier identifierForObject:object];
+	NSString *identifier = [DCTObjectStoreIdentifierInternal identifierForObject:object];
 	if (!identifier) {
 		identifier = [[NSUUID UUID] UUIDString];
-		[DCTObjectStoreIdentifier setIdentifier:identifier forObject:object];
+		[DCTObjectStoreIdentifierInternal setIdentifier:identifier forObject:object];
 	}
 
 	[self.diskStore saveObject:object];
@@ -211,7 +211,7 @@ NSString *const DCTObjectStoreObjectKey = @"DCTObjectStoreObjectKey";
 - (id<DCTObjectStoreCoding>)cloudObjectStore:(DCTCloudObjectStore *)cloudObjectStore objectWithIdentifier:(NSString *)identifier {
 
 	for (id<DCTObjectStoreCoding> object in self.objects) {
-		NSString *objectIdentifier = [DCTObjectStoreIdentifier identifierForObject:object];
+		NSString *objectIdentifier = [DCTObjectStoreIdentifierInternal identifierForObject:object];
 		if ([objectIdentifier isEqualToString:identifier]) {
 			return object;
 		}
