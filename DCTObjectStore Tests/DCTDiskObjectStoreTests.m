@@ -8,7 +8,7 @@
 
 @import XCTest;
 #import "DCTDiskObjectStore.h"
-#import "DCTObjectStoreIdentifier.h"
+#import "DCTObjectStoreIdentifierInternal.h"
 #import "Event.h"
 
 @interface DCTDiskObjectStoreTests : XCTestCase
@@ -36,7 +36,7 @@
 
 - (void)testInsertion {
 	Event *event = [Event new];
-	[DCTObjectStoreIdentifier setIdentifier:[[NSUUID UUID] UUIDString] forObject:event];
+	[DCTObjectStoreIdentifierInternal setIdentifier:[[NSUUID UUID] UUIDString] forObject:event];
 	[self.diskStore saveObject:event];
 	NSSet *objects = self.diskStore.objects;
 	XCTAssertEqual(objects.count, (NSUInteger)1, @"Should contain one object.");
@@ -46,7 +46,7 @@
 
 - (void)testDeletion {
 	Event *event = [Event new];
-	[DCTObjectStoreIdentifier setIdentifier:[[NSUUID UUID] UUIDString] forObject:event];
+	[DCTObjectStoreIdentifierInternal setIdentifier:[[NSUUID UUID] UUIDString] forObject:event];
 	[self.diskStore saveObject:event];
 	[self.diskStore deleteObject:event];
 	XCTAssertEqual(self.diskStore.objects.count, (NSUInteger)0, @"Shouldn't contain any objects.");
