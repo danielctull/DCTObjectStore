@@ -13,6 +13,7 @@ FOUNDATION_EXPORT double DCTObjectStoreVersionNumber;
 FOUNDATION_EXPORT const unsigned char DCTObjectStoreVersionString[];
 
 #import "DCTObjectStoreCoding.h"
+#import "DCTObjectStoreIdentifier.h"
 #import "DCTObjectStoreQuery.h"
 #import "DCTObjectStoreQueryDelegate.h"
 

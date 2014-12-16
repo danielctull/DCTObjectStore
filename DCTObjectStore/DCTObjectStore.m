@@ -82,7 +82,15 @@ NSString *const DCTObjectStoreObjectKey = @"DCTObjectStoreObjectKey";
 
 	NSString *identifier = [DCTObjectStoreIdentifierInternal identifierForObject:object];
 	if (!identifier) {
-		identifier = [[NSUUID UUID] UUIDString];
+
+		if ([object conformsToProtocol:@protocol(DCTObjectStoreIdentifier)]) {
+			identifier = [(id<DCTObjectStoreIdentifier>)object identifierForObjectStore:self];
+		}
+
+		if (!identifier) {
+			identifier = [[NSUUID UUID] UUIDString];
+		}
+
 		[DCTObjectStoreIdentifierInternal setIdentifier:identifier forObject:object];
 	}
 
