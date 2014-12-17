@@ -13,7 +13,8 @@ const struct DCTObjectStoreChangeAttributes DCTObjectStoreChangeAttributes = {
 	.date = @"date",
 	.identifier = @"identifier",
 	.object = @"object",
-	.type = @"type"
+	.type = @"type",
+	.requiresForceSave = @"requiresForceSave"
 };
 
 static NSString *const DCTObjectStoreChangeTypeString[] = {
@@ -35,12 +36,13 @@ static NSString *const DCTObjectStoreChangeTypeString[] = {
 }
 
 - (NSString *)description {
-	return [NSString stringWithFormat:@"<%@: %p; %@ = %@; %@ = %@; %@ = %@>",
+	return [NSString stringWithFormat:@"<%@: %p; %@ = %@; %@ = %@; %@ = %@; %@ = %@>",
 			NSStringFromClass([self class]),
 			self,
 			DCTObjectStoreChangeAttributes.date, self.date,
 			DCTObjectStoreChangeAttributes.identifier, self.identifier,
-			DCTObjectStoreChangeAttributes.type, DCTObjectStoreChangeTypeString[self.type]];
+			DCTObjectStoreChangeAttributes.type, DCTObjectStoreChangeTypeString[self.type],
+			DCTObjectStoreChangeAttributes.requiresForceSave, self.requiresForceSave ? @"YES" : @"NO"];
 }
 
 #pragma mark - DCTObjectStoreCoding
@@ -56,6 +58,7 @@ static NSString *const DCTObjectStoreChangeTypeString[] = {
 	_identifier = [decoder decodeObjectOfClass:[NSString class] forKey:DCTObjectStoreChangeAttributes.identifier];
 	_object = [decoder decodeObjectForKey:DCTObjectStoreChangeAttributes.object];
 	_type = [decoder decodeIntegerForKey:DCTObjectStoreChangeAttributes.type];
+	_requiresForceSave = [decoder decodeBoolForKey:DCTObjectStoreChangeAttributes.requiresForceSave];
 	return self;
 }
 
@@ -64,6 +67,7 @@ static NSString *const DCTObjectStoreChangeTypeString[] = {
 	[encoder encodeObject:self.identifier forKey:DCTObjectStoreChangeAttributes.identifier];
 	[encoder encodeObject:self.object forKey:DCTObjectStoreChangeAttributes.object];
 	[encoder encodeInteger:self.type forKey:DCTObjectStoreChangeAttributes.type];
+	[encoder encodeBool:self.requiresForceSave forKey:DCTObjectStoreChangeAttributes.requiresForceSave];
 }
 
 - (void)decodeWithCoder:(NSCoder *)coder {}

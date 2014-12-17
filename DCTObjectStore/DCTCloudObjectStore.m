@@ -189,6 +189,14 @@ static NSString *const DCTCloudObjectStoreRecordZone = @"RecordZone";
 	NSMutableArray *recordIDsToDelete = [NSMutableArray new];
 	NSMutableDictionary *workingChanges = [[NSMutableDictionary alloc] initWithCapacity:changes.count];
 
+	CKRecordSavePolicy policy = CKRecordSaveIfServerRecordUnchanged;
+	NSPredicate *forcePushPredicate = [NSPredicate predicateWithFormat:@"%K == %@", DCTObjectStoreChangeAttributes.requiresForceSave, @(YES)];
+	NSSet *forceChanges = [changes filteredSetUsingPredicate:forcePushPredicate];
+	if (forceChanges.count > 0) {
+		changes = forceChanges;
+		policy = CKRecordSaveChangedKeys;
+	}
+
 	for (DCTObjectStoreChange *change in changes) {
 
 		NSString *identifier = change.identifier;
@@ -236,7 +244,7 @@ static NSString *const DCTCloudObjectStoreRecordZone = @"RecordZone";
 
 	dispatch_group_notify(group, dispatch_get_main_queue(), ^{
 
-		[self saveRecords:recordsToSave deleteRecordIDs:recordIDsToDelete completion:^(NSArray *modifiedRecordIDs, NSError *operationError) {
+		[self saveRecords:recordsToSave deleteRecordIDs:recordIDsToDelete policy:policy completion:^(NSArray *modifiedRecordIDs, NSError *operationError) {
 
 			for (CKRecordID *recordID in modifiedRecordIDs) {
 				NSString *identifier = recordID.recordName;
@@ -251,12 +259,18 @@ static NSString *const DCTCloudObjectStoreRecordZone = @"RecordZone";
 					if (recordError.code == CKErrorServerRecordChanged) {
 						NSString *identifier = recordID.recordName;
 						CKRecord *serverRecord = recordError.userInfo[CKRecordChangedErrorServerRecordKey];
+						DCTObjectStoreChange *change = workingChanges[identifier];
+
+						if (!serverRecord) {
+							change.requiresForceSave = YES;
+							[self.changeStore saveObject:change];
+							return;
+						}
 
 						[DCTObjectStoreIdentifierInternal setIdentifier:identifier forObject:serverRecord];
 						[self.recordStore saveObject:serverRecord];
 
 						// If the server change is more recent, ignore the change
-						DCTObjectStoreChange *change = workingChanges[identifier];
 						if ([change.date compare:serverRecord.modificationDate] == NSOrderedDescending) {
 							[self.changeStore deleteObject:change];
 						}
@@ -423,9 +437,10 @@ static NSString *const DCTCloudObjectStoreRecordZone = @"RecordZone";
 	[self.database addOperation:operation];
 }
 
-- (void)saveRecords:(NSArray *)records deleteRecordIDs:(NSArray *)recordIDs completion:(void(^)(NSArray *modifiedRecordIDs, NSError *operationError))completion {
+- (void)saveRecords:(NSArray *)records deleteRecordIDs:(NSArray *)recordIDs policy:(CKRecordSavePolicy)policy completion:(void(^)(NSArray *modifiedRecordIDs, NSError *operationError))completion {
 	CKModifyRecordsOperation *operation = [[CKModifyRecordsOperation alloc] initWithRecordsToSave:records recordIDsToDelete:recordIDs];
 	operation.queuePriority = NSOperationQueuePriorityHigh;
+	operation.savePolicy = policy;
 	operation.modifyRecordsCompletionBlock = ^(NSArray *savedRecords, NSArray *deletedRecordIDs, NSError *error) {
 		NSArray *savedRecordIDs = [savedRecords valueForKey:@"recordID"];
 		NSArray *modifiedRecordIDs = [savedRecordIDs arrayByAddingObjectsFromArray:deletedRecordIDs];

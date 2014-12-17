@@ -14,6 +14,7 @@ extern const struct DCTObjectStoreChangeAttributes {
 	__unsafe_unretained NSString *identifier;
 	__unsafe_unretained NSString *object;
 	__unsafe_unretained NSString *type;
+	__unsafe_unretained NSString *requiresForceSave;
 } DCTObjectStoreChangeAttributes;
 
 typedef NS_ENUM(NSInteger, DCTObjectStoreChangeType) {
@@ -28,5 +29,7 @@ typedef NS_ENUM(NSInteger, DCTObjectStoreChangeType) {
 @property (nonatomic, readonly) id<DCTObjectStoreCoding> object;
 @property (nonatomic, readonly) DCTObjectStoreChangeType type;
 @property (nonatomic, readonly) NSDate *date;
+
+@property (nonatomic) BOOL requiresForceSave;
 
 @end
