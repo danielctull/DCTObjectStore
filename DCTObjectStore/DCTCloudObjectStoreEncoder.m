@@ -19,7 +19,7 @@
 
 - (void)encodeObject:(id)object forKey:(NSString *)key {
 
-	NSAssert([object conformsToProtocol:@protocol(CKRecordValue)], @"All given objects must conform to CKRecordValue.");
+	NSAssert(!object || [object conformsToProtocol:@protocol(CKRecordValue)], @"All given objects must conform to CKRecordValue.");
 
 	[self.record setObject:object forKey:key];
 }
