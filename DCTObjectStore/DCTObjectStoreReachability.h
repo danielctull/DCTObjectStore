@@ -10,6 +10,12 @@
 
 extern NSString *const DCTObjectStoreReachabilityDidChangeNotification;
 
+typedef NS_ENUM(NSInteger, DCTObjectStoreReachabilityStatus) {
+	DCTObjectStoreReachabilityStatusUnknown,
+	DCTObjectStoreReachabilityStatusConnected,
+	DCTObjectStoreReachabilityStatusNotConnected
+};
+
 @interface DCTObjectStoreReachability : NSObject
-@property (nonatomic, readonly, getter=isReachable) BOOL reachable;
+@property (nonatomic, readonly) DCTObjectStoreReachabilityStatus status;
 @end

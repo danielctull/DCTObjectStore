@@ -13,15 +13,26 @@
 @import Darwin.POSIX.netdb;
 #import "DCTObjectStoreReachability.h"
 
+static NSString *const DCTObjectStoreReachabilityStatusString[] = {
+	@"Unknown",
+	@"Connected",
+	@"NotConnected"
+};
+
 NSString *const DCTObjectStoreReachabilityDidChangeNotification = @"DCTObjectStoreReachabilityDidChangeNotification";
 
 @interface DCTObjectStoreReachability ()
-@property (nonatomic, readwrite, getter=isReachable) BOOL reachable;
+@property (nonatomic, readwrite) DCTObjectStoreReachabilityStatus status;
 @property (nonatomic) SCNetworkReachabilityRef reachabilityRef;
+@property (nonatomic) dispatch_queue_t queue;
 @end
 
 static BOOL DCTObjectStoreReachabilityIsReachable(SCNetworkReachabilityFlags flags) {
 	return (flags & kSCNetworkReachabilityFlagsReachable) && !(flags & kSCNetworkReachabilityFlagsConnectionRequired);
+}
+
+static DCTObjectStoreReachabilityStatus DCTObjectStoreReachabilityStatusFromFlags(SCNetworkReachabilityFlags flags) {
+	return DCTObjectStoreReachabilityIsReachable(flags) ? DCTObjectStoreReachabilityStatusConnected : DCTObjectStoreReachabilityStatusNotConnected;
 }
 
 static void DCTObjectStoreReachabilityCallback(__unused SCNetworkReachabilityRef reachabilityRef, SCNetworkReachabilityFlags flags, void* info) {
@@ -31,10 +42,7 @@ static void DCTObjectStoreReachabilityCallback(__unused SCNetworkReachabilityRef
 	DCTObjectStoreReachability *reachability = (__bridge DCTObjectStoreReachability *)info;
 	NSCAssert([reachability isKindOfClass:[DCTObjectStoreReachability class]], @"Info is wrong class, %@", info);
 
-	BOOL reachable = DCTObjectStoreReachabilityIsReachable(flags);
-	if (reachable != reachability.reachable) {
-		reachability.reachable = reachable;
-	}
+	reachability.status = DCTObjectStoreReachabilityStatusFromFlags(flags);
 }
 
 @implementation DCTObjectStoreReachability
@@ -56,33 +64,45 @@ static void DCTObjectStoreReachabilityCallback(__unused SCNetworkReachabilityRef
 	self = [super init];
 	if (!self) return nil;
 
+	_queue = dispatch_queue_create("DCTObjectStoreReachability", DISPATCH_QUEUE_SERIAL);
+
 	NSString *host = @"www.apple.com";
 	_reachabilityRef = SCNetworkReachabilityCreateWithName(NULL, [host UTF8String]);
 	if (_reachabilityRef == NULL) return self;
 
-	SCNetworkReachabilityFlags flags;
-	if (SCNetworkReachabilityGetFlags(_reachabilityRef, &flags)) {
-		_reachable = DCTObjectStoreReachabilityIsReachable(flags);
-	}
+	dispatch_async(_queue, ^{
+		SCNetworkReachabilityFlags flags;
+		if (SCNetworkReachabilityGetFlags(self->_reachabilityRef, &flags)) {
+			self.status = DCTObjectStoreReachabilityStatusFromFlags(flags);
+		}
+	});
 
 	SCNetworkReachabilityContext context = { 0, (__bridge void *)self, NULL, NULL, NULL };
 
-	if (SCNetworkReachabilitySetCallback(_reachabilityRef, DCTObjectStoreReachabilityCallback, &context)) {
+	if (SCNetworkReachabilitySetCallback(_reachabilityRef, DCTObjectStoreReachabilityCallback, &context) && SCNetworkReachabilitySetDispatchQueue(_reachabilityRef, _queue)) {
 		SCNetworkReachabilityScheduleWithRunLoop(_reachabilityRef, CFRunLoopGetCurrent(), kCFRunLoopDefaultMode);
 	}
+
 	return self;
 }
 
-- (void)setReachable:(BOOL)reachable {
-	_reachable = reachable;
-	[[NSNotificationCenter defaultCenter] postNotificationName:DCTObjectStoreReachabilityDidChangeNotification object:self];
+- (void)setStatus:(DCTObjectStoreReachabilityStatus)status {
+
+	if (_status == status) {
+		return;
+	}
+
+	_status = status;
+	dispatch_async(dispatch_get_main_queue(), ^{
+		[[NSNotificationCenter defaultCenter] postNotificationName:DCTObjectStoreReachabilityDidChangeNotification object:self];
+	});
 }
 
 - (NSString *)description {
-	return [NSString stringWithFormat:@"<%@: %p; reachable = %@>",
+	return [NSString stringWithFormat:@"<%@: %p; status = %@>",
 			NSStringFromClass([self class]),
 			self,
-			self.reachable ? @"YES" : @"NO"];
+			DCTObjectStoreReachabilityStatusString[self.status]];
 }
 
 @end

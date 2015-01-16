@@ -113,7 +113,7 @@ static NSString *const DCTCloudObjectStoreRecordZone = @"RecordZone";
 - (void)reachabilityDidChangeNotification:(NSNotification *)notification {
 
 	DCTObjectStoreReachability *reachability = notification.object;
-	if (!reachability.reachable) {
+	if (reachability.status != DCTObjectStoreReachabilityStatusConnected) {
 		return;
 	}
 
