@@ -40,7 +40,7 @@
 	
 	XCTAssertEqual(self.query.objects.count, (NSUInteger)2, @"Store should have two objects.");
 	XCTAssertEqualObjects(self.query.objects[0], event1, @"First object should be event1.");
-	XCTAssertEqualObjects(self.query.objects[1], event2, @"First object should be event2.");
+	XCTAssertEqualObjects(self.query.objects[1], event2, @"Second object should be event2.");
 }
 
 - (void)testSort2 {
@@ -53,7 +53,7 @@
 	
 	XCTAssertEqual(self.query.objects.count, (NSUInteger)2, @"Store should have two objects.");
 	XCTAssertEqualObjects(self.query.objects[0], event2, @"First object should be event2.");
-	XCTAssertEqualObjects(self.query.objects[1], event1, @"First object should be event1.");
+	XCTAssertEqualObjects(self.query.objects[1], event1, @"Second object should be event1.");
 }
 
 - (void)testMove {
