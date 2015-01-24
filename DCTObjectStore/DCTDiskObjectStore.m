@@ -56,7 +56,11 @@
 - (void)deleteObject:(id<DCTObjectStoreCoding>)object {
 
 	NSString *identifier = [DCTObjectStoreIdentifierInternal identifierForObject:object];
-	NSParameterAssert(identifier);
+
+	// This object has never been saved with this store?
+	if (!identifier) {
+		return;
+	}
 
 	// If this particular instance is not in the store, ignore
 	id ourObject = [self objectForIdentifier:identifier];
