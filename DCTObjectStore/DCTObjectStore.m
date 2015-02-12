@@ -100,6 +100,9 @@ NSString *const DCTObjectStoreObjectKey = @"DCTObjectStoreObjectKey";
 }
 
 - (void)deleteObject:(id<DCTObjectStoreCoding>)object {
+	NSString *identifier = [DCTObjectStoreIdentifierInternal identifierForObject:object];
+	if (!identifier) return;
+
 	[self.diskStore deleteObject:object];
 	[self.cloudStore deleteObject:object];
 	[self removeObject:object];
