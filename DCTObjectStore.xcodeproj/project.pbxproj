@@ -9,6 +9,34 @@
 /* Begin PBXBuildFile section */
 		2406954E1A34970E005BB314 /* CKRecord+DCTObjectStoreCoding.h in Headers */ = {isa = PBXBuildFile; fileRef = 2406954C1A34970E005BB314 /* CKRecord+DCTObjectStoreCoding.h */; };
 		2406954F1A34970E005BB314 /* CKRecord+DCTObjectStoreCoding.m in Sources */ = {isa = PBXBuildFile; fileRef = 2406954D1A34970E005BB314 /* CKRecord+DCTObjectStoreCoding.m */; };
+		242BBB4C1A93919700CA83B7 /* DCTObjectStore.h in Headers */ = {isa = PBXBuildFile; fileRef = 24501D161883DF9600FED266 /* DCTObjectStore.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		242BBB4D1A93919700CA83B7 /* DCTObjectStoreCoding.h in Headers */ = {isa = PBXBuildFile; fileRef = 24D52A641A2B59BF00FDA615 /* DCTObjectStoreCoding.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		242BBB4E1A93919700CA83B7 /* DCTObjectStoreIdentifier.h in Headers */ = {isa = PBXBuildFile; fileRef = 24768C431A408118008F8E3B /* DCTObjectStoreIdentifier.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		242BBB4F1A93919700CA83B7 /* DCTObjectStoreQuery.h in Headers */ = {isa = PBXBuildFile; fileRef = 24D52A511A28EEB800FDA615 /* DCTObjectStoreQuery.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		242BBB501A93919700CA83B7 /* DCTObjectStoreQueryDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 24D52A5C1A28FAE300FDA615 /* DCTObjectStoreQueryDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		242BBB511A9391AC00CA83B7 /* DCTDiskObjectStore.h in Headers */ = {isa = PBXBuildFile; fileRef = 2464AB5E1A2A32C100F72B41 /* DCTDiskObjectStore.h */; };
+		242BBB521A9391AC00CA83B7 /* DCTCloudObjectStore.h in Headers */ = {isa = PBXBuildFile; fileRef = 2464AB681A2A7B1B00F72B41 /* DCTCloudObjectStore.h */; };
+		242BBB531A9391AC00CA83B7 /* DCTCloudObjectStoreDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 2464AB6F1A2A8AE800F72B41 /* DCTCloudObjectStoreDelegate.h */; };
+		242BBB541A9391AC00CA83B7 /* DCTCloudObjectStoreEncoder.h in Headers */ = {isa = PBXBuildFile; fileRef = 244775111A1260260091CBDD /* DCTCloudObjectStoreEncoder.h */; };
+		242BBB551A9391AC00CA83B7 /* DCTCloudObjectStoreDecoder.h in Headers */ = {isa = PBXBuildFile; fileRef = 24D52A691A2B5DB900FDA615 /* DCTCloudObjectStoreDecoder.h */; };
+		242BBB561A9391AC00CA83B7 /* DCTObjectStoreChange.h in Headers */ = {isa = PBXBuildFile; fileRef = 24D52A5F1A2B4A4D00FDA615 /* DCTObjectStoreChange.h */; };
+		242BBB571A9391AC00CA83B7 /* DCTObjectStoreReachability.h in Headers */ = {isa = PBXBuildFile; fileRef = 246E614F1A2CF33700F01AB4 /* DCTObjectStoreReachability.h */; };
+		242BBB581A9391AC00CA83B7 /* DCTObjectStoreIdentifierInternal.h in Headers */ = {isa = PBXBuildFile; fileRef = 2464AB631A2A34D700F72B41 /* DCTObjectStoreIdentifierInternal.h */; };
+		242BBB591A9391AC00CA83B7 /* DCTObjectStoreAttributes.h in Headers */ = {isa = PBXBuildFile; fileRef = 2464AB391A29207100F72B41 /* DCTObjectStoreAttributes.h */; };
+		242BBB5A1A9391AC00CA83B7 /* CKRecordID+DCTObjectStoreCoding.h in Headers */ = {isa = PBXBuildFile; fileRef = 24D52A7F1A2C9D5500FDA615 /* CKRecordID+DCTObjectStoreCoding.h */; };
+		242BBB5B1A9391AC00CA83B7 /* CKRecord+DCTObjectStoreCoding.h in Headers */ = {isa = PBXBuildFile; fileRef = 2406954C1A34970E005BB314 /* CKRecord+DCTObjectStoreCoding.h */; };
+		242BBB5C1A9391BD00CA83B7 /* DCTObjectStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 24501D181883DF9600FED266 /* DCTObjectStore.m */; };
+		242BBB5D1A9391BD00CA83B7 /* DCTObjectStoreQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = 24D52A521A28EEB800FDA615 /* DCTObjectStoreQuery.m */; };
+		242BBB5E1A9391BD00CA83B7 /* DCTDiskObjectStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 2464AB5F1A2A32C100F72B41 /* DCTDiskObjectStore.m */; };
+		242BBB5F1A9391BD00CA83B7 /* DCTCloudObjectStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 2464AB691A2A7B1B00F72B41 /* DCTCloudObjectStore.m */; };
+		242BBB601A9391BD00CA83B7 /* DCTCloudObjectStoreEncoder.m in Sources */ = {isa = PBXBuildFile; fileRef = 244775121A1260260091CBDD /* DCTCloudObjectStoreEncoder.m */; };
+		242BBB611A9391BD00CA83B7 /* DCTCloudObjectStoreDecoder.m in Sources */ = {isa = PBXBuildFile; fileRef = 24D52A6A1A2B5DB900FDA615 /* DCTCloudObjectStoreDecoder.m */; };
+		242BBB621A9391BD00CA83B7 /* DCTObjectStoreChange.m in Sources */ = {isa = PBXBuildFile; fileRef = 24D52A601A2B4A4D00FDA615 /* DCTObjectStoreChange.m */; };
+		242BBB631A9391BD00CA83B7 /* DCTObjectStoreReachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 246E61501A2CF33700F01AB4 /* DCTObjectStoreReachability.m */; };
+		242BBB641A9391BD00CA83B7 /* DCTObjectStoreIdentifierInternal.m in Sources */ = {isa = PBXBuildFile; fileRef = 2464AB641A2A34D700F72B41 /* DCTObjectStoreIdentifierInternal.m */; };
+		242BBB651A9391BD00CA83B7 /* DCTObjectStoreAttributes.m in Sources */ = {isa = PBXBuildFile; fileRef = 2464AB3A1A29207100F72B41 /* DCTObjectStoreAttributes.m */; };
+		242BBB661A9391BD00CA83B7 /* CKRecordID+DCTObjectStoreCoding.m in Sources */ = {isa = PBXBuildFile; fileRef = 24D52A801A2C9D5500FDA615 /* CKRecordID+DCTObjectStoreCoding.m */; };
+		242BBB671A9391BD00CA83B7 /* CKRecord+DCTObjectStoreCoding.m in Sources */ = {isa = PBXBuildFile; fileRef = 2406954D1A34970E005BB314 /* CKRecord+DCTObjectStoreCoding.m */; };
 		242BEF7F19A8FBB00063F2F2 /* DCTObjectStore.h in Headers */ = {isa = PBXBuildFile; fileRef = 24501D161883DF9600FED266 /* DCTObjectStore.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		242BEF8019A8FBD00063F2F2 /* DCTObjectStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 24501D181883DF9600FED266 /* DCTObjectStore.m */; };
 		244775131A1260260091CBDD /* DCTCloudObjectStoreEncoder.h in Headers */ = {isa = PBXBuildFile; fileRef = 244775111A1260260091CBDD /* DCTCloudObjectStoreEncoder.h */; };
@@ -92,6 +120,7 @@
 /* Begin PBXFileReference section */
 		2406954C1A34970E005BB314 /* CKRecord+DCTObjectStoreCoding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CKRecord+DCTObjectStoreCoding.h"; sourceTree = "<group>"; };
 		2406954D1A34970E005BB314 /* CKRecord+DCTObjectStoreCoding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CKRecord+DCTObjectStoreCoding.m"; sourceTree = "<group>"; };
+		242BBB331A93911400CA83B7 /* DCTObjectStore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = DCTObjectStore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		242BEEFC19A8F53B0063F2F2 /* DCTObjectStore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = DCTObjectStore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		242BEF1219A8F55F0063F2F2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		244775111A1260260091CBDD /* DCTCloudObjectStoreEncoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCTCloudObjectStoreEncoder.h; sourceTree = "<group>"; };
@@ -160,6 +189,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		242BBB2F1A93911400CA83B7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		242BEEF819A8F53B0063F2F2 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -221,6 +257,7 @@
 				242BEEFC19A8F53B0063F2F2 /* DCTObjectStore.framework */,
 				24D52A211A28E98C00FDA615 /* DCTObjectStore.app */,
 				2464AB461A2931D800F72B41 /* DCTObjectStore Tests.xctest */,
+				242BBB331A93911400CA83B7 /* DCTObjectStore.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -327,6 +364,29 @@
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
+		242BBB301A93911400CA83B7 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				242BBB4C1A93919700CA83B7 /* DCTObjectStore.h in Headers */,
+				242BBB4D1A93919700CA83B7 /* DCTObjectStoreCoding.h in Headers */,
+				242BBB4E1A93919700CA83B7 /* DCTObjectStoreIdentifier.h in Headers */,
+				242BBB4F1A93919700CA83B7 /* DCTObjectStoreQuery.h in Headers */,
+				242BBB501A93919700CA83B7 /* DCTObjectStoreQueryDelegate.h in Headers */,
+				242BBB511A9391AC00CA83B7 /* DCTDiskObjectStore.h in Headers */,
+				242BBB521A9391AC00CA83B7 /* DCTCloudObjectStore.h in Headers */,
+				242BBB531A9391AC00CA83B7 /* DCTCloudObjectStoreDelegate.h in Headers */,
+				242BBB541A9391AC00CA83B7 /* DCTCloudObjectStoreEncoder.h in Headers */,
+				242BBB551A9391AC00CA83B7 /* DCTCloudObjectStoreDecoder.h in Headers */,
+				242BBB561A9391AC00CA83B7 /* DCTObjectStoreChange.h in Headers */,
+				242BBB571A9391AC00CA83B7 /* DCTObjectStoreReachability.h in Headers */,
+				242BBB581A9391AC00CA83B7 /* DCTObjectStoreIdentifierInternal.h in Headers */,
+				242BBB591A9391AC00CA83B7 /* DCTObjectStoreAttributes.h in Headers */,
+				242BBB5A1A9391AC00CA83B7 /* CKRecordID+DCTObjectStoreCoding.h in Headers */,
+				242BBB5B1A9391AC00CA83B7 /* CKRecord+DCTObjectStoreCoding.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		242BEEF919A8F53B0063F2F2 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
@@ -353,6 +413,25 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
+		242BBB321A93911400CA83B7 /* DCTObjectStore OS X */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 242BBB4A1A93911400CA83B7 /* Build configuration list for PBXNativeTarget "DCTObjectStore OS X" */;
+			buildPhases = (
+				242BBB2E1A93911400CA83B7 /* Sources */,
+				242BBB2F1A93911400CA83B7 /* Frameworks */,
+				242BBB301A93911400CA83B7 /* Headers */,
+				242BBB311A93911400CA83B7 /* Resources */,
+				242BBB681A9391D200CA83B7 /* Documentation */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "DCTObjectStore OS X";
+			productName = "DCTObjectStore OS X";
+			productReference = 242BBB331A93911400CA83B7 /* DCTObjectStore.framework */;
+			productType = "com.apple.product-type.framework";
+		};
 		242BEEFB19A8F53B0063F2F2 /* DCTObjectStore iOS */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 242BEF1019A8F53B0063F2F2 /* Build configuration list for PBXNativeTarget "DCTObjectStore iOS" */;
@@ -418,6 +497,9 @@
 				LastUpgradeCheck = 0610;
 				ORGANIZATIONNAME = "Daniel Tull";
 				TargetAttributes = {
+					242BBB321A93911400CA83B7 = {
+						CreatedOnToolsVersion = 6.1.1;
+					};
 					242BEEFB19A8F53B0063F2F2 = {
 						CreatedOnToolsVersion = 6.0;
 					};
@@ -451,13 +533,21 @@
 			projectRoot = "";
 			targets = (
 				242BEEFB19A8F53B0063F2F2 /* DCTObjectStore iOS */,
-				24D52A201A28E98C00FDA615 /* DCTObjectStore Demo */,
+				242BBB321A93911400CA83B7 /* DCTObjectStore OS X */,
 				2464AB451A2931D800F72B41 /* DCTObjectStore Tests */,
+				24D52A201A28E98C00FDA615 /* DCTObjectStore Demo */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		242BBB311A93911400CA83B7 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		242BEEFA19A8F53B0063F2F2 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -499,9 +589,42 @@
 			shellPath = /bin/sh;
 			shellScript = "./Scripts/documentation.sh -c \"Daniel Tull\" -i \"uk.co.danieltull\" > /dev/null 2>&1 &\n";
 		};
+		242BBB681A9391D200CA83B7 /* Documentation */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = Documentation;
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "./Scripts/documentation.sh -c \"Daniel Tull\" -i \"uk.co.danieltull\" > /dev/null 2>&1 &\n";
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		242BBB2E1A93911400CA83B7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				242BBB5C1A9391BD00CA83B7 /* DCTObjectStore.m in Sources */,
+				242BBB5D1A9391BD00CA83B7 /* DCTObjectStoreQuery.m in Sources */,
+				242BBB5E1A9391BD00CA83B7 /* DCTDiskObjectStore.m in Sources */,
+				242BBB5F1A9391BD00CA83B7 /* DCTCloudObjectStore.m in Sources */,
+				242BBB601A9391BD00CA83B7 /* DCTCloudObjectStoreEncoder.m in Sources */,
+				242BBB611A9391BD00CA83B7 /* DCTCloudObjectStoreDecoder.m in Sources */,
+				242BBB621A9391BD00CA83B7 /* DCTObjectStoreChange.m in Sources */,
+				242BBB631A9391BD00CA83B7 /* DCTObjectStoreReachability.m in Sources */,
+				242BBB641A9391BD00CA83B7 /* DCTObjectStoreIdentifierInternal.m in Sources */,
+				242BBB651A9391BD00CA83B7 /* DCTObjectStoreAttributes.m in Sources */,
+				242BBB661A9391BD00CA83B7 /* CKRecordID+DCTObjectStoreCoding.m in Sources */,
+				242BBB671A9391BD00CA83B7 /* CKRecord+DCTObjectStoreCoding.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		242BEEF719A8F53B0063F2F2 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -584,6 +707,26 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		242BBB461A93911400CA83B7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 244DE8D619A9235100A91DC7 /* OS X Framework.xcconfig */;
+			buildSettings = {
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				PRODUCT_NAME = DCTObjectStore;
+			};
+			name = Debug;
+		};
+		242BBB471A93911400CA83B7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 244DE8D619A9235100A91DC7 /* OS X Framework.xcconfig */;
+			buildSettings = {
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				PRODUCT_NAME = DCTObjectStore;
+			};
+			name = Release;
+		};
 		242BEF0C19A8F53B0063F2F2 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 244DE8D319A9235100A91DC7 /* iOS Framework.xcconfig */;
@@ -662,6 +805,14 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		242BBB4A1A93911400CA83B7 /* Build configuration list for PBXNativeTarget "DCTObjectStore OS X" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				242BBB461A93911400CA83B7 /* Debug */,
+				242BBB471A93911400CA83B7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		242BEF1019A8F53B0063F2F2 /* Build configuration list for PBXNativeTarget "DCTObjectStore iOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
