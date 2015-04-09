@@ -812,6 +812,7 @@
 				242BBB471A93911400CA83B7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		242BEF1019A8F53B0063F2F2 /* Build configuration list for PBXNativeTarget "DCTObjectStore iOS" */ = {
 			isa = XCConfigurationList;
