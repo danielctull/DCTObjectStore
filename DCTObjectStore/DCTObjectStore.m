@@ -131,10 +131,12 @@ NSString *const DCTObjectStoreObjectKey = @"DCTObjectStoreObjectKey";
 	NSURL *storeURL = [self URLWithBaseURL:self.documentsURL];
 
 	NSURL *diskStoreURL = [storeURL URLByAppendingPathComponent:NSStringFromClass([DCTDiskObjectStore class])];
-	_diskStore = [[DCTDiskObjectStore alloc] initWithURL:diskStoreURL];
-	_objects = _diskStore.objects;
+	if (diskStoreURL) {
+		_diskStore = [[DCTDiskObjectStore alloc] initWithURL:diskStoreURL];
+		_objects = _diskStore.objects;
+	}
 
-	if (cloudIdentifier) {
+	if (cloudIdentifier && diskStoreURL) {
 		NSURL *cacheURL = [self URLWithBaseURL:self.cachesURL];
 		NSURL *cloudStoreURL = [storeURL URLByAppendingPathComponent:NSStringFromClass([DCTCloudObjectStore class])];
 		NSURL *cloudCacheURL = [cacheURL URLByAppendingPathComponent:NSStringFromClass([DCTCloudObjectStore class])];
