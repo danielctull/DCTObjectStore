@@ -148,7 +148,8 @@ static NSString *const DCTCloudObjectStoreRecordZone = @"RecordZone";
 
 		// Not the most ideal way, I know
 		DCTObjectStoreChange *change = [self.changeStore objectForIdentifier:identifier];
-		if ([change.date compare:record.modificationDate] == NSOrderedDescending) {
+		NSDate *modificationDate = record.modificationDate;
+		if (modificationDate && [change.date compare:modificationDate] == NSOrderedDescending) {
 			return;
 		}
 
@@ -271,7 +272,8 @@ static NSString *const DCTCloudObjectStoreRecordZone = @"RecordZone";
 						[self.recordStore saveObject:serverRecord];
 
 						// If the server change is more recent, ignore the change
-						if ([change.date compare:serverRecord.modificationDate] == NSOrderedDescending) {
+						NSDate *modificationDate = serverRecord.modificationDate;
+						if (modificationDate && [change.date compare:modificationDate] == NSOrderedDescending) {
 							[self.changeStore deleteObject:change];
 						}
 					}
