@@ -494,7 +494,7 @@
 		24501D061883DF9600FED266 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0610;
+				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = "Daniel Tull";
 				TargetAttributes = {
 					242BBB321A93911400CA83B7 = {
@@ -713,6 +713,7 @@
 			buildSettings = {
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
+				PRODUCT_BUNDLE_IDENTIFIER = "uk.co.danieltull.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = DCTObjectStore;
 			};
 			name = Debug;
@@ -723,6 +724,7 @@
 			buildSettings = {
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
+				PRODUCT_BUNDLE_IDENTIFIER = "uk.co.danieltull.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = DCTObjectStore;
 			};
 			name = Release;
@@ -734,6 +736,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
+				PRODUCT_BUNDLE_IDENTIFIER = "uk.co.danieltull.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = DCTObjectStore;
 			};
 			name = Debug;
@@ -745,6 +748,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
+				PRODUCT_BUNDLE_IDENTIFIER = "uk.co.danieltull.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = DCTObjectStore;
 			};
 			name = Release;
@@ -753,6 +757,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 244DE8D019A9235100A91DC7 /* Debug.xcconfig */;
 			buildSettings = {
+				ENABLE_TESTABILITY = YES;
 				ONLY_ACTIVE_ARCH = YES;
 			};
 			name = Debug;
@@ -768,6 +773,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 244DE8D519A9235100A91DC7 /* iOS Tests.xcconfig */;
 			buildSettings = {
+				PRODUCT_BUNDLE_IDENTIFIER = "uk.co.danieltull.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -776,6 +782,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 244DE8D519A9235100A91DC7 /* iOS Tests.xcconfig */;
 			buildSettings = {
+				PRODUCT_BUNDLE_IDENTIFIER = "uk.co.danieltull.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -787,6 +794,7 @@
 				CODE_SIGN_ENTITLEMENTS = "DCTObjectStore Demo/DCTObjectStore Demo.entitlements";
 				INFOPLIST_FILE = "DCTObjectStore Demo/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "uk.co.danieltull.$(PRODUCT_NAME:rfc1034identifier)Demo";
 				PRODUCT_NAME = DCTObjectStore;
 			};
 			name = Debug;
@@ -798,6 +806,7 @@
 				CODE_SIGN_ENTITLEMENTS = "DCTObjectStore Demo/DCTObjectStore Demo.entitlements";
 				INFOPLIST_FILE = "DCTObjectStore Demo/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "uk.co.danieltull.$(PRODUCT_NAME:rfc1034identifier)Demo";
 				PRODUCT_NAME = DCTObjectStore;
 			};
 			name = Release;
