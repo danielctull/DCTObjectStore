@@ -102,8 +102,8 @@ static NSString *const DCTCloudObjectStoreRecordZone = @"RecordZone";
 	BOOL success = [[NSFileManager new] removeItemAtURL:self.URL error:&error];
 	if (!success) NSLog(@"%@:%@ %@", self, NSStringFromSelector(_cmd), error);
 
-	if (self.subscription) [self.database deleteSubscriptionWithID:self.subscription.subscriptionID completionHandler:nil];
-	if (self.recordZone) [self.database deleteRecordZoneWithID:self.recordZone.zoneID completionHandler:nil];
+	if (self.subscription) [self.database deleteSubscriptionWithID:self.subscription.subscriptionID completionHandler:^(NSString *subscriptionID, NSError *error) {}];
+	if (self.recordZone) [self.database deleteRecordZoneWithID:self.recordZone.zoneID completionHandler:^(CKRecordZoneID *zoneID, NSError *error) {}];
 }
 
 - (void)handleNotification:(__unused CKRecordZoneNotification *)notification {
@@ -315,7 +315,7 @@ static NSString *const DCTCloudObjectStoreRecordZone = @"RecordZone";
 
 	if (!self.subscription) return;
 
-	[self.database deleteSubscriptionWithID:self.subscription.subscriptionID completionHandler:nil];
+	[self.database deleteSubscriptionWithID:self.subscription.subscriptionID completionHandler:^(NSString *subscriptionID, NSError *error) {}];
 }
 
 #pragma clang diagnostic push
