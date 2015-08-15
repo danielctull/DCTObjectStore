@@ -66,8 +66,9 @@ static void DCTObjectStoreReachabilityCallback(__unused SCNetworkReachabilityRef
 
 	_queue = dispatch_queue_create("DCTObjectStoreReachability", DISPATCH_QUEUE_SERIAL);
 
-	NSString *host = @"www.apple.com";
-	_reachabilityRef = SCNetworkReachabilityCreateWithName(NULL, [host UTF8String]);
+	const char *host = [@"www.apple.com" UTF8String];
+	if (host == NULL) return self;
+	_reachabilityRef = SCNetworkReachabilityCreateWithName(NULL, host);
 	if (_reachabilityRef == NULL) return self;
 
 	dispatch_async(_queue, ^{
