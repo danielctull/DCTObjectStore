@@ -352,7 +352,10 @@ static NSString *const DCTCloudObjectStoreRecordZone = @"RecordZone";
 
 - (void)setRecordZone:(CKRecordZone *)recordZone {
 	_recordZone = recordZone;
-	[NSKeyedArchiver archiveRootObject:recordZone toFile:self.recordZoneURL.path];
+	NSString *path = self.recordZoneURL.path;
+	if (path) {
+		[NSKeyedArchiver archiveRootObject:recordZone toFile:path];
+	}
 	[self saveSubscription];
 	[self downloadChangesWithCompletion:^{
 		[self uploadChanges];
@@ -362,7 +365,10 @@ static NSString *const DCTCloudObjectStoreRecordZone = @"RecordZone";
 - (CKRecordZone *)recordZone {
 
 	if (!_recordZone) {
-		_recordZone = [NSKeyedUnarchiver unarchiveObjectWithFile:self.recordZoneURL.path];
+		NSString *path = self.recordZoneURL.path;
+		if (path) {
+			_recordZone = [NSKeyedUnarchiver unarchiveObjectWithFile:path];
+		}
 	}
 
 	return _recordZone;
@@ -403,7 +409,10 @@ static NSString *const DCTCloudObjectStoreRecordZone = @"RecordZone";
 - (CKServerChangeToken *)serverChangeToken {
 
 	if (!_serverChangeToken) {
-		_serverChangeToken = [NSKeyedUnarchiver unarchiveObjectWithFile:self.serverChangeTokenURL.path];
+		NSString *path = self.serverChangeTokenURL.path;
+		if (path) {
+			_serverChangeToken = [NSKeyedUnarchiver unarchiveObjectWithFile:path];
+		}
 	}
 
 	return _serverChangeToken;
@@ -411,7 +420,10 @@ static NSString *const DCTCloudObjectStoreRecordZone = @"RecordZone";
 
 - (void)setServerChangeToken:(CKServerChangeToken *)serverChangeToken {
 	_serverChangeToken = serverChangeToken;
-	[NSKeyedArchiver archiveRootObject:serverChangeToken toFile:self.serverChangeTokenURL.path];
+	NSString *path = self.serverChangeTokenURL.path;
+	if (path) {
+		[NSKeyedArchiver archiveRootObject:serverChangeToken toFile:path];
+	}
 }
 
 #pragma mark - CloudKit Operations
