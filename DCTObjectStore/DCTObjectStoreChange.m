@@ -38,7 +38,7 @@ static NSString *const DCTObjectStoreChangeTypeString[] = {
 - (NSString *)description {
 	return [NSString stringWithFormat:@"<%@: %p; %@ = %@; %@ = %@; %@ = %@; %@ = %@>",
 			NSStringFromClass([self class]),
-			self,
+			(void *)self,
 			DCTObjectStoreChangeAttributes.date, self.date,
 			DCTObjectStoreChangeAttributes.identifier, self.identifier,
 			DCTObjectStoreChangeAttributes.type, DCTObjectStoreChangeTypeString[self.type],

@@ -102,7 +102,7 @@ static void DCTObjectStoreReachabilityCallback(__unused SCNetworkReachabilityRef
 - (NSString *)description {
 	return [NSString stringWithFormat:@"<%@: %p; status = %@>",
 			NSStringFromClass([self class]),
-			self,
+			(void *)self,
 			DCTObjectStoreReachabilityStatusString[self.status]];
 }
 
