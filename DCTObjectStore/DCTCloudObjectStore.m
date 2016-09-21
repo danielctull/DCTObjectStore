@@ -127,7 +127,7 @@ static NSString *const DCTCloudObjectStoreRecordZone = @"RecordZone";
 
 - (void)downloadChangesWithCompletion:(void(^)())completion {
 
-	[self fetchRecordChangesWithDeletionHandler:^(CKRecordID *recordID) {
+	[self fetchRecordChangesWithDeletionHandler:^(CKRecordID *recordID, NSString *recordType) {
 
 		NSString *identifier = recordID.recordName;
 		[DCTObjectStoreIdentifierInternal setIdentifier:identifier forObject:recordID];
@@ -335,7 +335,7 @@ static NSString *const DCTCloudObjectStoreRecordZone = @"RecordZone";
 			return;
 		}
 
-		CKSubscription *newSubscription = [[CKSubscription alloc] initWithZoneID:self.recordZone.zoneID subscriptionID:subscriptionID options:0];
+		CKRecordZoneSubscription *newSubscription = [[CKRecordZoneSubscription alloc] initWithZoneID:self.recordZone.zoneID subscriptionID:subscriptionID];
 		[self.database saveSubscription:newSubscription completionHandler:^(CKSubscription *subscription, NSError *error) {
 			self.subscription = subscription;
 		}];
@@ -385,7 +385,7 @@ static NSString *const DCTCloudObjectStoreRecordZone = @"RecordZone";
 	}
 
 	__weak DCTCloudObjectStore *weakSelf = self;
-	CKRecordZoneID *zoneID = [[CKRecordZoneID alloc] initWithZoneName:self.name ownerName:CKOwnerDefaultName];
+	CKRecordZoneID *zoneID = [[CKRecordZoneID alloc] initWithZoneName:self.name ownerName:CKCurrentUserDefaultName];
 	[self fetchRecordZoneWithID:zoneID completion:^(CKRecordZone *recordZone, NSError *error) {
 
 		if (recordZone) {
@@ -428,21 +428,23 @@ static NSString *const DCTCloudObjectStoreRecordZone = @"RecordZone";
 
 #pragma mark - CloudKit Operations
 
-- (void)fetchRecordChangesWithDeletionHandler:(void(^)(CKRecordID *recordID))deletionHandler updateHandler:(void(^)(CKRecord *record))updateHandler completion:(void(^)())completion {
+- (void)fetchRecordChangesWithDeletionHandler:(void(^)(CKRecordID *recordID, NSString *recordType))deletionHandler updateHandler:(void(^)(CKRecord *record))updateHandler completion:(void(^)())completion {
 
 	if (!self.recordZone) return;
 
-	CKFetchRecordChangesOperation *operation = [[CKFetchRecordChangesOperation alloc] initWithRecordZoneID:self.recordZone.zoneID previousServerChangeToken:self.serverChangeToken];
+	CKRecordZoneID *zoneID = self.recordZone.zoneID;
+	CKFetchRecordZoneChangesOptions *options = [CKFetchRecordZoneChangesOptions new];
+	options.previousServerChangeToken = self.serverChangeToken;
+
+	CKFetchRecordZoneChangesOperation *operation = [[CKFetchRecordZoneChangesOperation alloc] initWithRecordZoneIDs:@[zoneID] optionsByRecordZoneID:@{ zoneID : options }];
 	operation.queuePriority = NSOperationQueuePriorityNormal;
 	operation.recordWithIDWasDeletedBlock = deletionHandler;
 	operation.recordChangedBlock = updateHandler;
-
-	__weak CKFetchRecordChangesOperation *weakOperation = operation;
-	operation.fetchRecordChangesCompletionBlock = ^(CKServerChangeToken *serverChangeToken, NSData *clientChangeTokenData, NSError *operationError) {
+	operation.recordZoneFetchCompletionBlock = ^(CKRecordZoneID *recordZoneID, CKServerChangeToken *serverChangeToken, NSData *clientChangeTokenData, BOOL moreComing, NSError * recordZoneError) {
 
 		self.serverChangeToken = serverChangeToken;
 
-		if (weakOperation.moreComing) {
+		if (moreComing) {
 			[self fetchRecordChangesWithDeletionHandler:deletionHandler updateHandler:updateHandler completion:completion];
 		} else if (completion) {
 			completion();
