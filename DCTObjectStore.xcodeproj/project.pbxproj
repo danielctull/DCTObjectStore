@@ -208,7 +208,7 @@
 		24A06C081A3222B40047AC36 /* DCTTestObjectStoreQueryDelegateEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCTTestObjectStoreQueryDelegateEvent.m; sourceTree = "<group>"; };
 		24A06C0A1A3380F10047AC36 /* EventCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventCell.h; sourceTree = "<group>"; };
 		24A06C0B1A3380F10047AC36 /* EventCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventCell.m; sourceTree = "<group>"; };
-		24D52A211A28E98C00FDA615 /* DCTObjectStore.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DCTObjectStore.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		24D52A211A28E98C00FDA615 /* DCTObjectStore Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "DCTObjectStore Demo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		24D52A241A28E98C00FDA615 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		24D52A251A28E98C00FDA615 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		24D52A271A28E98C00FDA615 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -357,7 +357,7 @@
 			isa = PBXGroup;
 			children = (
 				242BEEFC19A8F53B0063F2F2 /* DCTObjectStore.framework */,
-				24D52A211A28E98C00FDA615 /* DCTObjectStore.app */,
+				24D52A211A28E98C00FDA615 /* DCTObjectStore Demo.app */,
 				2464AB461A2931D800F72B41 /* DCTObjectStore Tests.xctest */,
 				242BBB331A93911400CA83B7 /* DCTObjectStore.framework */,
 				2473F1FA1BC857A60075EA00 /* DCTObjectStore.framework */,
@@ -577,9 +577,9 @@
 			productReference = 242BEEFC19A8F53B0063F2F2 /* DCTObjectStore.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		2464AB451A2931D800F72B41 /* DCTObjectStore Tests */ = {
+		2464AB451A2931D800F72B41 /* DCTObjectStore iOS Tests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 2464AB4F1A2931D800F72B41 /* Build configuration list for PBXNativeTarget "DCTObjectStore Tests" */;
+			buildConfigurationList = 2464AB4F1A2931D800F72B41 /* Build configuration list for PBXNativeTarget "DCTObjectStore iOS Tests" */;
 			buildPhases = (
 				2464AB421A2931D800F72B41 /* Sources */,
 				2464AB431A2931D800F72B41 /* Frameworks */,
@@ -590,7 +590,7 @@
 			dependencies = (
 				2464AB4E1A2931D800F72B41 /* PBXTargetDependency */,
 			);
-			name = "DCTObjectStore Tests";
+			name = "DCTObjectStore iOS Tests";
 			productName = "DCTObjectStore Tests";
 			productReference = 2464AB461A2931D800F72B41 /* DCTObjectStore Tests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
@@ -630,7 +630,7 @@
 			);
 			name = "DCTObjectStore Demo";
 			productName = "DCTObjectStore Demo";
-			productReference = 24D52A211A28E98C00FDA615 /* DCTObjectStore.app */;
+			productReference = 24D52A211A28E98C00FDA615 /* DCTObjectStore Demo.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -680,7 +680,7 @@
 				242BEEFB19A8F53B0063F2F2 /* DCTObjectStore iOS */,
 				242BBB321A93911400CA83B7 /* DCTObjectStore macOS */,
 				2473F1D51BC857A60075EA00 /* DCTObjectStore tvOS */,
-				2464AB451A2931D800F72B41 /* DCTObjectStore Tests */,
+				2464AB451A2931D800F72B41 /* DCTObjectStore iOS Tests */,
 				24D52A201A28E98C00FDA615 /* DCTObjectStore Demo */,
 			);
 		};
@@ -897,9 +897,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 244A461B1D9E2662009A622C /* macOS Framework.xcconfig */;
 			buildSettings = {
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				PRODUCT_BUNDLE_IDENTIFIER = "uk.co.danieltull.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = DCTObjectStore;
 			};
 			name = Debug;
@@ -908,9 +905,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 244A461B1D9E2662009A622C /* macOS Framework.xcconfig */;
 			buildSettings = {
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				PRODUCT_BUNDLE_IDENTIFIER = "uk.co.danieltull.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = DCTObjectStore;
 			};
 			name = Release;
@@ -919,10 +913,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 244A46131D9E2662009A622C /* iOS Framework.xcconfig */;
 			buildSettings = {
-				CURRENT_PROJECT_VERSION = 1;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				PRODUCT_BUNDLE_IDENTIFIER = "uk.co.danieltull.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = DCTObjectStore;
 			};
 			name = Debug;
@@ -931,10 +921,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 244A46131D9E2662009A622C /* iOS Framework.xcconfig */;
 			buildSettings = {
-				CURRENT_PROJECT_VERSION = 1;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				PRODUCT_BUNDLE_IDENTIFIER = "uk.co.danieltull.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = DCTObjectStore;
 			};
 			name = Release;
@@ -943,6 +929,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 244A460D1D9E2662009A622C /* Debug.xcconfig */;
 			buildSettings = {
+				PRODUCT_BUNDLE_IDENTIFIER = "uk.co.danieltull.$(PRODUCT_NAME:rfc1034identifier)";
 			};
 			name = Debug;
 		};
@@ -950,6 +937,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 244A461F1D9E2662009A622C /* Release.xcconfig */;
 			buildSettings = {
+				PRODUCT_BUNDLE_IDENTIFIER = "uk.co.danieltull.$(PRODUCT_NAME:rfc1034identifier)";
 			};
 			name = Release;
 		};
@@ -957,8 +945,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 244A46151D9E2662009A622C /* iOS Tests.xcconfig */;
 			buildSettings = {
-				PRODUCT_BUNDLE_IDENTIFIER = "uk.co.danieltull.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "DCTObjectStore Tests";
 			};
 			name = Debug;
 		};
@@ -966,8 +953,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 244A46151D9E2662009A622C /* iOS Tests.xcconfig */;
 			buildSettings = {
-				PRODUCT_BUNDLE_IDENTIFIER = "uk.co.danieltull.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "DCTObjectStore Tests";
 			};
 			name = Release;
 		};
@@ -975,10 +961,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 244A462A1D9E2662009A622C /* tvOS Framework.xcconfig */;
 			buildSettings = {
-				CURRENT_PROJECT_VERSION = 1;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				PRODUCT_BUNDLE_IDENTIFIER = "uk.co.danieltull.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = DCTObjectStore;
 			};
 			name = Debug;
@@ -987,10 +969,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 244A462A1D9E2662009A622C /* tvOS Framework.xcconfig */;
 			buildSettings = {
-				CURRENT_PROJECT_VERSION = 1;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				PRODUCT_BUNDLE_IDENTIFIER = "uk.co.danieltull.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = DCTObjectStore;
 			};
 			name = Release;
@@ -1000,10 +978,7 @@
 			baseConfigurationReference = 244A46101D9E2662009A622C /* iOS Application.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = "DCTObjectStore Demo/DCTObjectStore Demo.entitlements";
-				INFOPLIST_FILE = "DCTObjectStore Demo/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "uk.co.danieltull.$(PRODUCT_NAME:rfc1034identifier)Demo";
-				PRODUCT_NAME = DCTObjectStore;
+				PRODUCT_NAME = "DCTObjectStore Demo";
 			};
 			name = Debug;
 		};
@@ -1012,10 +987,7 @@
 			baseConfigurationReference = 244A46101D9E2662009A622C /* iOS Application.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = "DCTObjectStore Demo/DCTObjectStore Demo.entitlements";
-				INFOPLIST_FILE = "DCTObjectStore Demo/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "uk.co.danieltull.$(PRODUCT_NAME:rfc1034identifier)Demo";
-				PRODUCT_NAME = DCTObjectStore;
+				PRODUCT_NAME = "DCTObjectStore Demo";
 			};
 			name = Release;
 		};
@@ -1049,7 +1021,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		2464AB4F1A2931D800F72B41 /* Build configuration list for PBXNativeTarget "DCTObjectStore Tests" */ = {
+		2464AB4F1A2931D800F72B41 /* Build configuration list for PBXNativeTarget "DCTObjectStore iOS Tests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				2464AB501A2931D800F72B41 /* Debug */,
