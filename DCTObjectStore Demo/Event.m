@@ -18,7 +18,7 @@ const struct EventAttributes EventAttributes = {
 - (NSString *)description {
 	return [NSString stringWithFormat:@"<%@: %p; %@ = %@; %@ = %@>",
 			NSStringFromClass([self class]),
-			self,
+			(void *)self,
 			EventAttributes.name, self.name,
 			EventAttributes.date, self.date];
 }

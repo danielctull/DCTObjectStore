@@ -36,7 +36,7 @@ static NSString *const DCTTestObjectStoreQueryDelegateEventTypeString[] = {
 - (NSString *)description {
 	return [NSString stringWithFormat:@"<%@: %p; type = %@; from = %@; to = %@>",
 			NSStringFromClass([self class]),
-			self,
+			(void *)self,
 			DCTTestObjectStoreQueryDelegateEventTypeString[self.type],
 			@(self.fromIndex),
 			@(self.toIndex)];
