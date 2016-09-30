@@ -41,6 +41,26 @@
 		242BEF8019A8FBD00063F2F2 /* DCTObjectStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 24501D181883DF9600FED266 /* DCTObjectStore.m */; };
 		244775131A1260260091CBDD /* DCTCloudObjectStoreEncoder.h in Headers */ = {isa = PBXBuildFile; fileRef = 244775111A1260260091CBDD /* DCTCloudObjectStoreEncoder.h */; };
 		244775151A1260260091CBDD /* DCTCloudObjectStoreEncoder.m in Sources */ = {isa = PBXBuildFile; fileRef = 244775121A1260260091CBDD /* DCTCloudObjectStoreEncoder.m */; };
+		244A465D1D9E2801009A622C /* DCTObjectStoreQueryTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2464AB581A29C42D00F72B41 /* DCTObjectStoreQueryTests.m */; };
+		244A465E1D9E2801009A622C /* Event.m in Sources */ = {isa = PBXBuildFile; fileRef = 24D52A5A1A28F36900FDA615 /* Event.m */; };
+		244A465F1D9E2801009A622C /* DCTObjectStoreQueryPredicateTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2464AB5A1A29C79900F72B41 /* DCTObjectStoreQueryPredicateTests.m */; };
+		244A46601D9E2801009A622C /* DCTTestObjectStoreQueryDelegateEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 24A06C081A3222B40047AC36 /* DCTTestObjectStoreQueryDelegateEvent.m */; };
+		244A46611D9E2801009A622C /* DCTObjectStoreQueryDelegateTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 24A06C021A3220AB0047AC36 /* DCTObjectStoreQueryDelegateTests.m */; };
+		244A46621D9E2801009A622C /* DCTTestObjectStoreQueryDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 24A06C051A3221170047AC36 /* DCTTestObjectStoreQueryDelegate.m */; };
+		244A46631D9E2801009A622C /* DCTDiskObjectStoreTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2464AB6D1A2A7E6000F72B41 /* DCTDiskObjectStoreTests.m */; };
+		244A46641D9E2801009A622C /* DCTObjectStoreQuerySortDescriptorTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2464AB5C1A29C8BA00F72B41 /* DCTObjectStoreQuerySortDescriptorTests.m */; };
+		244A46651D9E2801009A622C /* DCTObjectStoreTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2464AB4A1A2931D800F72B41 /* DCTObjectStoreTests.m */; };
+		244A46671D9E2801009A622C /* DCTObjectStore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 242BEEFC19A8F53B0063F2F2 /* DCTObjectStore.framework */; };
+		244A46711D9E2806009A622C /* DCTObjectStoreQueryTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2464AB581A29C42D00F72B41 /* DCTObjectStoreQueryTests.m */; };
+		244A46721D9E2806009A622C /* Event.m in Sources */ = {isa = PBXBuildFile; fileRef = 24D52A5A1A28F36900FDA615 /* Event.m */; };
+		244A46731D9E2806009A622C /* DCTObjectStoreQueryPredicateTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2464AB5A1A29C79900F72B41 /* DCTObjectStoreQueryPredicateTests.m */; };
+		244A46741D9E2806009A622C /* DCTTestObjectStoreQueryDelegateEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 24A06C081A3222B40047AC36 /* DCTTestObjectStoreQueryDelegateEvent.m */; };
+		244A46751D9E2806009A622C /* DCTObjectStoreQueryDelegateTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 24A06C021A3220AB0047AC36 /* DCTObjectStoreQueryDelegateTests.m */; };
+		244A46761D9E2806009A622C /* DCTTestObjectStoreQueryDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 24A06C051A3221170047AC36 /* DCTTestObjectStoreQueryDelegate.m */; };
+		244A46771D9E2806009A622C /* DCTDiskObjectStoreTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2464AB6D1A2A7E6000F72B41 /* DCTDiskObjectStoreTests.m */; };
+		244A46781D9E2806009A622C /* DCTObjectStoreQuerySortDescriptorTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2464AB5C1A29C8BA00F72B41 /* DCTObjectStoreQuerySortDescriptorTests.m */; };
+		244A46791D9E2806009A622C /* DCTObjectStoreTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2464AB4A1A2931D800F72B41 /* DCTObjectStoreTests.m */; };
+		244A467B1D9E2806009A622C /* DCTObjectStore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 242BEEFC19A8F53B0063F2F2 /* DCTObjectStore.framework */; };
 		2464AB3C1A2922B200F72B41 /* DCTObjectStoreAttributes.h in Headers */ = {isa = PBXBuildFile; fileRef = 2464AB391A29207100F72B41 /* DCTObjectStoreAttributes.h */; };
 		2464AB3D1A2922B800F72B41 /* DCTObjectStoreAttributes.m in Sources */ = {isa = PBXBuildFile; fileRef = 2464AB3A1A29207100F72B41 /* DCTObjectStoreAttributes.m */; };
 		2464AB4B1A2931D800F72B41 /* DCTObjectStoreTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2464AB4A1A2931D800F72B41 /* DCTObjectStoreTests.m */; };
@@ -122,6 +142,20 @@
 			remoteGlobalIDString = 242BEEFB19A8F53B0063F2F2;
 			remoteInfo = "DCTObjectStore iOS";
 		};
+		24CCFEAD1D9E28D000228331 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 24501D061883DF9600FED266 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 242BBB321A93911400CA83B7;
+			remoteInfo = "DCTObjectStore macOS";
+		};
+		24CCFEAF1D9E28DA00228331 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 24501D061883DF9600FED266 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 2473F1D51BC857A60075EA00;
+			remoteInfo = "DCTObjectStore tvOS";
+		};
 		24D52A491A28EB1C00FDA615 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 24501D061883DF9600FED266 /* Project object */;
@@ -179,6 +213,8 @@
 		244A46301D9E2662009A622C /* watchOS Extension.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "watchOS Extension.xcconfig"; sourceTree = "<group>"; };
 		244A46311D9E2662009A622C /* watchOS Framework.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "watchOS Framework.xcconfig"; sourceTree = "<group>"; };
 		244A46321D9E2662009A622C /* watchOS.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = watchOS.xcconfig; sourceTree = "<group>"; };
+		244A466C1D9E2801009A622C /* DCTObjectStore Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "DCTObjectStore Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		244A46801D9E2806009A622C /* DCTObjectStore Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "DCTObjectStore Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		24501D161883DF9600FED266 /* DCTObjectStore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = DCTObjectStore.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		24501D181883DF9600FED266 /* DCTObjectStore.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = DCTObjectStore.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		2464AB391A29207100F72B41 /* DCTObjectStoreAttributes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCTObjectStoreAttributes.h; sourceTree = "<group>"; };
@@ -246,6 +282,22 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		244A46661D9E2801009A622C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				244A46671D9E2801009A622C /* DCTObjectStore.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		244A467A1D9E2806009A622C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				244A467B1D9E2806009A622C /* DCTObjectStore.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -361,6 +413,8 @@
 				2464AB461A2931D800F72B41 /* DCTObjectStore Tests.xctest */,
 				242BBB331A93911400CA83B7 /* DCTObjectStore.framework */,
 				2473F1FA1BC857A60075EA00 /* DCTObjectStore.framework */,
+				244A466C1D9E2801009A622C /* DCTObjectStore Tests.xctest */,
+				244A46801D9E2806009A622C /* DCTObjectStore Tests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -577,9 +631,45 @@
 			productReference = 242BEEFC19A8F53B0063F2F2 /* DCTObjectStore.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		2464AB451A2931D800F72B41 /* DCTObjectStore iOS Tests */ = {
+		244A46591D9E2801009A622C /* DCTObjectStore Tests macOS */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 2464AB4F1A2931D800F72B41 /* Build configuration list for PBXNativeTarget "DCTObjectStore iOS Tests" */;
+			buildConfigurationList = 244A46691D9E2801009A622C /* Build configuration list for PBXNativeTarget "DCTObjectStore Tests macOS" */;
+			buildPhases = (
+				244A465C1D9E2801009A622C /* Sources */,
+				244A46661D9E2801009A622C /* Frameworks */,
+				244A46681D9E2801009A622C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				24CCFEAE1D9E28D000228331 /* PBXTargetDependency */,
+			);
+			name = "DCTObjectStore Tests macOS";
+			productName = "DCTObjectStore Tests";
+			productReference = 244A466C1D9E2801009A622C /* DCTObjectStore Tests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		244A466D1D9E2806009A622C /* DCTObjectStore Tests tvOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 244A467D1D9E2806009A622C /* Build configuration list for PBXNativeTarget "DCTObjectStore Tests tvOS" */;
+			buildPhases = (
+				244A46701D9E2806009A622C /* Sources */,
+				244A467A1D9E2806009A622C /* Frameworks */,
+				244A467C1D9E2806009A622C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				24CCFEB01D9E28DA00228331 /* PBXTargetDependency */,
+			);
+			name = "DCTObjectStore Tests tvOS";
+			productName = "DCTObjectStore Tests";
+			productReference = 244A46801D9E2806009A622C /* DCTObjectStore Tests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		2464AB451A2931D800F72B41 /* DCTObjectStore Tests iOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2464AB4F1A2931D800F72B41 /* Build configuration list for PBXNativeTarget "DCTObjectStore Tests iOS" */;
 			buildPhases = (
 				2464AB421A2931D800F72B41 /* Sources */,
 				2464AB431A2931D800F72B41 /* Frameworks */,
@@ -590,7 +680,7 @@
 			dependencies = (
 				2464AB4E1A2931D800F72B41 /* PBXTargetDependency */,
 			);
-			name = "DCTObjectStore iOS Tests";
+			name = "DCTObjectStore Tests iOS";
 			productName = "DCTObjectStore Tests";
 			productReference = 2464AB461A2931D800F72B41 /* DCTObjectStore Tests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
@@ -680,7 +770,9 @@
 				242BEEFB19A8F53B0063F2F2 /* DCTObjectStore iOS */,
 				242BBB321A93911400CA83B7 /* DCTObjectStore macOS */,
 				2473F1D51BC857A60075EA00 /* DCTObjectStore tvOS */,
-				2464AB451A2931D800F72B41 /* DCTObjectStore iOS Tests */,
+				2464AB451A2931D800F72B41 /* DCTObjectStore Tests iOS */,
+				244A46591D9E2801009A622C /* DCTObjectStore Tests macOS */,
+				244A466D1D9E2806009A622C /* DCTObjectStore Tests tvOS */,
 				24D52A201A28E98C00FDA615 /* DCTObjectStore Demo */,
 			);
 		};
@@ -695,6 +787,20 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		242BEEFA19A8F53B0063F2F2 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		244A46681D9E2801009A622C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		244A467C1D9E2806009A622C /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -811,6 +917,38 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		244A465C1D9E2801009A622C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				244A465D1D9E2801009A622C /* DCTObjectStoreQueryTests.m in Sources */,
+				244A465E1D9E2801009A622C /* Event.m in Sources */,
+				244A465F1D9E2801009A622C /* DCTObjectStoreQueryPredicateTests.m in Sources */,
+				244A46601D9E2801009A622C /* DCTTestObjectStoreQueryDelegateEvent.m in Sources */,
+				244A46611D9E2801009A622C /* DCTObjectStoreQueryDelegateTests.m in Sources */,
+				244A46621D9E2801009A622C /* DCTTestObjectStoreQueryDelegate.m in Sources */,
+				244A46631D9E2801009A622C /* DCTDiskObjectStoreTests.m in Sources */,
+				244A46641D9E2801009A622C /* DCTObjectStoreQuerySortDescriptorTests.m in Sources */,
+				244A46651D9E2801009A622C /* DCTObjectStoreTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		244A46701D9E2806009A622C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				244A46711D9E2806009A622C /* DCTObjectStoreQueryTests.m in Sources */,
+				244A46721D9E2806009A622C /* Event.m in Sources */,
+				244A46731D9E2806009A622C /* DCTObjectStoreQueryPredicateTests.m in Sources */,
+				244A46741D9E2806009A622C /* DCTTestObjectStoreQueryDelegateEvent.m in Sources */,
+				244A46751D9E2806009A622C /* DCTObjectStoreQueryDelegateTests.m in Sources */,
+				244A46761D9E2806009A622C /* DCTTestObjectStoreQueryDelegate.m in Sources */,
+				244A46771D9E2806009A622C /* DCTDiskObjectStoreTests.m in Sources */,
+				244A46781D9E2806009A622C /* DCTObjectStoreQuerySortDescriptorTests.m in Sources */,
+				244A46791D9E2806009A622C /* DCTObjectStoreTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		2464AB421A2931D800F72B41 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -865,6 +1003,16 @@
 			isa = PBXTargetDependency;
 			target = 242BEEFB19A8F53B0063F2F2 /* DCTObjectStore iOS */;
 			targetProxy = 2464AB4D1A2931D800F72B41 /* PBXContainerItemProxy */;
+		};
+		24CCFEAE1D9E28D000228331 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 242BBB321A93911400CA83B7 /* DCTObjectStore macOS */;
+			targetProxy = 24CCFEAD1D9E28D000228331 /* PBXContainerItemProxy */;
+		};
+		24CCFEB01D9E28DA00228331 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 2473F1D51BC857A60075EA00 /* DCTObjectStore tvOS */;
+			targetProxy = 24CCFEAF1D9E28DA00228331 /* PBXContainerItemProxy */;
 		};
 		24D52A4A1A28EB1C00FDA615 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -922,6 +1070,38 @@
 			baseConfigurationReference = 244A46131D9E2662009A622C /* iOS Framework.xcconfig */;
 			buildSettings = {
 				PRODUCT_NAME = DCTObjectStore;
+			};
+			name = Release;
+		};
+		244A466A1D9E2801009A622C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 244A461C1D9E2662009A622C /* macOS Tests.xcconfig */;
+			buildSettings = {
+				PRODUCT_NAME = "DCTObjectStore Tests";
+			};
+			name = Debug;
+		};
+		244A466B1D9E2801009A622C /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 244A461C1D9E2662009A622C /* macOS Tests.xcconfig */;
+			buildSettings = {
+				PRODUCT_NAME = "DCTObjectStore Tests";
+			};
+			name = Release;
+		};
+		244A467E1D9E2806009A622C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 244A462B1D9E2662009A622C /* tvOS Tests.xcconfig */;
+			buildSettings = {
+				PRODUCT_NAME = "DCTObjectStore Tests";
+			};
+			name = Debug;
+		};
+		244A467F1D9E2806009A622C /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 244A462B1D9E2662009A622C /* tvOS Tests.xcconfig */;
+			buildSettings = {
+				PRODUCT_NAME = "DCTObjectStore Tests";
 			};
 			name = Release;
 		};
@@ -1012,6 +1192,24 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
+		244A46691D9E2801009A622C /* Build configuration list for PBXNativeTarget "DCTObjectStore Tests macOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				244A466A1D9E2801009A622C /* Debug */,
+				244A466B1D9E2801009A622C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		244A467D1D9E2806009A622C /* Build configuration list for PBXNativeTarget "DCTObjectStore Tests tvOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				244A467E1D9E2806009A622C /* Debug */,
+				244A467F1D9E2806009A622C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		24501D091883DF9600FED266 /* Build configuration list for PBXProject "DCTObjectStore" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -1021,7 +1219,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		2464AB4F1A2931D800F72B41 /* Build configuration list for PBXNativeTarget "DCTObjectStore iOS Tests" */ = {
+		2464AB4F1A2931D800F72B41 /* Build configuration list for PBXNativeTarget "DCTObjectStore Tests iOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				2464AB501A2931D800F72B41 /* Debug */,
