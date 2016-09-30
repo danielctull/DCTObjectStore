@@ -539,9 +539,9 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		242BBB321A93911400CA83B7 /* DCTObjectStore OS X */ = {
+		242BBB321A93911400CA83B7 /* DCTObjectStore macOS */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 242BBB4A1A93911400CA83B7 /* Build configuration list for PBXNativeTarget "DCTObjectStore OS X" */;
+			buildConfigurationList = 242BBB4A1A93911400CA83B7 /* Build configuration list for PBXNativeTarget "DCTObjectStore macOS" */;
 			buildPhases = (
 				242BBB2E1A93911400CA83B7 /* Sources */,
 				242BBB2F1A93911400CA83B7 /* Frameworks */,
@@ -553,7 +553,7 @@
 			);
 			dependencies = (
 			);
-			name = "DCTObjectStore OS X";
+			name = "DCTObjectStore macOS";
 			productName = "DCTObjectStore OS X";
 			productReference = 242BBB331A93911400CA83B7 /* DCTObjectStore.framework */;
 			productType = "com.apple.product-type.framework";
@@ -678,7 +678,7 @@
 			projectRoot = "";
 			targets = (
 				242BEEFB19A8F53B0063F2F2 /* DCTObjectStore iOS */,
-				242BBB321A93911400CA83B7 /* DCTObjectStore OS X */,
+				242BBB321A93911400CA83B7 /* DCTObjectStore macOS */,
 				2473F1D51BC857A60075EA00 /* DCTObjectStore tvOS */,
 				2464AB451A2931D800F72B41 /* DCTObjectStore Tests */,
 				24D52A201A28E98C00FDA615 /* DCTObjectStore Demo */,
@@ -1022,7 +1022,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		242BBB4A1A93911400CA83B7 /* Build configuration list for PBXNativeTarget "DCTObjectStore OS X" */ = {
+		242BBB4A1A93911400CA83B7 /* Build configuration list for PBXNativeTarget "DCTObjectStore macOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				242BBB461A93911400CA83B7 /* Debug */,
