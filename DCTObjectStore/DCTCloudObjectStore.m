@@ -125,7 +125,7 @@ static NSString *const DCTCloudObjectStoreRecordZone = @"RecordZone";
 
 #pragma mark - Changes
 
-- (void)downloadChangesWithCompletion:(void(^)())completion {
+- (void)downloadChangesWithCompletion:(void(^)(void))completion {
 
 	[self fetchRecordChangesWithDeletionHandler:^(CKRecordID *recordID, NSString *recordType) {
 
@@ -428,7 +428,7 @@ static NSString *const DCTCloudObjectStoreRecordZone = @"RecordZone";
 
 #pragma mark - CloudKit Operations
 
-- (void)fetchRecordChangesWithDeletionHandler:(void(^)(CKRecordID *recordID, NSString *recordType))deletionHandler updateHandler:(void(^)(CKRecord *record))updateHandler completion:(void(^)())completion {
+- (void)fetchRecordChangesWithDeletionHandler:(void(^)(CKRecordID *recordID, NSString *recordType))deletionHandler updateHandler:(void(^)(CKRecord *record))updateHandler completion:(void(^)(void))completion {
 
 	if (!self.recordZone) return;
 
